@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMDb Community Web</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="icon/favicon.ico">
+    <script type="text/javascript" src="js/navToggle.js"></script>
+    <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+
+    <nav>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <ul class="navigation">
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="movie.html" class="active">Filmer</a></li>
+            <li><a href="search.html">Sök</a></li>
+            <li><a href="aboutUs.html">Om oss</a></li>
+        </ul> 
+    </nav>
+
+    <form class="searchbar-movie">
+        <input name="searchbar" type="text" placeholder="Sök film..." >
+        <button type="submit" title="submit"></button>
+    </form>   
+
+   
+    <main class="flex-movie-info">
+        <section class="infoAndRating flex-item">
+            <div class="info-movie">
+                <h1>Handling</h1>
+                <p>Disney och Pixars "Elementärt" är en helt ny originalfilm, som utspelar sig i Elementstaden, 
+                    där eld-, vatten-, jord- och luftinvånare bor tillsammans. I berättelsen möter vi Brinnie, 
+                    en tuff, smart och eldfängd ung kvinna, vars vänskap med en rolig, lättrörd flyta-med-strömmen-kille 
+                    som heter Vadar utmanar hennes uppfattning om den värld de lever i. Regisserad av Peter Sohn 
+                    ("Den gode dinosaurien", kortfilmen "Delvis molnigt"), producerad av Denise Ream. 
+                    ("Den gode dinosaurien", "Bilar 2").  
+                </p>
+
+                <p><span>Speltid:</span> 1 h 43 min</p>
+                <p><span>Genre: </span> Animerat, Komedi, Fantasy, Barn och Familj</p>
+                <p><span>Regisserad av: </span>Peter Sohn</p>
+            </div>
+
+            <section class="see-rating-section"> 
+                <h1>Betyg</h1>
+                <p id="rating-number">3,7</p>
+                <ul class="ratingline">
+            
+                    <li>
+                        <div id="red-rating"></div>
+                    </li>
+
+                    <li>
+                        <div id="orange-rating"></div>
+                    </li>
+
+                    <li>
+                        <div id="lightgreen-rating"></div>
+                                    
+                    </li>
+
+                    <li>
+                        <div id="green-rating"></div>                
+                    </li>   
+                </ul>
+
+                <div class="rating-stroke"></div>  
+                
+                <p>Baserat på 14 röster</p>
+
+                <span class="counts">10 st</span> 
+                <div class="green-vote"> <span class="number">4</span></div> 
+                <span class="counts">4 st</span> 
+                <div class="lightgreen-vote"><span class="number">3</span></div>
+                <span class="counts">0 st</span> 
+                <div class="orange-vote"> <span class="number">2</span></div>
+                <span class="counts">0 st</span> 
+                <div class="red-vote"> <span class="number">1</span> </div> 
+            </section>
+
+            <section class="set-rating">
+                <h1>Ge betyg</h1>
+                <div id="rating">
+                    <ul>
+                        <li><a href="#" class="one">1</a></li>
+                        <li><a href="#" class="two">2</a></li>
+                        <li><a href="#" class="three">3</a></li>
+                        <li><a href="#" class="four">4</a></li>
+                    </ul>
+                </div>  
+            </section>
+        </section>
+
+        <section class="review flex-item">
+            <h1>Användarrecensioner</h1>
+            <div class="read-review">
+                <h4>Pelle Karlsson 10 okt 2023</h4>
+                <p>En film som verkligen berörde. Pixar visar ännu en gång att de kan sin sak. 
+                    Handlingen är berörande och vacker, musiken perfekt anpassad och karaktärerna är älskvärda. 
+                    Filmen tar möjligtvis upp lite känsliga ämnen men det är så verkligheten ser ut.
+                </p>
+
+                <h4>Kajsa Thulander 7 juli 2023</h4>
+                <p>
+                    ”Elementärt” är en rörande berättelse med andragenerationsinvandraruppväxten som tema. 
+                    Filmen når nästan, men inte riktigt, upp till Pixars högstanivå.
+                </p>
+            </div>
+
+            <div class="write-review">
+                <h1>Publicera recension</h1>
+                <form name="writeReview" class="contactUs">
+                <!--Kommer förmodligen behöva använda action="/action_page.php" sen när den ska behandla det 
+                ifyllda med javascript-->
+                    <div class="form-group">
+                        <label for="firstName">Förnamn</label>
+                        <input type="text" id="firstName" name="firstname" placeholder="Förnamn...">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Efternamn</label>
+                        <input type="text" id="lastName" name="lastname" placeholder="Efternamn...">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Datum</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Recension</label>
+                        <textarea id="review" name="review" placeholder="Skriv din recension här..."></textarea>
+                    </div>
+                    <input name="submit" type="submit" value="Publicera">
+                </form>
+            </div>
+        </section>
+    </main>
+
+
+    <aside class="flex-posters">
+        <div class="moviePoster">
+            <a href="img/elementart.jpg" target="_blank"><img src="img/elementart.jpg" target="_blank" alt="Elementärt poster"/></a>
+        </div>
+
+        <div class="movieImg">
+            <h3>Bilder</h3>
+            <a href="img/elementart1.jpg" target="_blank"><img src="img/elementart1.jpg" alt="Bild från filmen Elementärt"/></a>
+            <div class="arrow-right-image">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+            </div>
+            <div class="arrow-left-image">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+            </div>
+        </div>
+
+        <div class="movieTrailer">
+            <h3>Trailer</h3>
+            <iframe title="Trailer" src="https://www.youtube.com/embed/v1T5k0bVp-E" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </aside>
+
+
+    <footer>
+        <div class="social-media"> 
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-tiktok"></i>
+            <i class="fa-brands fa-youtube"></i>
+        </div>
+
+        <span id="email">E-post: info@cmdbfilm.se</span>     
+        <span id="copyright"><i class="fa-regular fa-copyright"></i> 2023 CMDB Film</span>
+    </footer>
+
+</body>
+</html>

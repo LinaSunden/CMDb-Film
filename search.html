@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMDb Community Web</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="icon/favicon.ico">
+    <script type="text/javascript" src="js/navToggle.js"></script>
+    <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/multiselect-dropdown.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <ul class="navigation">
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="movie.html">Filmer</a></li>
+            <li><a href="search.html" class="active">Sök</a></li>
+            <li><a href="aboutUs.html">Om oss</a></li>
+        </ul> 
+    </nav>
+
+    <form id="searchbar-site-search">
+        <input name="searchbar" type="text" placeholder="Sök filmtitel, genre, skådespelare..." >
+        <button type="submit" title="submit"></button>
+    </form> 
+    
+    <div id="flex-content-search">
+        <section class="search-filter flex-item"> 
+            <h1>Sökfilter</h1>
+            <div id="grid-container-search-filter">
+                <div id="genres">
+                    <h4>Genre</h4>
+                 <select name="select" multiple multiselect-search="true" multiselect-select-all="true"
+                 multiselect-max-items="14" title="select">
+                  <option>Action</option>
+                  <option>Animerat</option>
+                  <option>Barnfilm</option>
+                  <option>Dokumentärer</option>
+                  <option>Draman</option>
+                  <option>Fantasy</option>
+                  <option>Klassiker</option>
+                  <option>Komedier</option>
+                  <option>Kriminalare</option>
+                  <option>Musikaler</option>
+                  <option>Romantik</option>
+                  <option>Sci-fi</option>
+                  <option>Skräck</option>
+                  <option>Thriller</option>
+                 </select>
+
+                </div>
+                <div id="release-year">
+                    <h4>Utgivningsår</h4>
+                    <form class="year">
+                      <!--Kommer förmodligen behöva använda action="/action_page.php" sen när den ska behandla det 
+                      ifyllda med javascript-->
+                      <div class="form-group">
+                        <label for="startYear">Från: </label>
+                        <input type="tel" maxlength="4" id="startYear" name="startYear" value="1894">
+                      </div>
+                      <div class="form-group">
+                        <label for="endYear">Till: </label>
+                        <input type="tel" maxlength="4" id="endYear" name="endYear" value="2023">
+                      </div>  
+                    </form>
+                </div>
+                <div id="CMDb-score">
+                    <h4>CMDb poäng</h4>
+                    <select name="select" multiple multiselect-search="true" multiselect-select-all="true"
+                    multiselect-max-items="4" title="select">
+                      <option>4</option>
+                      <option>3</option>
+                      <option>2</option>
+                      <option>1</option>
+                    </select>
+                  
+                </div>
+                <div id="movie-runtime">
+                    <h4>Max speltid</h4>
+                    <select name="select-runtime" id="select-runtime">
+                      <option disabled selected>Välj</option>
+                      <option>30 min</option>
+                      <option>1 h</option>
+                      <option>1 h 30 min</option>
+                      <option>2 h</option>
+                      <option>2 h 30 min</option>
+                      <option>3 h</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-result flex-item">
+            <div class="searchResultheadings clearfix">
+              <h1>Sök resultat</h1>
+              <h3>Din sökning: Home</h3>
+            </div>
+            
+
+              <div class="result1 clearfix">
+                <div class="movie-poster">
+                  <a href="img/home.jpg" target="_blank"> <img src="img/home.jpg" alt="Home"/></a>
+                </div>
+                <div class="movie-summary">
+                  <h4>Home</h4>
+                  <p>
+                    En fredlig grupp utomjordingar använder jorden som ett gömställe från sina fiender. 
+                    När en utomjording råkar avslöja deras gömställe måste han ge sig av tillsammans med en tonårstjej 
+                    på en fartfylld jorden-runt-resa för att ställa allt till rätta.
+                  </p>
+                </div>
+              </div>
+
+              <div class="result2 clearfix">
+                <div class="movie-poster">
+                  <a href="img/spidermanNoWayHome.jpg" target="_blank"> <img src="img/spidermanNoWayHome.jpg" alt="Spiderman no way home"/></a>
+                </div>
+                <div class="movie-summary">
+                  <h4>Spider-Man No Way Home</h4>
+                  <p>
+                    När hans nära och kära utsätts för fara ber Peter Parker doktor Stange att återställa
+                    hans hemlighet-och råkar av misstag utlösa en katastrof av episka proportioner.
+                  </p>
+                </div>
+              </div>
+              
+            
+        </section>
+
+        <section class="topp-search flex-item">
+            <h3>Toppsökningar idag</h3>
+            <div id="topp-today-search">
+              <p><span class="topp-search-number">1.</span> Extraction <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">2.</span> Elementärt <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">3.</span> Evin Ahmad <span class="type">(Skådespelare)</span></p>
+              <p><span class="topp-search-number">4.</span> Chris Hemsworth <span class="type">(Skådespelare)</span></p>
+              <p><span class="topp-search-number">5.</span> Home <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">6.</span> Spiderman <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">7.</span> The creator <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">8.</span> Mission:Impossible <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">9.</span> Past Lives <span class="type">(Filmtitel)</span></p>
+              <p><span class="topp-search-number">10.</span> Shrek3 <span class="type">(Filmtitel)</span></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="social-media"> 
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-tiktok"></i>
+            <i class="fa-brands fa-youtube"></i>
+        </div>
+
+        <span id="email">E-post: info@cmdbfilm.se</span>     
+        <span id="copyright"><i class="fa-regular fa-copyright"></i> 2023 CMDB Film</span>
+    </footer>
+
+</body>
+</html>

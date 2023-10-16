@@ -1,0 +1,1287 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #5E807F;
+
+}
+
+header{
+    background-color: #355F34;
+    padding: 10px; 
+}
+
+.logo{
+  margin-left: 25%;
+}
+
+form {
+    color:black;
+    display: flex;
+    padding: 5px;
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    background-color: #DEF4CC;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 10px;  
+}
+
+input[type="text"] {
+    border: none;
+    background: transparent;
+    padding: 7px;
+    font-size: 14px;
+    color: inherit;
+    width: 100%;
+}
+
+button[type="submit"] {
+    width: 30px;
+    border: transparent;
+    border-radius: 5px;
+    background-image: url('../icon/search.png');
+    background-size: cover;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+nav {
+    background-color: #2D3142;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+   
+}
+
+.navigation{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-left: 25%;
+    display: flex;
+}
+
+.navigation a{
+    display: block;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navigation a:link{
+  color: white;
+}
+
+.navigation a:visited{
+    color: white;
+}
+
+.navigation a:hover{
+    background-color: #EC953B;
+}
+
+.navigation .active{
+    color: white;
+    background-color:#EC953B;
+    text-decoration: underline;
+}
+
+.hamburger{
+  display: none;
+}
+
+
+h1{
+    color: #EC953B;
+    text-shadow: 2px 2px 3px black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;     
+}
+
+p{
+  font-size: 14px;
+}
+
+#topplist{
+  margin-left: 25%;
+}
+
+.flex-container, .topp2-3-container, .topp4-10-container{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 5px;
+  justify-content: center;
+}
+
+.flex-item{
+  background-color: #2D3142;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.flex-item-4-10{
+  background-color: #2D3142;
+  padding: 5px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.topp1{
+  width: 50%;
+}
+
+.topp2-3{
+  width: 25%;
+}
+
+.topp4-10{
+  width: 10%;
+}
+
+
+#rank1{
+  float: left;
+  position: relative;
+  top: -160px;
+  left: -45px; 
+  padding: 0;
+  font-size: 120px;
+  rotate: -10deg;
+  margin-bottom: -200px;
+}
+
+#rank2{
+  float: left;
+  position: relative;
+  top: -145px;
+  left: -30px; 
+  padding: 0;
+  rotate: -10deg;
+  margin-bottom: -200px;
+  font-size: 80px;
+}
+
+#rank3{
+  float: left;
+  position: relative;
+  top: -145px;
+  left: -30px; 
+  padding: 0;
+  font-size: 80px;
+  rotate: -10deg;
+  margin-bottom: -200px;
+}
+
+#rank4, #rank5, #rank6, #rank7, #rank8, #rank9{
+  float: left;
+  position: relative;
+  top: -110px;
+  left: -20px; 
+  padding: 0;
+  font-size: 60px;
+  rotate: -10deg;
+  margin-bottom: -200px;
+}
+
+#rank10 {
+  float: left;
+  position: relative;
+  top: -117px;
+  left: -39px; 
+  padding: 0;
+  font-size: 60px;
+  rotate: -10deg;
+  margin-bottom: -200px;
+}
+
+
+h3{
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  font-size: 25px;
+  margin: 0;
+  margin-left: 100px;
+  text-align: left; 
+}
+
+h4{
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  font-size: 20px;
+  margin: 0;
+  margin-left: 30px;
+  text-align: left; 
+}
+
+img{
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px whitesmoke;
+
+}
+
+.movieImg1, .movieImg2, .movieImg3, .movieImg4, .movieImg5, .movieImg6, .movieImg7, 
+.movieImg8, .movieImg9, .movieImg10{
+  width: 100%;
+  height: auto;
+}
+
+
+#rating ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+}
+
+#rating li{
+  float: left;
+}
+
+#rating li a{
+  display: block;
+  padding: 5px 10px;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#rating .one{
+  background-color: red;
+  margin: 0px 5px 0px 0px;
+}
+
+#rating .two{
+  background-color: orange;
+  margin: 0px 5px 0px 0px;
+}
+
+#rating .three{
+  background-color: #8CA047;
+  margin: 0px 5px 0px 0px;
+}
+
+#rating .four{
+  background-color: rgb(1, 143, 1);
+}
+
+.set-rating{
+  font-weight: bold;
+}
+
+.summary {
+  border: 3px solid #2D3142;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+  background-color: whitesmoke;
+}
+
+.arrow-right i{
+  color: 2D3142;
+  margin-top: 250px;
+  font-size: 50px;
+}
+
+footer{
+  background-color: #355F34;
+  padding: 30px;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+}
+
+.social-media i{
+  font-size: 40px;
+  padding: 5px;
+  margin: 10px
+}
+
+#email, #copyright{
+  padding: 130px;
+}
+
+/*Styling för filmer (detaljsidan)*/
+.flex-movie-info{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 5px;
+  justify-content: flex-end;
+}
+
+.flex-posters{
+  position: absolute;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.infoAndRating, .review{
+  width: 40%;
+}
+
+.moviePoster, .movieImg, .movieTrailer{
+  width: 25%;
+  margin: 10px;
+}
+
+.moviePoster img, .movieImg img{
+  width: 100%;
+  height: auto;
+}
+
+.movieTrailer iframe{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.movieImg{
+  position: relative;
+  display: inline-block;
+}
+.arrow-right-image, .arrow-left-image{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 3px;
+  color: #2D3142;
+  background-color: hsl(0, 0%, 96%, 0.6) ;
+  text-align: center;
+  cursor: pointer;
+  font-size: 25px;
+} 
+
+.arrow-left-image{
+  left: 0;
+}
+
+.arrow-right-image{
+  right: 0;
+}
+
+.flex-movie-info p{
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex-movie-info span{
+  font-weight: bold;
+}
+
+.info-movie, .see-rating-section, .read-review{
+  border-bottom: 10px dotted #355F34;
+  padding-bottom: 20px;
+}
+
+.ratingline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+
+.ratingline li{
+  margin-right: 3px;
+}
+
+
+#red-rating{
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+#orange-rating{
+  width: 45px;
+  height: 50px;
+  background-color: orange;
+}
+
+#lightgreen-rating{
+  width: 45px;
+  height: 50px;
+  background-color: #8CA047;
+}
+
+#green-rating{
+  width: 50px;
+  height: 50px;
+  background-color: rgb(1, 143, 1);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#see-rating-section{
+  position: relative;
+}
+
+.rating-stroke{
+  position: absolute;
+  margin-left: 125px;
+  margin-top: -60px;
+  width: 3px;
+  height: 70px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#rating-number{
+  margin-left: 115px;
+}
+
+.green-vote{
+  background: linear-gradient(to right, green 75%,  gray 0%);
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: start;
+  text-indent: 10px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px; 
+}
+
+.lightgreen-vote{
+  background: linear-gradient(to right, #8CA047 20%,  gray 0%);
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: start;
+  text-indent: 10px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px; 
+}
+
+.orange-vote{
+  background: linear-gradient(to right, orange 2%,  gray 0%);
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: start;
+  text-indent: 10px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px; 
+}
+
+.red-vote{
+  background: linear-gradient(to right, red 2%,  gray 0%);
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: start;
+  text-indent: 10px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px; 
+}
+
+.number{
+  background-color: whitesmoke;
+  padding: 0 5px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.counts{
+  color: white;  
+  display: inline-block;
+  vertical-align: middle; 
+}
+
+.set-rating #rating .one, .set-rating #rating .two, .set-rating #rating .three, .set-rating #rating .four{
+  font-size: 45px;
+  padding: 50px;
+}
+
+.read-review p{
+  background-color: whitesmoke;
+  color: black;
+  padding: 10px;
+  margin: 5px 0px 50px 0px;
+}
+
+.contactUs #review{
+  height: 200px;
+}
+
+
+/*Styling för search*/
+#select-runtime{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  background: white;
+  color: black;
+  border: 2px solid orange;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#select-runtime option:hover{
+  box-shadow: 0 0 10px 100px lightgray inset;
+}
+
+#searchbar-site-search{
+  height: 70px;
+}
+
+/*Modifierat kod från Youtube till Genre och CMDb poäng för dropdown menyer
+https://www.youtube.com/watch?v=fZgGc9XoZ6U*/
+.multiselect-dropdown {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid orange;
+  border-radius: 10px;
+  background-color: white;
+  position: relative;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px 12px;
+}
+
+.multiselect-dropdown span.optext {
+  display: inline-block;
+  margin-right: 1px;
+  margin-bottom: 2px;
+  padding: 1px 0.75em;
+  background-color: lightgray;
+  border-radius: 4px;
+}
+
+.multiselect-dropdown span.optext .optdel {
+  float: right;
+  margin: 0 -6px 1px 5px;
+  font-size: 0.7em;
+  margin-top: 2px;
+  cursor: pointer;
+  color: #666;
+}
+
+.multiselect-dropdown span.placeholder {
+  color: rgb(143, 142, 142);
+}
+
+.multiselect-dropdown-list-wrapper {
+  box-shadow: 0 3px 8px gray;
+  z-index: 100;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  display: none;
+  margin: -1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+}
+
+.multiselect-dropdown-list-wrapper .multiselect-dropdown-search {
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.multiselect-dropdown-list {
+  padding: 2px;
+  height: 15rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.multiselect-dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.multiselect-dropdown-list::-webkit-scrollbar-thumb {
+  background-color: #bec4ca;
+  border-radius: 3px;
+}
+
+.multiselect-dropdown-list div {
+  padding: 5px;
+}
+
+.multiselect-dropdown-list input {
+  height: 1.15em;
+  width: 1.15em;
+  margin-right: 0.35em;
+}
+
+.multiselect-dropdown-list div:hover {
+  background-color: #ced4da;
+}
+
+.multiselect-dropdown span.maxselected {
+  width: 100%;
+}
+
+.multiselect-dropdown-all-selector {
+  border-bottom: solid 1px #999;
+}
+/*Här slutar kod som jag modifierat från youtube*/
+
+
+#searchbar-site-search button[type="submit"] {
+  width: 60px;
+  border: transparent;
+  border-radius: 5px;
+  background-image: url('/icon/search.png');
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#flex-content-search{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: space-between;
+}
+
+.search-filter{
+  width: 100%;
+}
+
+.search-result{
+  width: 70%;
+}
+
+.topp-search{
+  width: 27%;
+}
+
+#grid-container-search-filter{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+}
+
+select{
+  width: 30em;
+}
+
+.movie-poster img{
+  width: 100%;
+  height: auto;
+}
+
+.result1, .result2, .searchResultheadings{
+  border-bottom: 2px solid orange;
+  display: flex;
+  align-items: center;
+}
+
+.result1 .movie-poster, .result2 .movie-poster{
+  float: left;
+  width: 20%;
+  margin: 10px;
+ }
+
+.movie-summary p{
+  background-color: whitesmoke;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 10px;
+  margin:10px;
+}
+
+ .result1 .movie-summary, .result2 .movie-summary{
+  float:left;
+  width: 75%;
+ }
+
+ .clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#topp-today-search{
+  border: 7px dotted #355F34;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+  
+}
+
+#topp-today-search p{
+  font-weight: bold;
+  font-size: 22px;
+  text-shadow: 2px 2px 3px black;
+}
+
+#topp-today-search .topp-search-number{
+  font-size: 20px;
+  margin-right: 5px;
+  font-weight: normal;
+}
+
+#topp-today-search .type{
+  font-size: 16px;
+  margin-left: 5px;
+  text-shadow: none;
+  font-weight: normal;
+}
+
+.year{
+  width: 240px;
+  padding: 10px;
+  margin-left: 0;
+  background-color: rgb(255, 199, 96);
+}
+
+.year label{
+  font-weight: bold;
+}
+
+.year input[type=tel]{
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+#flex-content-search h4{
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+
+/*Styling för aboutUs*/
+#grid-container-aboutUs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+
+.flex-item-aboutUs{
+  border: 10px solid #2D3142;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  text-align: left;
+}
+
+.flex-item-aboutUs h1{
+  margin: 0;
+  margin-bottom: 7px;
+}
+
+.flex-item-aboutUs p{
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.weAre{
+ grid-column: 1;
+ grid-row: 1;
+}
+
+.followUs{
+  grid-column: 2;
+  grid-row: 1 /span 2;
+}
+
+.contactForm{
+  grid-column: 1;
+  grid-row:2;
+}
+
+.weAre .logo{
+  margin-left: 0;
+}
+
+.weAre p{
+  font-size: 16px;
+}
+
+/*Denna stylning av formulär gäller både för aboutUs och movie*/
+.contactUs input[type=text], textarea, select, .contactUs, .contactUs input[type=email]
+,.contactUs input[type=number], .contactUs input[type=date]{
+  width: 95%;
+  margin: 0px 10px 20px 10px;
+  padding: 15px;
+  display: inline-block;
+  border: 2px solid black;
+  border-radius: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.contactUs input[type=text], .contactUs input[type=email], .contactUs input[type=number], 
+.contactUs input[type=date]{
+  background-color: white;
+}
+
+
+.contactUs label{
+  margin-left: 10px;
+  font-weight: bold;
+ 
+}
+
+.contactUs #subject{
+  height: 200px;
+}
+
+.contactUs input[type=submit]{
+  width: 95%;
+  background-color: #EC953B;
+  color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.contactUs input[type=submit]:hover{
+  background-color: orange;
+}
+
+.facebook, .youtube, .instagram{
+  padding: 10px;
+  text-align: center;
+}
+
+.followUs h3{
+  margin-left: 10%;
+}
+
+.facebook, .youtube, .instagram{
+  position: relative;
+}
+
+.followUs .movies, .film-shooting, .film-reel{
+  width: 80%;
+  height: auto;
+  opacity: 0.5;
+}
+
+.youtube i{
+  background-color: white;
+  font-size: 100px;
+  border-radius: 10px;
+  color: #ff0000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.followUs .facebook-logo, .instagram-logo{
+  width: 30%;
+  height: auto;
+  box-shadow: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.instagram-logo{
+  background-color: white;
+
+ 
+}
+
+/*iPad Air*/
+@media all and (max-width: 1180px){
+
+  .logo{
+    margin-left: 0;
+    width: 100px;
+  }
+
+  form {
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.navigation {
+  margin-left: 0%;
+}
+
+.navigation li{
+  padding: 0px 50px;
+}
+
+#topplist{
+  margin-left: 0%;
+  font-size: 30px;
+}
+
+.flex-container, .topp2-3-container, .topp4-10-container{
+  justify-content: left;
+}
+
+.topp1{
+  width: 100%;
+}
+
+.topp2-3{
+  width: 47%;
+}
+
+.topp4-10{
+  width: 26%;
+}
+
+#email, #copyright{
+  padding: 80px;
+}
+
+/*Anpassning för Filmer*/
+.flex-movie-info{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 5px;
+  justify-content: flex-end;
+  margin-top: 225px;
+}
+
+.flex-posters{
+   
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.infoAndRating, .review{
+  width: 100%;
+}
+
+.moviePoster{
+  width: 25%;
+  margin: 10px;
+}
+
+.movieImg, .movieTrailer{
+  margin: 10px;
+  width: 35%;
+}
+
+/*Anpassning för söksida*/
+.search-result{
+  width: 100%;
+}
+
+.topp-search{
+  width: 100%;
+}
+
+#grid-container-search-filter{
+  grid-template-columns: auto auto;
+  gap: 10px;
+  row-gap: 50px;
+}
+
+/*Anpassning för Om oss*/
+#grid-container-aboutUs{
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.followUs{
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.flex-item-aboutUs{
+  border: none;
+
+}
+
+
+}
+
+/*iPhone SE*/
+@media all and (max-width: 667px){
+
+*{
+  margin:0;
+}  
+
+nav{
+  flex-direction: column;
+
+}
+
+.navigation{
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: column; 
+  margin-left: 0;
+  display: none;
+}
+
+.navigation a{
+  text-align: center;
+
+  border-top: 1px solid whitesmoke;
+}
+
+.hamburger{
+  align-self: flex-end;
+  display: initial;
+  position: absolute;
+  cursor: pointer;
+  font-size: 30px;
+  color: white;  
+  margin: 5px;
+}
+
+.nav-toggle{
+  display:flex;
+  background-color: #2D3142;
+  width: 100%;
+}
+
+.flex-container, .topp2-3-container, .topp4-10-container, .flex-item{
+  padding: 5px;
+  margin: 0;
+}
+
+.summary p{
+  margin: 5px;
+}
+
+.movieImg2, .movieImg3{
+  width: 50%;
+}
+
+.movieImg4, .movieImg5, .movieImg6, .movieImg7, .movieImg8, .movieImg9, .movieImg10{
+  width: 90%;
+}
+
+#topplist{
+  margin-left: 8px;
+  font-size: 25px;
+  padding: 5px;
+}
+
+h3{
+  font-size: 18px;
+}
+
+h4{
+  font-size: 16px;
+}
+
+.topp2-3{
+  width: 100%;
+  margin-top: 10px
+}
+
+.topp4-10{
+  width: 45%;
+  margin: 8px;
+}
+
+#rating li{
+  padding-left: 40px;
+  padding-bottom: 20px;
+}
+
+
+#email, #copyright{
+  padding: 40px;
+}
+
+#rank1{
+  top: -20px;
+  left: -7px; 
+  font-size: 50px;
+}
+
+#rank2, #rank3{
+  top: -30px;
+  left: -6px; 
+  font-size: 50px;
+}
+
+#rank4, #rank5, #rank6, #rank7, #rank8, #rank9{
+  top: -30px;
+  left: -6px; 
+  font-size: 40px;
+}
+
+#rank10{
+  top: -30px;
+  left: -15px; 
+  font-size: 40px;
+}
+
+/*Anpassningar för filmer*/
+main h1{
+  font-size: 30px;
+  margin: 10px;
+}
+
+.info-movie p, #rating-number{
+  margin-bottom: 15px;
+}
+
+.see-rating-section p{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
+.green-vote, .lightgreen-vote, .orange-vote, .red-vote{
+  width: 350px;
+}
+
+.infoAndRating{
+  margin-bottom: 20px;
+}
+
+
+.flex-movie-info{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 5px;
+  justify-content: flex-end;
+  margin-top: 1100px;
+}
+
+.flex-posters{
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  margin-right: 20px; 
+  margin-top: 40px;
+}
+
+.searchbar-movie{
+  margin-top: 70px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.infoAndRating, .review{
+  width: 100%;
+}
+
+.moviePoster, .movieImg, .movieTrailer{
+  width: 100%;
+  margin: 10px;
+}
+
+
+/*Anpassning kontaktformulär*/
+.contactUs input[type=text], textarea, select, .contactUs{
+  padding: 20px 1px;
+  border: 1px solid black;
+}
+
+/*Anpassningar för söksidan*/
+#searchbar-site-search{
+  margin-top: 50px;
+  margin-left: 5px;
+  margin-right: 5px; 
+}
+
+#searchbar-site-search button[type="submit"] {
+  width: 70px;
+}
+
+.search-filter h1{
+  text-align: center;
+}
+
+#grid-container-search-filter{
+  grid-template-columns: auto;
+  row-gap: 50px;
+  margin: 10px;
+}
+
+.search-filter, .search-result, .topp-search{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#topp-today-search p{
+  font-size: 18px;
+}
+
+.result1, .result2, .searchResultheadings{
+  border-bottom: 2px solid orange;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.searchResultheadings h3{
+  color: white;
+  margin-left: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.result1 .movie-poster, .result2 .movie-poster{
+  width: 75%;
+ }
+
+ .result1 .movie-summary, .result2 .movie-summary{
+  width: 100%;
+  margin-bottom: 10px;
+ }
+ 
+}
+
+
+  
+
+
