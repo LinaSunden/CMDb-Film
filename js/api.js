@@ -28,9 +28,16 @@ async function getMovieOmdb(imdbID){
 }
 
 async function fetchMovies(){
-const top1Container = document.querySelector('.topp1');
-const top2To3Container = document.querySelector('.topp2-3-container');
-const top4To10Container = document.querySelector('.topp4-10-container');
+const top1Container = document.getElementById('top1');
+const top2Container = document.getElementById('top2');
+const top3Container = document.getElementById('top3');
+const top4TContainer = document.getElementById('top4');
+const top5Container = document.getElementById('top5');
+const top6Container = document.getElementById('top6');
+const top7Container = document.getElementById('top7');
+const top8Container = document.getElementById('top8');
+const top9Container = document.getElementById('top9');
+const top10Container = document.getElementById('top10');
 
 try {
     const movies = await getMoviesCmdb(10);
@@ -66,6 +73,8 @@ try {
       readMoreButton.classList.add('read-more-button');
       readMoreButton.textContent = 'Read more...';
 
+      readMoreToggler(readMoreButton, moviePlot);
+
       const setRating = document.createElement('span');
       setRating.classList.add('set-rating');
       setRating.textContent = 'Score movie';
@@ -81,6 +90,8 @@ try {
           link.textContent = option;
           listItem.appendChild(link);
           rating.appendChild(listItem);
+         
+          
       });
 
       summary.appendChild(movieScore);
@@ -92,20 +103,57 @@ try {
       movieContainer.appendChild(movieTitle);
       movieContainer.appendChild(movieImg);
       movieContainer.appendChild(summary);
-
-  
      
-      if (index === 0) {
+switch (index) {
+    case 0:
         top1Container.appendChild(movieContainer);
-      } else if (index >= 1 && index <= 2) {
-        top2To3Container.appendChild(movieContainer);
-      } else {
-        top4To10Container.appendChild(movieContainer);
-      }
+        break;
+    case 1:
+        top2Container.appendChild(movieContainer);
+        break;
+    case 2:
+        top3Container.appendChild(movieContainer);
+        break;
+    case 3:
+        top4TContainer.appendChild(movieContainer);
+        break;
+    case 4:
+        top5Container.appendChild(movieContainer);
+        break;
+    case 5:
+        top6Container.appendChild(movieContainer);
+        break;
+    case 6:
+        top7Container.appendChild(movieContainer);
+        break;
+    case 7:
+        top8Container.appendChild(movieContainer);
+        break;
+    case 8:
+        top9Container.appendChild(movieContainer);
+        break;
+    case 9:
+        top10Container.appendChild(movieContainer);
+        break;
+    default:    
+        break;  
+    }
+
     });
   } catch (error) {
     handleError(error);
   }
+}
+
+function readMoreToggler (readMoreButton, moviePlot) {
+    readMoreButton.addEventListener('click', () => {
+        moviePlot.classList.toggle('expanded');
+        if (moviePlot.classList.contains('expanded')) {
+            readMoreButton.textContent = 'Read less...';
+        } else {
+            readMoreButton.textContent = 'Read more...';
+        }
+    });
 }
 
 fetchMovies();
