@@ -49,19 +49,51 @@ try {
       const movieImg = document.createElement('img');
       movieImg.classList.add('movie-img');
       movieImg.src = `${oneMovie.Poster}`;
+      movieImg.alt = `Poster of ${oneMovie.Title}`;
+
+      const summary = document.createElement('div');
+      summary.classList.add('summary');
 
       const movieScore = document.createElement('p');
       movieScore.classList.add('movie-score');
-      movieScore.textContent = `Betyg: ${movie.cmdbScore}`;
+      movieScore.textContent = `Score: ${movie.cmdbScore}`;
 
       const moviePlot = document.createElement('p');
       moviePlot.classList.add('movie-plot');
       moviePlot.textContent = `${oneMovie.Plot}`;
 
+      const readMoreButton = document.createElement('button');
+      readMoreButton.classList.add('read-more-button');
+      readMoreButton.textContent = 'Read more...';
+
+      const setRating = document.createElement('span');
+      setRating.classList.add('set-rating');
+      setRating.textContent = 'Score movie';
+      
+      const rating = document.createElement('div');
+      rating.classList.add('rating');
+      const ratingOptions = ['1', '2', '3', '4'];
+      ratingOptions.forEach(option => {
+          const listItem = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = '#';
+          link.classList.add("_"+ option);
+          link.textContent = option;
+          listItem.appendChild(link);
+          rating.appendChild(listItem);
+      });
+
+      summary.appendChild(movieScore);
+      summary.appendChild(setRating);
+      summary.appendChild(rating);
+      summary.appendChild(moviePlot);
+      summary.appendChild(readMoreButton);
+
       movieContainer.appendChild(movieTitle);
       movieContainer.appendChild(movieImg);
-      movieContainer.appendChild(movieScore);
-      movieContainer.appendChild(moviePlot);
+      movieContainer.appendChild(summary);
+
+  
      
       if (index === 0) {
         top1Container.appendChild(movieContainer);

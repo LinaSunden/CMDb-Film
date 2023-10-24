@@ -235,7 +235,7 @@ img{
 }
 
 
-#rating ul{
+.rating {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -243,11 +243,11 @@ img{
 
 }
 
-#rating li{
+.rating li{
   float: left;
 }
 
-#rating li a{
+.rating li a{
   display: block;
   padding: 5px 10px;
   color: white;
@@ -258,23 +258,26 @@ img{
   border-radius: 5px;
 }
 
-#rating .one{
+
+.rating ._1 {
   background-color: red;
-  margin: 0px 5px 0px 0px;
+  margin: 5px 5px 10px 0px;
 }
 
-#rating .two{
+
+.rating ._2{
   background-color: orange;
-  margin: 0px 5px 0px 0px;
+  margin: 5px 5px 10px 0px;
 }
 
-#rating .three{
+.rating ._3{
   background-color: #8CA047;
-  margin: 0px 5px 0px 0px;
+  margin: 5px 5px 10px 0px;
 }
 
-#rating .four{
+.rating ._4{
   background-color: rgb(1, 143, 1);
+  margin: 5px 5px 10px 0px;
 }
 
 .set-rating{
@@ -289,6 +292,13 @@ img{
   text-align: left;
   background-color: whitesmoke;
 }
+
+.movie-plot, .read-more-button{
+  display: inline;
+  
+}
+
+
 
 .arrow-right i{
   color: 2D3142;
