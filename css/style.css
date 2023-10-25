@@ -11,6 +11,9 @@ body{
 header{
     background-color: #355F34;
     padding: 10px; 
+    background-image: url('../img/movie_roll.jpg');
+    background-size: cover;
+    background-position: 100% 65%;
 }
 
 .logo{
@@ -293,7 +296,7 @@ main img{
 }
 
 /*Fungerar bara på första filmen de andra blir hel knasiga. Måste ha något med loop att göra*/
-
+/*
 .movie-plot{
   width: 100%;
   overflow: hidden;
@@ -305,6 +308,7 @@ main img{
   white-space: normal;
   text-overflow: clip;
 }
+*/
 
 
 
@@ -339,7 +343,13 @@ footer{
   justify-content: center;
   text-align: center;
   font-size: 18px;
+  background-image: url('../img/movie_stripe.png');
+  
+  background-size: cover;
+  background-position: bottom;
+
 }
+
 
 .social-media i{
   font-size: 40px;
