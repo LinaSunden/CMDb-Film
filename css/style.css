@@ -11,6 +11,9 @@ body{
 header{
     background-color: #355F34;
     padding: 10px; 
+    background-image: url('../img/movie_roll.jpg');
+    background-size: cover;
+    background-position: 100% 65%;
 }
 
 .logo{
@@ -109,11 +112,11 @@ p{
   font-size: 14px;
 }
 
-#topplist{
+#toplist{
   margin-left: 25%;
 }
 
-.flex-container, .topp2-3-container, .topp4-10-container{
+.flex-container, .top2-3-container, .top4-10-container{
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -135,18 +138,31 @@ p{
   border-radius: 5px;
 }
 
-.topp1{
+#top1{
   width: 50%;
 }
 
-.topp2-3{
+#top2, #top3{
   width: 25%;
 }
 
-.topp4-10{
+#top4, #top5, #top6, #top7, #top8, #top9, #top10{
   width: 10%;
 }
 
+.to-movie-details{
+  background-color: #EC953B;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  box-shadow: 1px 1px 10px whitesmoke;
+  margin: 5px;
+}
 
 #rank1{
   float: left;
@@ -228,14 +244,13 @@ img{
 
 }
 
-.movieImg1, .movieImg2, .movieImg3, .movieImg4, .movieImg5, .movieImg6, .movieImg7, 
-.movieImg8, .movieImg9, .movieImg10{
-  width: 100%;
+main img{
+  max-width: 100%;
   height: auto;
 }
 
 
-#rating ul{
+.rating {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -243,11 +258,11 @@ img{
 
 }
 
-#rating li{
+.rating li{
   float: left;
 }
 
-#rating li a{
+.rating li a{
   display: block;
   padding: 5px 10px;
   color: white;
@@ -258,23 +273,26 @@ img{
   border-radius: 5px;
 }
 
-#rating .one{
+
+.rating ._1 {
   background-color: red;
-  margin: 0px 5px 0px 0px;
+  margin: 5px 5px 10px 0px;
 }
 
-#rating .two{
+
+.rating ._2{
   background-color: orange;
-  margin: 0px 5px 0px 0px;
+  margin: 5px 5px 10px 0px;
 }
 
-#rating .three{
+.rating ._3{
   background-color: #8CA047;
-  margin: 0px 5px 0px 0px;
+  margin: 5px 5px 10px 0px;
 }
 
-#rating .four{
+.rating ._4{
   background-color: rgb(1, 143, 1);
+  margin: 5px 5px 10px 0px;
 }
 
 .set-rating{
@@ -290,6 +308,40 @@ img{
   background-color: whitesmoke;
 }
 
+/*Fungerar bara på första filmen de andra blir hel knasiga. Måste ha något med loop att göra*/
+/*
+.movie-plot{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.movie-plot.expanded {
+  white-space: normal;
+  text-overflow: clip;
+}
+*/
+
+
+
+.movie-plot{
+  margin-bottom: 2px;
+}
+
+.read-more-button {
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.read-more-button:hover{
+  background-color: darkgray; 
+}
+
+
+
 .arrow-right i{
   color: 2D3142;
   margin-top: 250px;
@@ -304,7 +356,13 @@ footer{
   justify-content: center;
   text-align: center;
   font-size: 18px;
+  background-image: url('../img/movie_stripe.png');
+  
+  background-size: cover;
+  background-position: bottom;
+
 }
+
 
 .social-media i{
   font-size: 40px;
@@ -951,26 +1009,27 @@ select{
   padding: 0px 50px;
 }
 
-#topplist{
+#toplist{
   margin-left: 0%;
   font-size: 30px;
 }
 
-.flex-container, .topp2-3-container, .topp4-10-container{
+.flex-container, .top2-3-container, .top4-10-container{
   justify-content: left;
 }
 
-.topp1{
+#top1 {
   width: 100%;
 }
 
-.topp2-3{
+#top2, #top3{
   width: 47%;
 }
 
-.topp4-10{
+#top4, #top5, #top6, #top7, #top8, #top9, #top10{
   width: 26%;
 }
+
 
 #email, #copyright{
   padding: 80px;
@@ -1084,7 +1143,7 @@ nav{
   width: 100%;
 }
 
-.flex-container, .topp2-3-container, .topp4-10-container, .flex-item{
+.flex-container, .top2-3-container, .top4-10-container, .flex-item{
   padding: 5px;
   margin: 0;
 }
@@ -1093,15 +1152,15 @@ nav{
   margin: 5px;
 }
 
-.movieImg2, .movieImg3{
+#top2 img, #top3 img{
   width: 50%;
 }
 
-.movieImg4, .movieImg5, .movieImg6, .movieImg7, .movieImg8, .movieImg9, .movieImg10{
+#top4 img, #top5 img, #top6 img, #top7 img, #top8 img, #top9 img, #top10 img {
   width: 90%;
 }
 
-#topplist{
+#toplist{
   margin-left: 8px;
   font-size: 25px;
   padding: 5px;
@@ -1115,17 +1174,17 @@ h4{
   font-size: 16px;
 }
 
-.topp2-3{
+#top2, #top3 {
   width: 100%;
   margin-top: 10px
 }
 
-.topp4-10{
+#topp4, #top5, #top6, #top7, #top8, #top9, #top10{
   width: 45%;
   margin: 8px;
 }
 
-#rating li{
+.rating li{
   padding-left: 40px;
   padding-bottom: 20px;
 }
