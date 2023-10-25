@@ -11,7 +11,7 @@ async function getApiKey(){
 
 async function getMoviesCmdb(moviesPerPage){
  
-const response = await fetch(`https://grupp6.dsvkurs.miun.se/api/toplists?sort=DESC&limit=${moviesPerPage}&page=1&countLimit=4`);
+const response = await fetch(`https://grupp6.dsvkurs.miun.se/api/toplists?sort=DESC&limit=${moviesPerPage}&page=1&countLimit=2`);
     const movies = await await response.json();
     return movies;
 }
@@ -25,6 +25,13 @@ async function getMovieOmdb(imdbID){
     const oneMovie = await response.json();
     //displayMovieList(oneMovie);
     return oneMovie;
+}
+
+async function combineResults(movies , oneMovie){
+    const a = movies.movies;
+    const b = oneMovie;
+    const result = a.push(b);
+    return result;
 }
 
 async function fetchMovies(){
@@ -45,6 +52,9 @@ try {
     movies.movies.forEach(async (movie, index) => {
       const imdbID = movie.imdbID;
       const oneMovie = await getMovieOmdb(imdbID);
+    
+      const movielist = await combineResults(movies, oneMovie);
+    console.log(movielist);
 
       const movieContainer = document.createElement('div');
       movieContainer.classList.add('movie-container');
@@ -144,6 +154,7 @@ switch (index) {
     handleError(error);
   }
 }
+
 
 function readMoreToggler (readMoreButton, moviePlot) {
     readMoreButton.addEventListener('click', () => {

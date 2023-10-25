@@ -292,7 +292,8 @@ main img{
   background-color: whitesmoke;
 }
 
-/*Fungerar bara på första filmen de andra blir hel knasiga. Måste ha något med loop att göra
+/*Fungerar bara på första filmen de andra blir hel knasiga. Måste ha något med loop att göra*/
+
 .movie-plot{
   width: 100%;
   overflow: hidden;
@@ -304,7 +305,8 @@ main img{
   white-space: normal;
   text-overflow: clip;
 }
-*/
+
+
 
 .movie-plot{
   margin-bottom: 2px;
