@@ -75,16 +75,6 @@ try {
       movieScore.classList.add('movie-score');
       movieScore.textContent = `Score: ${movie.cmdbScore}`;
 
-      const moviePlot = document.createElement('p');
-      moviePlot.classList.add('movie-plot');
-      moviePlot.textContent = `${oneMovie.Plot}`;
-
-      const readMoreButton = document.createElement('button');
-      readMoreButton.classList.add('read-more-button');
-      readMoreButton.textContent = 'Read more...';
-
-      readMoreToggler(readMoreButton, moviePlot);
-
       const setRating = document.createElement('span');
       setRating.classList.add('set-rating');
       setRating.textContent = 'Score movie';
@@ -100,9 +90,21 @@ try {
           link.textContent = option;
           listItem.appendChild(link);
           rating.appendChild(listItem);
-         
-          
-      });
+        });
+
+      const moviePlot = document.createElement('p');
+      moviePlot.classList.add('movie-plot');
+      moviePlot.textContent = `${oneMovie.Plot}`;
+
+      const readMoreButton = document.createElement('button');
+      readMoreButton.classList.add('read-more-button');
+      readMoreButton.textContent = 'Read more...';
+
+      readMoreToggler(readMoreButton, moviePlot);
+
+      const toMovieDetails = document.createElement('button');
+        toMovieDetails.classList.add('to-movie-details');
+        toMovieDetails.textContent = 'To movie details';
 
       summary.appendChild(movieScore);
       summary.appendChild(setRating);
@@ -113,6 +115,7 @@ try {
       movieContainer.appendChild(movieTitle);
       movieContainer.appendChild(movieImg);
       movieContainer.appendChild(summary);
+      movieContainer.appendChild(toMovieDetails);
      
 switch (index) {
     case 0:
@@ -150,6 +153,7 @@ switch (index) {
     }
 
     });
+
   } catch (error) {
     handleError(error);
   }
