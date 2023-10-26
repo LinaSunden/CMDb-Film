@@ -44,6 +44,14 @@ async function getMovieOmdb(imdbID){
 // #endregion
 
 
+//#region functions calls
+console.log(combineResults());
+fetchMoviestop3();
+fetchMoviesFromTop4();
+// #endregion
+
+// #region functions for top list
+
 /**
  * Take the results from the CMDB and the OMDB API and combine them into one object.
  * @returns {Promise<Array>} An array of combined movie objects.
@@ -60,7 +68,6 @@ async function combineResults(){
     return combinedMovies;
 }
 
-// #region Fetch top movies
 
 /**
  * Fetch the top 3 movies from the CMDB with data from OMDB API.
@@ -101,6 +108,9 @@ try {
       const rating = document.createElement('div');
       rating.classList.add('rating');
       const ratingOptions = ['1', '2', '3', '4'];
+
+      const ratingList = document.createElement('ul');
+
       ratingOptions.forEach(option => {
           const listItem = document.createElement('li');
           const link = document.createElement('a');
@@ -110,6 +120,7 @@ try {
           listItem.appendChild(link);
           rating.appendChild(listItem);
         });
+        
 
       const moviePlot = document.createElement('p');
       moviePlot.classList.add('movie-plot');
@@ -125,6 +136,29 @@ try {
         toMovieDetails.classList.add('to-movie-details');
         toMovieDetails.textContent = 'To movie details';
 
+        toMovieDetails.addEventListener('click', function() {
+            // Construct the URL with query parameters
+            const movieData = { ...movie };
+            const queryParams = new URLSearchParams();
+            queryParams.set('title', movieData.Title);
+            queryParams.set('year', movieData.Year);
+            queryParams.set('runtime', movieData.Runtime);
+            queryParams.set('plot', movieData.Plot);
+            queryParams.set('poster', movieData.Poster);
+            queryParams.set('score', movieData.cmdbScore);
+            queryParams.set('numberCmdbVotes', movieData.count);
+            queryParams.set('reviews', movieData.reviews);
+            const url = `movie.html?${queryParams.toString()}`;
+          
+            // Redirect to the detail page with query parameters
+            window.location.href = url;
+        });
+
+
+    
+    
+     rating.appendChild(ratingList);
+
       summary.appendChild(movieScore);
       summary.appendChild(setRating);
       summary.appendChild(rating);
@@ -135,6 +169,7 @@ try {
       movieContainer.appendChild(movieImg);
       movieContainer.appendChild(summary);
       movieContainer.appendChild(toMovieDetails);
+
      
 switch (index) {
     case 0:
@@ -157,7 +192,6 @@ switch (index) {
   }
 }
 
-fetchMoviestop3();
 
 /**
  * Fetch the top 4-10 movies from the CMDB with data from OMDB API.
@@ -211,6 +245,9 @@ async function fetchMoviesFromTop4() {
           const rating = document.createElement('div');
           rating.classList.add('rating');
           const ratingOptions = ['1', '2', '3', '4'];
+
+          const ratingList = document.createElement('ul');
+
           ratingOptions.forEach(option => {
               const listItem = document.createElement('li');
               const link = document.createElement('a');
@@ -235,6 +272,9 @@ async function fetchMoviesFromTop4() {
             toMovieDetails.classList.add('to-movie-details');
             toMovieDetails.textContent = 'To movie details';
     
+
+            rating.appendChild(ratingList);
+
           summary.appendChild(movieScore);
           summary.appendChild(setRating);
           summary.appendChild(rating);
@@ -254,8 +294,7 @@ async function fetchMoviesFromTop4() {
       handleError(error);
     }
   }
-
-  fetchMoviesFromTop4();
+ 
 
 
   /**
@@ -274,5 +313,13 @@ function readMoreToggler (readMoreButton, moviePlot) {
     });
 }
 
-  // #endregion
+  
+/**
+ * @param {*} error Error message
+ */
+  function handleError(error) {
+    console.error(error);
+  }
+
+// #endregion
 
