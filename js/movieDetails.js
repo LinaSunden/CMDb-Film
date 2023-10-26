@@ -7,14 +7,14 @@ const year = urlParams.get('year');
 const runtime = urlParams.get('runtime');
 const plot = urlParams.get('plot');
 const numberCmdbVotes = urlParams.get('numberCmdbVotes');
-const reviews = urlParams.get('reviews');
+const reviewsData = urlParams.get('reviewsData');
 //#endregion
 
 
 //#region functions calls
 movieInfo();
 movieCmdbRating();
-
+showReviews();
 //#endregion
 
 
@@ -74,7 +74,9 @@ const posterContainers = document.querySelectorAll('.flex-posters');
 posterContainers.forEach(container => container.appendChild(posterContainer));
 }
 
-
+/**
+ * Function that presents the cmdb rating and number of votes
+ */
 function movieCmdbRating() {
 
 const cmdbScore = document.querySelector('.rating-number');
@@ -82,10 +84,31 @@ const cmdbVotes = document.querySelector('.votes');
 
 cmdbScore.textContent = score;
 cmdbVotes.textContent = `Based on: ${numberCmdbVotes} votes`;
-
-
-
 }
+
+/**
+ * Function that presents the reviews of the movie
+ */
+function showReviews() {
+    const reviewContainer = document.querySelector('.read-review');
+    const reviewsArray = JSON.parse(reviewsData);
+    reviewsArray.forEach(review => {
+ 
+  const reviewWrapper = document.createElement('div');
+  reviewWrapper.classList.add('review-entry');
+  
+  const reviewerInfo = document.createElement('h4');
+  reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
+  
+  const reviewText = document.createElement('p');
+  reviewText.textContent = review.review;
+  
+  
+  reviewWrapper.appendChild(reviewerInfo);
+  reviewWrapper.appendChild(reviewText);
+  reviewContainer.appendChild(reviewWrapper);
+  });
+  }
 
 
 //#endregion

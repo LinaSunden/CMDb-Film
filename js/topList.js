@@ -46,7 +46,7 @@ async function getMovieOmdb(imdbID){
 
 //#region functions calls
 console.log(combineResults());
-fetchMoviestop3();
+fetchMoviesTop3();
 fetchMoviesFromTop4();
 // #endregion
 
@@ -72,126 +72,36 @@ async function combineResults(){
 /**
  * Fetch the top 3 movies from the CMDB with data from OMDB API.
  */
-async function fetchMoviestop3(){
-const top1Container = document.getElementById('top1');
-const top2Container = document.getElementById('top2');
-const top3Container = document.getElementById('top3');
+async function fetchMoviesTop3(){
+    const topContainers = [
+        document.getElementById('top1'),
+        document.getElementById('top2'),
+        document.getElementById('top3')
+    ];
+
+    const rankElements = [];
 
 try {
     const combinedMovies = await combineResults(); 
     
     combinedMovies.slice(0, 3).forEach(async (movie, index) => {
+        createMovieContainer(movie, topContainers[index]);
 
-      const movieContainer = document.createElement('div');
-      movieContainer.classList.add('movie-container');
-
-      const movieTitle = document.createElement('h3');
-      movieTitle.classList.add('movie-title');
-      movieTitle.textContent = `${movie.Title}`;
-
-      const movieImg = document.createElement('img');
-      movieImg.classList.add('movie-img');
-      movieImg.src = `${movie.Poster}`;
-      movieImg.alt = `Poster of ${movie.Title}`;
-
-      const summary = document.createElement('div');
-      summary.classList.add('summary');
-
-      const movieScore = document.createElement('p');
-      movieScore.classList.add('movie-score');
-      movieScore.textContent = `Score: ${movie.cmdbScore}`;
-
-      const setRating = document.createElement('span');
-      setRating.classList.add('set-rating');
-      setRating.textContent = 'Score movie';
-      
-      const rating = document.createElement('div');
-      rating.classList.add('rating');
-      const ratingOptions = ['1', '2', '3', '4'];
-
-      const ratingList = document.createElement('ul');
-
-      ratingOptions.forEach(option => {
-          const listItem = document.createElement('li');
-          const link = document.createElement('a');
-          link.href = '#';
-          link.classList.add("_"+ option);
-          link.textContent = option;
-          listItem.appendChild(link);
-          rating.appendChild(listItem);
-        });
-        
-
-      const moviePlot = document.createElement('p');
-      moviePlot.classList.add('movie-plot');
-      moviePlot.textContent = `${movie.Plot}`;
-
-      const readMoreButton = document.createElement('button');
-      readMoreButton.classList.add('read-more-button');
-      readMoreButton.textContent = 'Read more...';
-
-      readMoreToggler(readMoreButton, moviePlot);
-
-      const toMovieDetails = document.createElement('button');
-        toMovieDetails.classList.add('to-movie-details');
-        toMovieDetails.textContent = 'To movie details';
-
-        toMovieDetails.addEventListener('click', function() {
-            // Construct the URL with query parameters
-            const movieData = { ...movie };
-            const queryParams = new URLSearchParams();
-            queryParams.set('title', movieData.Title);
-            queryParams.set('year', movieData.Year);
-            queryParams.set('runtime', movieData.Runtime);
-            queryParams.set('plot', movieData.Plot);
-            queryParams.set('poster', movieData.Poster);
-            queryParams.set('score', movieData.cmdbScore);
-            queryParams.set('numberCmdbVotes', movieData.count);
-            queryParams.set('reviews', movieData.reviews);
-            const url = `movie.html?${queryParams.toString()}`;
-          
-            // Redirect to the detail page with query parameters
-            window.location.href = url;
-        });
-
-
+    const rankElement = document.createElement('h1');
+    rankElement.id = `rank${index + 1}`;
+    rankElement.textContent = index + 1;
+    rankElements.push(rankElement);
     
-    
-     rating.appendChild(ratingList);
+  });
 
-      summary.appendChild(movieScore);
-      summary.appendChild(setRating);
-      summary.appendChild(rating);
-      summary.appendChild(moviePlot);
-      summary.appendChild(readMoreButton);
-
-      movieContainer.appendChild(movieTitle);
-      movieContainer.appendChild(movieImg);
-      movieContainer.appendChild(summary);
-      movieContainer.appendChild(toMovieDetails);
-
-     
-switch (index) {
-    case 0:
-        top1Container.appendChild(movieContainer);
-        break;
-    case 1:
-        top2Container.appendChild(movieContainer);
-        break;
-    case 2:
-        top3Container.appendChild(movieContainer);
-        break;
-    default:    
-        break;  
-    }
-
-    });
-
+  // Append the rank elements to the respective top containers
+  rankElements.forEach((rankElement, index) => {
+    topContainers[index].appendChild(rankElement);
+  });
   } catch (error) {
     handleError(error);
   }
 }
-
 
 /**
  * Fetch the top 4-10 movies from the CMDB with data from OMDB API.
@@ -219,7 +129,20 @@ async function fetchMoviesFromTop4() {
       const combinedMovies = await combineResults();
   
       combinedMovies.slice(3, 3 + topContainers.length).forEach(async (movie, index) => {
-        const movieContainer = document.createElement('div');
+        createMovieContainer(movie, topContainers[index]);
+      });
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
+/**
+ * Create a movie container for the top list.
+ * @param {} movie 
+ * @param {*} targetContainer 
+ */
+  function createMovieContainer (movie, targetContainer){
+    const movieContainer = document.createElement('div');
         movieContainer.classList.add('movie-container');
   
         const movieTitle = document.createElement('h3');
@@ -272,6 +195,24 @@ async function fetchMoviesFromTop4() {
             toMovieDetails.classList.add('to-movie-details');
             toMovieDetails.textContent = 'To movie details';
     
+            toMovieDetails.addEventListener('click', function() {
+                // Construct the URL with query parameters
+                const movieData = { ...movie };
+                const reviewsData = JSON.stringify(movieData.reviews);
+                const queryParams = new URLSearchParams();
+                queryParams.set('title', movieData.Title);
+                queryParams.set('year', movieData.Year);
+                queryParams.set('runtime', movieData.Runtime);
+                queryParams.set('plot', movieData.Plot);
+                queryParams.set('poster', movieData.Poster);
+                queryParams.set('score', movieData.cmdbScore);
+                queryParams.set('numberCmdbVotes', movieData.count);
+                queryParams.set('reviewsData', reviewsData);
+                const url = `movie.html?${queryParams.toString()}`;
+              
+                // Redirect to the detail page with query parameters
+                window.location.href = url;
+            });
 
             rating.appendChild(ratingList);
 
@@ -285,16 +226,9 @@ async function fetchMoviesFromTop4() {
           movieContainer.appendChild(movieImg);
           movieContainer.appendChild(summary);
           movieContainer.appendChild(toMovieDetails);
-  
-        if (index < topContainers.length) {
-          topContainers[index].appendChild(movieContainer);
-        }
-      });
-    } catch (error) {
-      handleError(error);
-    }
+
+          targetContainer.appendChild(movieContainer);
   }
- 
 
 
   /**

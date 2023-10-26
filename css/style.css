@@ -167,19 +167,20 @@ p{
 #rank1{
   float: left;
   position: relative;
-  top: -160px;
-  left: -45px; 
+  top: -55rem;
+  left: -3rem; 
   padding: 0;
   font-size: 120px;
   rotate: -10deg;
   margin-bottom: -200px;
+
 }
 
 #rank2{
   float: left;
   position: relative;
-  top: -145px;
-  left: -30px; 
+  top: -56.5rem;
+  left: -2rem; 
   padding: 0;
   rotate: -10deg;
   margin-bottom: -200px;
@@ -189,8 +190,8 @@ p{
 #rank3{
   float: left;
   position: relative;
-  top: -145px;
-  left: -30px; 
+  top: -54rem;
+  left: -2rem; 
   padding: 0;
   font-size: 80px;
   rotate: -10deg;
@@ -200,8 +201,8 @@ p{
 #rank4, #rank5, #rank6, #rank7, #rank8, #rank9{
   float: left;
   position: relative;
-  top: -110px;
-  left: -20px; 
+  top: -5rem;
+  left: -1rem; 
   padding: 0;
   font-size: 60px;
   rotate: -10deg;
@@ -211,8 +212,8 @@ p{
 #rank10 {
   float: left;
   position: relative;
-  top: -117px;
-  left: -39px; 
+  top: -5rem;
+  left: -2rem; 
   padding: 0;
   font-size: 60px;
   rotate: -10deg;
