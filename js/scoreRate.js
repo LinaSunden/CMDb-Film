@@ -59,4 +59,5 @@ async function scoreMovie(imdbID, score) {
 
 //#endregion
 
+
 export {rateMovie, scoreMovie, ratedMovies};
