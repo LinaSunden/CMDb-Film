@@ -1,4 +1,4 @@
-let ratedMovies = [];
+import { rateMovie, ratedMovies } from './scoreRate.js';
 
 
 // #region Api calls
@@ -44,23 +44,6 @@ async function getMovieOmdb(imdbID){
     return oneMovie;
 }
 
-async function scoreMovie(imdbID, score) {
-  try {
-    const response = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/rate/${imdbID}/${score}`, {
-      method: 'PUT',
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to rate the movie. Status: ${response.status}`);
-    }
-
-    const movieScored = await response.json();
-    return movieScored;
-  } catch (error) {
-    console.error('Error rating movie:', error);
-    throw error;
-  }
-}
 
 // #endregion
 
@@ -203,30 +186,8 @@ async function fetchMoviesFromTop4() {
 
               link.addEventListener('click', function (event){
                 event.preventDefault();
-
                 const imdbID = movie.imdbID;
-
-                if (!ratedMovies.includes(imdbID)) {
-                  const ratingScore = parseInt(option);
-            
-                  scoreMovie(imdbID, ratingScore)
-                    .then(response => {
-                      console.log('Movie scored:', response);
-            
-                      // Update the UI to show the user's rating
-                      link.textContent = 'You scored ' + option;
-            
-                      ratedMovies.push(imdbID);
-            
-                     
-                    })
-                    .catch(error => {
-                      console.error('Error scoring movie:', error);
-                    });
-                } else {
-                  // Display a message to inform the user they've already rated the movie
-                  alert('You have already rated this movie.');
-                }
+                rateMovie(imdbID, option, ratedMovies, link);
               });
 
               listItem.appendChild(link);
@@ -308,4 +269,5 @@ function readMoreToggler (readMoreButton, moviePlot) {
   }
 
 // #endregion
+
 
