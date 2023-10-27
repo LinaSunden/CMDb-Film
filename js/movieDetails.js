@@ -1,15 +1,24 @@
-//#region Retrieve query parameters from the URL
+//#region Get the movieData from the local storage
 const urlParams = new URLSearchParams(window.location.search);
-const title = urlParams.get('title');
-const poster = urlParams.get('poster');
-const score = urlParams.get('score');
-const year = urlParams.get('year');
-const runtime = urlParams.get('runtime');
-const plot = urlParams.get('plot');
-const numberCmdbVotes = urlParams.get('numberCmdbVotes');
-const reviewsData = urlParams.get('reviewsData');
-//#endregion
+const imdbID = urlParams.get('imdbID');
+const movieKey = `movieData_${imdbID}`;
+const movieString = localStorage.getItem(movieKey);
+const movieData = JSON.parse(movieString);
 
+//contains all the data for the movie
+console.log(movieData); 
+
+// All data we view at the moment for each movie
+const title = movieData.Title;
+const poster = movieData.Poster;
+const score = movieData.cmdbScore;
+const year = movieData.Year;
+const runtime = movieData.Runtime;
+const plot = movieData.Plot;
+const numberCmdbVotes = movieData.count;
+const reviewsData = JSON.stringify(movieData.reviews);
+
+//#endregion
 
 //#region functions calls
 movieInfo();

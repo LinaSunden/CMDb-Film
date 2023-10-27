@@ -209,25 +209,21 @@ async function fetchMoviesFromTop4() {
             toMovieDetails.textContent = 'To movie details';
     
             toMovieDetails.addEventListener('click', function() {
-                // Construct the URL with query parameters
-                const movieData = { ...movie };
-                const reviewsData = JSON.stringify(movieData.reviews);
-                const queryParams = new URLSearchParams();
-                queryParams.set('title', movieData.Title);
-                queryParams.set('year', movieData.Year);
-                queryParams.set('runtime', movieData.Runtime);
-                queryParams.set('plot', movieData.Plot);
-                queryParams.set('poster', movieData.Poster);
-                queryParams.set('score', movieData.cmdbScore);
-                queryParams.set('numberCmdbVotes', movieData.count);
-                queryParams.set('reviewsData', reviewsData);
-                const url = `movie.html?${queryParams.toString()}`;
-              
-                // Redirect to the detail page with query parameters
-                window.location.href = url;
-            });
+              // Store the movie object in local storage
+              const movieString = JSON.stringify(movie);
+              const movieKey = `movieData_${movie.imdbID}`;
+              localStorage.setItem(movieKey, movieString);
 
-            rating.appendChild(ratingList);
+             // Construct the URL with a query parameter for the IMDb ID
+            const queryParams = new URLSearchParams();
+            queryParams.set('imdbID', movie.imdbID);
+            const url = `movie.html?${queryParams.toString()}`;
+
+            // Redirect to the detail page with the IMDb ID in the URL
+            window.location.href = url;
+          });
+
+          rating.appendChild(ratingList);
 
           summary.appendChild(movieScore);
           summary.appendChild(setRating);
