@@ -1,3 +1,6 @@
+let ratedMovies = [];
+
+
 // #region Api calls
 
 const cmdbUrl = "https://grupp6.dsvkurs.miun.se/api";
@@ -20,8 +23,8 @@ async function getApiKey(){
  * @returns return the top movies from the CMDB API.
  */
 async function getMoviesCmdb(moviesPerPage){
- 
-const response = await fetch(`https://grupp6.dsvkurs.miun.se/api/toplists?sort=DESC&limit=${moviesPerPage}&page=1&countLimit=2`);
+ const endpoint = `/toplists?sort=DESC&limit=${moviesPerPage}&page=1&countLimit=2`;
+const response = await fetch(cmdbUrl + endpoint);
     const movies = await await response.json();
     return movies;
 }
@@ -41,10 +44,30 @@ async function getMovieOmdb(imdbID){
     return oneMovie;
 }
 
+async function scoreMovie(imdbID, score) {
+  try {
+    const response = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/rate/${imdbID}/${score}`, {
+      method: 'PUT',
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to rate the movie. Status: ${response.status}`);
+    }
+
+    const movieScored = await response.json();
+    return movieScored;
+  } catch (error) {
+    console.error('Error rating movie:', error);
+    throw error;
+  }
+}
+
 // #endregion
 
 
 //#region functions calls
+
+
 console.log(combineResults());
 fetchMoviesTop3();
 fetchMoviesFromTop4();
@@ -177,6 +200,35 @@ async function fetchMoviesFromTop4() {
               link.href = '#';
               link.classList.add("_"+ option);
               link.textContent = option;
+
+              link.addEventListener('click', function (event){
+                event.preventDefault();
+
+                const imdbID = movie.imdbID;
+
+                if (!ratedMovies.includes(imdbID)) {
+                  const ratingScore = parseInt(option);
+            
+                  scoreMovie(imdbID, ratingScore)
+                    .then(response => {
+                      console.log('Movie scored:', response);
+            
+                      // Update the UI to show the user's rating
+                      link.textContent = 'You scored ' + option;
+            
+                      ratedMovies.push(imdbID);
+            
+                     
+                    })
+                    .catch(error => {
+                      console.error('Error scoring movie:', error);
+                    });
+                } else {
+                  // Display a message to inform the user they've already rated the movie
+                  alert('You have already rated this movie.');
+                }
+              });
+
               listItem.appendChild(link);
               rating.appendChild(listItem);
             });
