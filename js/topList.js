@@ -143,7 +143,7 @@ async function fetchMoviesFromTop4() {
   }
 
 /**
- * Create a movie container for the top list.
+ * Create the movie container with title, poster, score, rating, plot, read more button and to movie details button.
  * @param {} movie 
  * @param {*} targetContainer 
  */
@@ -209,18 +209,8 @@ async function fetchMoviesFromTop4() {
             toMovieDetails.textContent = 'To movie details';
     
             toMovieDetails.addEventListener('click', function() {
-              // Store the movie object in local storage
-              const movieString = JSON.stringify(movie);
-              const movieKey = `movieData_${movie.imdbID}`;
-              localStorage.setItem(movieKey, movieString);
-
-             // Construct the URL with a query parameter for the IMDb ID
-            const queryParams = new URLSearchParams();
-            queryParams.set('imdbID', movie.imdbID);
-            const url = `movie.html?${queryParams.toString()}`;
-
-            // Redirect to the detail page with the IMDb ID in the URL
-            window.location.href = url;
+              goToMovieDetails(movie);
+              
           });
 
           rating.appendChild(ratingList);
@@ -256,6 +246,25 @@ function readMoreToggler (readMoreButton, moviePlot) {
     });
 }
 
+/**
+ * Create a local storage with all the movie data.
+ * Redirect to the movie details page.
+ * @param {*} movie 
+ */
+function goToMovieDetails(movie) {
+  // Store the movie object in local storage
+  const movieString = JSON.stringify(movie);
+  const movieKey = `movieData_${movie.imdbID}`;
+  localStorage.setItem(movieKey, movieString);
+
+ // Construct the URL with a query parameter for the IMDb ID
+const queryParams = new URLSearchParams();
+queryParams.set('imdbID', movie.imdbID);
+const url = `movie.html?${queryParams.toString()}`;
+
+// Redirect to the detail page with the IMDb ID in the URL
+window.location.href = url;
+}
   
 /**
  * @param {*} error Error message
