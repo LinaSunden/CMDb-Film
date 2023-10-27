@@ -1,4 +1,6 @@
+//# region Import
 import { rateMovie, ratedMovies } from './scoreRate.js';
+// #endregion
 
 //#region Get the movieData from the local storage
 const urlParams = new URLSearchParams(window.location.search);
