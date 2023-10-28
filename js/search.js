@@ -1,5 +1,8 @@
 
 // detalj: https://www.omdbapi.com/?i=tt3896198&apikey=5a4be969
+// https://omdbapi.com/?i=tt4300958&plot=full&apikey=5a4be969
+
+
 
 const movieSearchBox = document.getElementById('movie-search-box');
 const searchList = document.getElementById('search-list');
@@ -21,8 +24,11 @@ function findMovies(){
         loadMovies(searchTerm);
     }  else {
         searchList.classList.add('hide-search-list');
-    }       
+    }     
 }
+
+
+
 
 function displayMovieList(movies){
     searchList.innerHTML = "";
@@ -49,20 +55,73 @@ function displayMovieList(movies){
     loadMovieDetails();
 }
 
-function loadMovieDetails(){
+// function loadMovieDetails(){
+//     const searchListMovies = searchList.querySelectorAll('.search-list-item');
+//     searchListMovies.forEach(movie => {
+//         movie.addEventListener('click', async () => {
+//             // console.log(movie.dataset.id);  får fram id
+//             searchList.classList.add('hide-search-list');
+//             movieSearchBox.value = "";
+//             const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&apikey=5a4be969`);
+//             const movieDetails = await result.json();
+//             // console.log(movieDetails)
+//             displayMovieDetails(movieDetails);
+//         });
+//     });
+// }
+
+function loadMovieDetails() {
     const searchListMovies = searchList.querySelectorAll('.search-list-item');
     searchListMovies.forEach(movie => {
         movie.addEventListener('click', async () => {
-            // console.log(movie.dataset.id);  får fram id
             searchList.classList.add('hide-search-list');
             movieSearchBox.value = "";
-            const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&apikey=5a4be969`);
+            const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`);
             const movieDetails = await result.json();
-            // console.log(movieDetails)
-            displayMovieDetails(movieDetails);
+
+            // Store movie data and redirect to details page
+            storeMovieData(movieDetails);
+            redirectToMovieDetails(movieDetails.imdbID);
         });
     });
 }
+
+function storeMovieData(movie) {
+    // Store the movie object in local storage
+    const movieString = JSON.stringify(movie);
+    const movieKey = `movieData_${movie.imdbID}`;
+    localStorage.setItem(movieKey, movieString);
+}
+
+function constructMovieURL(imdbID) {
+    // Construct the URL with a query parameter for the IMDb ID
+    const queryParams = new URLSearchParams();
+    queryParams.set('imdbID', imdbID);
+    const url = `movie.html?${queryParams.toString()}`;
+    return url;
+}
+
+function redirectToMovieDetails(imdbID) {
+    const url = constructMovieURL(imdbID);
+    // Redirect to the detail page with the IMDb ID in the URL
+    window.location.href = url;
+}
+
+// Byte till söksidan
+function redirectToSearchPage() {  
+    const searchTerm = document.getElementById('movie-search-box').value.trim();
+    if (searchTerm.length > 0) {
+        window.location.href = `search.html?searchTerm=${searchTerm}`;
+    } else {
+        window.location.href = 'search.html';
+    }
+} 
+
+
+
+
+
+
 
 function displayMovieDetails(details){
     resultGrid.innerHTML = `

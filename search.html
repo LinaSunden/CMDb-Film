@@ -20,6 +20,7 @@
             
             <input type = "text" class = "form-control" id = "movie-search-box" 
             placeholder="Search Movie Title ..." onkeyup="findMovies()">
+            
              
             <div class = "search-list" id = "search-list">
                 <!-- list here -->
@@ -35,6 +36,7 @@
                 
             </div>
         </div>
+        <button class="search-button" onclick="redirectToSearchPage()">Search</button>
     </div>    
 </header>
     <nav>
@@ -54,6 +56,14 @@
     <div id="flex-content-search">
         <section class="search-filter flex-item"> 
             <h1>Sökfilter</h1>
+
+            <div class = "search-box2">
+              <input type = "text" class = "form-control2" id = "movie-search-box2" placeholder="Sök film..." onkeyup="findMovies()">
+              <div class = "search-list2" id = "search-list2"></div>
+            </div>
+            <button class="search-button2" onclick="redirectToSearchPage()">Search</button>
+
+            
             <div id="grid-container-search-filter">
                 <div id="genres">
                     <h4>Genre</h4>
@@ -121,6 +131,8 @@
             <div class="searchResultheadings clearfix">
               <h1>Sök resultat</h1>
               <h3>Din sökning: Home</h3>
+
+            >
             </div>
             
 
