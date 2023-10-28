@@ -9,18 +9,37 @@
     <script type="text/javascript" src="js/navToggle.js"></script>
     <script type="module" src="js/topList.js"></script>
     <script type="module" src="js/scoreRate.js"></script>
+
     <script type="module" src="js/apiCalls.js"></script>
+
     <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header> 
-        <img src="img/CMDb_logo.png" alt="CMBb:s logga" width="200" class="logo">
-        <form>
-            <input type="text" placeholder="Sök film..." name="searchbar">
-            <button type="submit" title="submit"></button>
-        </form>      
-    </header>
+        <header> 
+            <img src="img/CMDb_logo.png" alt="CMBb:s logga" width="200" class="logo">
+            <div class = "search-container">
+                <div class = "search-element">
+                    
+                    <input type = "text" class = "form-control" id = "movie-search-box" 
+                    placeholder="Search Movie Title ..." onkeyup="findMovies()">
+                     
+                    <div class = "search-list" id = "search-list">
+                        <!-- list here -->
+                        <!-- <div class = "search-list-item">
+                            <div class = "search-item-thumbnail">
+                                <img src = "/img/medium-cover.jpg">
+                            </div>
+                            <div class = "search-item-info">
+                                <h3>Guardians of the Galaxy Vol. 2</h3>
+                                <p>2017</p>
+                            </div>
+                        </div>   -->
+                        
+                    </div>
+                </div>
+            </div>    
+        </header>
 
     <nav>
         <div class="hamburger">
@@ -73,7 +92,7 @@
         <span id="email">E-post: info@cmdbfilm.se</span>     
         <span id="copyright"><i class="fa-regular fa-copyright"></i> 2023 CMDB Film</span>
     </footer>
-
+    <script src="/js/search.js"></script>
 </body>
 </html>
 
