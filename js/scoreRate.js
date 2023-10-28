@@ -1,7 +1,8 @@
-let ratedMovies = [];
+//place the ratedMovies in a local storage and if it is empty, create an empty array
+let ratedMovies = localStorage.getItem('ratedMovies') ? JSON.parse(localStorage.getItem('ratedMovies')) : [];
+
 
 //#region functions for score/set rating
-
 /**
  * Check if the user has rated the movie before.
  * If not, rate the movie and update the UI.
@@ -23,6 +24,9 @@ function rateMovie(imdbID, option, ratedMovies, link) {
         link.textContent = 'You scored ' + option;
 
         ratedMovies.push(imdbID);   
+  
+        // Update ratedMovies in local storage
+        localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
       })
       .catch(error => {
         console.error('Error scoring movie:', error);
@@ -57,7 +61,9 @@ async function scoreMovie(imdbID, score) {
   }
 }
 
+
 //#endregion
 
-
+//#region export
 export {rateMovie, scoreMovie, ratedMovies};
+//#endregion

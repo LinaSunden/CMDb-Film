@@ -1,3 +1,7 @@
+//# region Import
+import { rateMovie, ratedMovies } from './scoreRate.js';
+// #endregion
+
 //#region Get the movieData from the local storage
 const urlParams = new URLSearchParams(window.location.search);
 const imdbID = urlParams.get('imdbID');
@@ -24,6 +28,7 @@ const reviewsData = JSON.stringify(movieData.reviews);
 movieInfo();
 movieCmdbRating();
 showReviews();
+rateMovieDetailpage();
 //#endregion
 
 
@@ -117,7 +122,26 @@ function showReviews() {
   reviewWrapper.appendChild(reviewText);
   reviewContainer.appendChild(reviewWrapper);
   });
-  }
+}
 
-
+/**
+ * Function that handles the rating of the movie on the detailpage
+ */
+function rateMovieDetailpage(){
+  const ratingLinks = document.querySelectorAll('.set-rating-detailpage .rating ul li a');
+  // Add event listeners to rating buttons
+  ratingLinks.forEach(link => {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      const ratingOption = link.textContent;
+      rateMovie(imdbID, ratingOption, ratedMovies, link);
+    });
+  });
+}
 //#endregion
+
+
+
+
+
+
