@@ -40,7 +40,20 @@ header{
   justify-content: left;
   
 }
+.search-button {
+  height: 38px;
+  padding: 0 10px;
+  border: none;
+  background-color: #0078d7;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: -370px;
+}
 
+.search-button:hover {
+  background-color: #005a9e;
+}
 .search-element {
   display: flex;
   align-items: stretch;
@@ -68,14 +81,15 @@ header{
   background-color: #DEF4CC;
   padding: 1rem 2rem;
   font-size: 1.4rem;
-  /* height: 40px; */
   border: none;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   outline: none;
   color: var(--light-dark-color);
   width: 350px;
+  
 }
+
 
 .search-list{
   position: absolute;
@@ -479,13 +493,17 @@ footer{
   text-align: center;
   padding: 5px;
   justify-content: flex-end;
+  position: relative;
 }
 
 .flex-posters{
   position: absolute;
-  top: 110px;
+  /* top: 110px; */
   display: flex;
   flex-direction: column;
+  left: 0;
+  top: 500px;
+  margin: 10px;
   
 }
 
@@ -705,6 +723,40 @@ footer{
 #searchbar-site-search{
   height: 70px;
 }
+
+.search-box2 {
+  position: relative;
+  display: inline-block;
+}
+
+.search-button2{
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: 2px solid orange; 
+}
+
+#movie-search-box2{
+  margin-bottom: 65px;
+  width: 500px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid orange;
+}
+
+.search-list2{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  max-height: 200px;
+  border: 1px solid #ccc;
+  overflow-y: scroll;
+  z-index: 1;
+}
+
+
+
+
 
 /*Modifierat kod från Youtube till Genre och CMDb poäng för dropdown menyer
 https://www.youtube.com/watch?v=fZgGc9XoZ6U*/
@@ -1217,7 +1269,18 @@ select{
   padding-left: 0;
   margin-left: 0;
 }
-
+.search-container {
+  flex-wrap: wrap;
+}
+.search-button {
+  margin-left: 0;
+  margin-top: 10px;
+}
+.search-element {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+}
 
 }
 
@@ -1229,7 +1292,22 @@ select{
 }  
 
 /*SÖKRUTA*/
-
+.search-container {
+  flex-wrap: wrap;
+}
+.search-button {
+  margin-left: 0;
+  margin-top: 10px;
+}
+.search-button2{
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.search-element {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+}
 .search-element .form-control{
   width: 90%;
   margin: 0 auto;
@@ -1246,6 +1324,10 @@ select{
 }
 .search-list .search-list-item{
   width: 100%;
+}
+#movie-search-box2{
+  margin-left: 10px;
+  margin-bottom: -10px;
 }
 nav{
   flex-direction: column;
