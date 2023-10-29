@@ -151,10 +151,6 @@ header{
 }
 
 
-
-
-
-
 nav {
     background-color: #2D3142;
     margin-top: 5px;
@@ -205,6 +201,27 @@ nav {
 }
 
 
+/*style for carousel*/
+.carousel-container{
+  height: 100vh;
+  margin-left: 15%;
+  margin-right: 15%;
+  align-items: center;
+  text-align: center;
+  margin-bottom: -100px;
+}
+
+.glide__slide {
+  transition: transform 0.4s;
+  scale: 0.8; 
+}
+
+.glide__slide.glide__slide--active {
+  transform: scale(1.2); 
+}
+/*End of carousel style*/
+
+
 h1{
     color: #EC953B;
     text-shadow: 2px 2px 3px black;
@@ -242,13 +259,7 @@ p{
   border-radius: 5px;
 }
 
-#top1{
-  width: 50%;
-}
 
-#top2, #top3{
-  width: 25%;
-}
 
 #top4, #top5, #top6, #top7, #top8, #top9, #top10{
   width: 10%;
@@ -268,39 +279,41 @@ p{
   margin: 5px;
 }
 
+
 #rank1{
   float: left;
   position: relative;
-  top: -55rem;
-  left: -3rem; 
+  top: -50rem;
+  left: 2rem; 
   padding: 0;
-  font-size: 120px;
+  font-size: 100px;
   rotate: -10deg;
-  margin-bottom: -200px;
+  margin-bottom: -220px;
+
 
 }
 
 #rank2{
   float: left;
   position: relative;
-  top: -56.5rem;
-  left: -2rem; 
-  padding: 0;
+  top: -50rem;
+  left: 3rem; 
   rotate: -10deg;
-  margin-bottom: -200px;
   font-size: 80px;
+  margin-bottom: -220px;
+ 
 }
 
 #rank3{
   float: left;
   position: relative;
-  top: -54rem;
-  left: -2rem; 
-  padding: 0;
+  top: -49rem;
+  left: 3rem; 
   font-size: 80px;
   rotate: -10deg;
-  margin-bottom: -200px;
+  margin-bottom: -110px;
 }
+
 
 #rank4, #rank5, #rank6, #rank7, #rank8, #rank9{
   float: left;
@@ -469,10 +482,8 @@ footer{
   text-align: center;
   font-size: 18px;
   background-image: url('../img/movie_stripe.png');
-  
   background-size: cover;
   background-position: bottom;
-
 }
 
 
@@ -1123,6 +1134,12 @@ select{
  
 }
 
+
+
+
+
+
+
 /*iPad Air*/
 @media all and (max-width: 1180px){
 
@@ -1144,6 +1161,15 @@ select{
   padding: 0px 50px;
 }
 
+
+/*style for carousel*/
+.carousel-container{
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: -420px;
+}
+
+
 #toplist{
   margin-left: 0%;
   font-size: 30px;
@@ -1153,13 +1179,6 @@ select{
   justify-content: left;
 }
 
-#top1 {
-  width: 100%;
-}
-
-#top2, #top3{
-  width: 47%;
-}
 
 #top4, #top5, #top6, #top7, #top8, #top9, #top10{
   width: 26%;
@@ -1347,6 +1366,49 @@ nav{
   width: 100%;
 }
 
+
+/*style for carousel*/
+.carousel-container{
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 100px;
+}
+
+#rank1{
+  float: left;
+  position: relative;
+  top: -46rem;
+  left: 1rem; 
+  padding: 0;
+  font-size: 70px;
+  rotate: -10deg;
+  margin-bottom: -220px;
+
+
+}
+
+#rank2{
+  float: left;
+  position: relative;
+  top: -46rem;
+  left: 1.5rem; 
+  rotate: -10deg;
+  font-size: 50px;
+  margin-bottom: -220px;
+ 
+}
+
+#rank3{
+  float: left;
+  position: relative;
+  top: -46rem;
+  left: 1.5rem; 
+  font-size: 50px;
+  rotate: -10deg;
+  margin-bottom: -30px;
+}
+
+
 .flex-container, .top2-3-container, .top4-10-container, .flex-item{
   padding: 5px;
   margin: 0;
@@ -1356,9 +1418,6 @@ nav{
   margin: 5px;
 }
 
-#top2 img, #top3 img{
-  width: 50%;
-}
 
 #top4 img, #top5 img, #top6 img, #top7 img, #top8 img, #top9 img, #top10 img {
   width: 90%;
@@ -1378,10 +1437,6 @@ h4{
   font-size: 16px;
 }
 
-#top2, #top3 {
-  width: 100%;
-  margin-top: 10px
-}
 
 #topp4, #top5, #top6, #top7, #top8, #top9, #top10{
   width: 45%;
@@ -1398,17 +1453,7 @@ h4{
   padding: 40px;
 }
 
-#rank1{
-  top: -20px;
-  left: -7px; 
-  font-size: 50px;
-}
 
-#rank2, #rank3{
-  top: -30px;
-  left: -6px; 
-  font-size: 50px;
-}
 
 #rank4, #rank5, #rank6, #rank7, #rank8, #rank9{
   top: -30px;

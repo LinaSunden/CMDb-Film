@@ -9,10 +9,14 @@
     <script type="text/javascript" src="js/navToggle.js"></script>
     <script type="module" src="js/topList.js"></script>
     <script type="module" src="js/scoreRate.js"></script>
-
     <script type="module" src="js/apiCalls.js"></script>
-
     <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js" integrity="sha512-IkLiryZhI6G4pnA3bBZzYCT9Ewk87U4DGEOz+TnRD3MrKqaUitt+ssHgn2X/sxoM7FxCP/ROUp6wcxjH/GcI5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css" integrity="sha512-YQlbvfX5C6Ym6fTUSZ9GZpyB3F92hmQAZTO5YjciedwAaGRI9ccNs4iw2QTCJiSPheUQZomZKHQtuwbHkA9lgw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.theme.min.css" integrity="sha512-wCwx+DYp8LDIaTem/rpXubV/C1WiNRsEVqoztV0NZm8tiTvsUeSlA/Uz02VTGSiqfzAHD4RnqVoevMcRZgYEcQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script type="module" src="js/carousel.js"></script>
+
 </head>
 
 <body>
@@ -62,23 +66,51 @@
     <main>
         <h1 id="toplist">Top list</h1>
         
+        <div class="carousel-container">
+            
+            <div class="glide">
+              
+
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <li class="glide__slide" id="top3">
+                         
+                        </li>
+                        <li class="glide__slide" id="top1">
+                  
+                        </li>
+                        <li class="glide__slide" id="top2">
+                       
+                        </li>
+                    </ul>
+                </div>
+                 
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                  </div>
+
+                  <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                  </div>
+                  
+            </div>
+
+    
+        </div>
+          
+
+        
+
+
         <div class="flex-container">
             
-            <section class="flex-item" id="top1">
-               
-            </section>
-        
-            <section class="top2-3-container">
-
-                <div class="flex-item" id="top2">
-                   
-                </div>  
-            
-                <div class="flex-item" id="top3">
-                
-                </div>
-            </section>
-           
             <section class="top4-10-container">
             </section>
 
