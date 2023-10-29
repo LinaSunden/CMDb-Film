@@ -107,6 +107,9 @@ function showReviews() {
     const reviewContainer = document.querySelector('.read-review');
     const reviewsArray = JSON.parse(reviewsData);
     reviewsArray.forEach(review => {
+      if (review.reviewer === null || review.review === null) {
+        return;
+      }
  
   const reviewWrapper = document.createElement('div');
   reviewWrapper.classList.add('review-entry');
