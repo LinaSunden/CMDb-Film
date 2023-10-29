@@ -1,6 +1,11 @@
+//#region imports
+import { scoreMovie } from "./apiCalls.js";
+//#endregion
+
+//#region variables
 //place the ratedMovies in a local storage and if it is empty, create an empty array
 let ratedMovies = localStorage.getItem('ratedMovies') ? JSON.parse(localStorage.getItem('ratedMovies')) : [];
-
+//#endregion
 
 //#region functions for score/set rating
 /**
@@ -18,10 +23,10 @@ function rateMovie(imdbID, option, ratedMovies, link) {
 
     scoreMovie(imdbID, ratingScore)
       .then(response => {
-        console.log('Movie scored:', response);
+        console.log('Your rating is ', response);
 
         // Update the UI to show the user's rating
-        link.textContent = 'You scored ' + option;
+        link.textContent = 'Your rating is ' + option;
 
         ratedMovies.push(imdbID);   
   
@@ -29,7 +34,7 @@ function rateMovie(imdbID, option, ratedMovies, link) {
         localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
       })
       .catch(error => {
-        console.error('Error scoring movie:', error);
+        console.error('Error rate movie:', error);
       });
   } else {
     // Display a message to inform the user they've already rated the movie
@@ -37,33 +42,8 @@ function rateMovie(imdbID, option, ratedMovies, link) {
   }
 }
 
-
-/**
- * Handle the API PUT request to score a movie.
- * @param {*} imdbID 
- * @param {*} score 
- */
-async function scoreMovie(imdbID, score) {
-  try {
-    const response = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/rate/${imdbID}/${score}`, {
-      method: 'PUT',
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to rate the movie. Status: ${response.status}`);
-    }
-
-    const movieScored = await response.json();
-    return movieScored;
-  } catch (error) {
-    console.error('Error rating movie:', error);
-    throw error;
-  }
-}
-
-
 //#endregion
 
 //#region export
-export {rateMovie, scoreMovie, ratedMovies};
+export {rateMovie, ratedMovies};
 //#endregion

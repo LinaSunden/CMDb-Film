@@ -121,11 +121,11 @@ async function fetchMoviesFromTop4() {
   
         const movieScore = document.createElement('p');
         movieScore.classList.add('movie-score');
-        movieScore.textContent = `Score: ${movie.cmdbScore}`;
+        movieScore.textContent = `Rating: ${movie.cmdbScore}`;
   
         const setRating = document.createElement('span');
           setRating.classList.add('set-rating');
-          setRating.textContent = 'Score movie';
+          setRating.textContent = 'Rate movie';
           
           const rating = document.createElement('div');
           rating.classList.add('rating');

@@ -1,5 +1,7 @@
+//#region API URLs
 const cmdbUrl = "https://grupp6.dsvkurs.miun.se/api";
 const omdbURL = "http://www.omdbapi.com/?";
+//#endregion
 
 //#region API calls functions
 /**
@@ -40,7 +42,33 @@ async function getMovieOmdb(imdbID){
     return oneMovie;
 }
 
+/**
+ * Handle the API PUT request to score a movie.
+ * @param {*} imdbID 
+ * @param {*} score 
+ */
+async function scoreMovie(imdbID, score) {
+    try {
+        const endpoint = `/movies/rate/${imdbID}/${score}`;
+        const response = await fetch(cmdbUrl + endpoint, {
+        method: 'PUT',
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to rate the movie. Status: ${response.status}`);
+      }
+  
+      const movieScored = await response.json();
+      return movieScored;
+      
+    } catch (error) {
+      console.error('Error rating movie:', error);
+      throw error;
+    }
+  }
+
 //#endregion
 
-
-export {getMoviesCmdb, getMovieOmdb};
+//#region export
+export {getMoviesCmdb, getMovieOmdb, scoreMovie};
+//#endregion
