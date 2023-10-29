@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Your code here
+   
     function hambergmenuToggle() {
         const navs = document.querySelectorAll('.navigation');
 

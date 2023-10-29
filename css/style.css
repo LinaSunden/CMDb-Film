@@ -498,39 +498,24 @@ footer{
 
 .flex-posters{
   position: absolute;
-  /* top: 110px; */
   display: flex;
   flex-direction: column;
   left: 0;
-  top: 500px;
+  top: 18rem;
   margin: 10px;
-  
 }
 
 .infoAndRating, .review{
   width: 40%;
 }
 
-.moviePoster, .movieImg, .movieTrailer{
-  width: 25%;
+.moviePoster img{
+  max-width: 100%;
+  height: auto;
   margin: 10px;
 }
 
-.moviePoster img, .movieImg img{
-  width: 100%;
-  height: auto;
-}
 
-.movieTrailer iframe{
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.movieImg{
-  position: relative;
-  display: inline-block;
-}
 .arrow-right-image, .arrow-left-image{
   position: absolute;
   top: 50%;
@@ -1192,30 +1177,28 @@ select{
   text-align: center;
   padding: 5px;
   justify-content: flex-end;
-  margin-top: 225px;
+  margin-top: 480px;
 }
 
+
+
 .flex-posters{
-   
-  margin-left: 5px;
+  position: absolute;
   display: flex;
   flex-direction: row;
-  
+  top: 14rem;
 }
 
 .infoAndRating, .review{
   width: 100%;
 }
 
-.moviePoster{
-  width: 25%;
+.moviePoster img{
+  max-width: 100%;
+  height: auto;
   margin: 10px;
 }
 
-.movieImg, .movieTrailer{
-  margin: 10px;
-  width: 35%;
-}
 
 /*Anpassning för söksida*/
 .search-result{
@@ -1470,15 +1453,11 @@ main h1{
   text-align: center;
   padding: 5px;
   justify-content: flex-end;
-  margin-top: 1100px;
+  margin-top: 550px;
 }
 
 .flex-posters{
-  display: flex;
-  flex-direction: column;
-  margin-left: 0px;
-  margin-right: 20px; 
-  margin-top: 40px;
+  z-index: -1; 
 }
 
 .searchbar-movie{
@@ -1491,10 +1470,6 @@ main h1{
   width: 100%;
 }
 
-.moviePoster, .movieImg, .movieTrailer{
-  width: 100%;
-  margin: 10px;
-}
 
 .set-rating-detailpage li a{
   padding: 2rem;
