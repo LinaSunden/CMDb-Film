@@ -2,11 +2,12 @@
 import { scoreMovie } from "./apiCalls.js";
 //#endregion
 
+
 //#region variables
 //place the ratedMovies in a local storage and if it is empty, create an empty array
 let ratedMovies = localStorage.getItem('ratedMovies') ? JSON.parse(localStorage.getItem('ratedMovies')) : [];
 //#endregion
-
+console.log(ratedMovies);
 //#region functions for score/set rating
 /**
  * Check if the user has rated the movie before.
@@ -25,7 +26,8 @@ function rateMovie(imdbID, option, ratedMovies, link) {
       .then(response => {
         console.log('Your rating is ', response);
 
-        // Update the UI to show the user's rating
+        // Update the UI to show the user's rating //kolla om den även kan spara detta lokalt 
+
         link.textContent = 'Your rating is ' + option;
 
         ratedMovies.push(imdbID);   

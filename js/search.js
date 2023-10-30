@@ -76,17 +76,27 @@ function loadMovieDetails() {
         movie.addEventListener('click', async () => {
             searchList.classList.add('hide-search-list');
             movieSearchBox.value = "";
-            const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`);
-            const movieDetails = await result.json();
+           
+            const omdbResponse = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`);//combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
+            const omdbMovieDetails = await omdbResponse.json();
 
+            const cmdbResponse = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/${movie.dataset.id}`);
+            const cmdbMovieDetails = await cmdbResponse.json();
+            
+            const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
+            
             // Store movie data and redirect to details page
-            storeMovieData(movieDetails);
-            redirectToMovieDetails(movieDetails.imdbID);
+            storeMovieData(combinedMovieDetails);
+           
+            redirectToMovieDetails(combinedMovieDetails.imdbID);
+         
         });
     });
 }
 
 function storeMovieData(movie) {
+    console.log('Movie Data:', movie);
+
     // Store the movie object in local storage
     const movieString = JSON.stringify(movie);
     const movieKey = `movieData_${movie.imdbID}`;
