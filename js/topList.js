@@ -10,6 +10,8 @@ import { getMoviesCmdb, getMovieOmdb } from './apiCalls.js';
 console.log(combineResults());
 fetchMoviesTop3();
 fetchMoviesFromTop4();
+
+
 // #endregion
 
 // #region functions for top list
@@ -19,7 +21,7 @@ fetchMoviesFromTop4();
  * @returns {Promise<Array>} An array of combined movie objects.
  */
 async function combineResults(){
-    const moviesCmdb = await getMoviesCmdb(10);
+    const moviesCmdb = await getMoviesCmdb(30);
     const moviePromises = moviesCmdb.movies.map(async (movie) => {
         const imdbID = movie.imdbID;
         const movieOmdb = await getMovieOmdb(imdbID);
@@ -68,35 +70,37 @@ try {
 /**
  * Fetch the top 4-10 movies from the CMDB with data from OMDB API.
  */
-async function fetchMoviesFromTop4() {
-    const topContainers = [];
+// async function fetchMoviesFromTop4() {
+//     const topContainers = [];
 
-    for (let i = 4; i <= 10; i++) {
-      const topContainer = document.createElement('div');
-      topContainer.classList.add('flex-item-4-10');
-      topContainer.id = `top${i}`;
+//     for (let i = 4; i <= 10; i++) {
+//       const topContainer = document.createElement('div');
+//       topContainer.classList.add('flex-item-4-10');
+//       topContainer.id = `top${i}`;
   
-      const rankElement = document.createElement('h1');
-      rankElement.id = `rank${i}`;
-      rankElement.textContent = i;
+//       const rankElement = document.createElement('h1');
+//       rankElement.id = `rank${i}`;
+//       rankElement.textContent = i;
   
-      topContainer.appendChild(rankElement);
-      topContainers.push(topContainer);
-    }
+//       topContainer.appendChild(rankElement);
+//       topContainers.push(topContainer);
+//     }
 
-    const top4To10Container = document.querySelector('.top4-10-container');
-    topContainers.forEach(container => top4To10Container.appendChild(container));
+//     const top4To10Container = document.querySelector('.top4-10-container');
+//     topContainers.forEach(container => top4To10Container.appendChild(container));
   
-    try {
-      const combinedMovies = await combineResults();
+//     try {
+//       const combinedMovies = await combineResults();
   
-      combinedMovies.slice(3, 3 + topContainers.length).forEach(async (movie, index) => {
-        createMovieContainer(movie, topContainers[index]);
-      });
-    } catch (error) {
-      handleError(error);
-    }
-  }
+//       combinedMovies.slice(3, 3 + topContainers.length).forEach(async (movie, index) => {
+//         createMovieContainer(movie, topContainers[index]);
+//       });
+//     } catch (error) {
+//       handleError(error);
+//     }
+//   }
+
+
 
 /**
  * Create the movie container with title, poster, score, rating, plot, read more button and to movie details button.
@@ -231,4 +235,101 @@ window.location.href = url;
 
 // #endregion
 
+/*
+// Define the number of items per page
+const itemsPerPage = 11; // Change this to your desired value
 
+/// Get references to the pagination controls
+const prevPageButton = document.getElementById('prevPage');
+const nextPageButton = document.getElementById('nextPage');
+const top4To10Container = document.querySelector('.top4-10-container');
+
+// Initialize the current page
+let currentPage = 1;
+
+// Initialize the topContainers array with container elements
+const topContainers = [];
+for (let i = 4; i < itemsPerPage; i++) {
+  const topContainer = document.createElement('div');
+    topContainer.classList.add('flex-item-4-10');
+topContainer.id = `top${i}`;
+    
+  const rankElement = document.createElement('h1');
+  rankElement.id = `rank${i}`;
+  rankElement.textContent = i;
+    
+  topContainer.appendChild(rankElement);
+  topContainers.push(topContainer);
+}
+
+// Update the content based on the current page
+async function updateContent() {
+    const startIdx = (currentPage - 1) * itemsPerPage + 3;
+    const endIdx = startIdx + itemsPerPage;
+
+    // Clear the current content
+    top4To10Container.innerHTML = '';
+
+    // Display movies for the current page
+    const combinedMovies = await combineResults();
+
+    combinedMovies.slice(startIdx, Math.min(endIdx, combinedMovies.length)).forEach(async (movie, index) => {
+        createMovieContainer(movie, topContainers[index]);
+        top4To10Container.appendChild(topContainers[index]); // Append container to the container list
+    });
+
+    // Enable or disable the pagination buttons based on the current page
+    prevPageButton.disabled = currentPage === 1;
+    nextPageButton.disabled = endIdx >= combinedMovies.length;
+}
+
+// Handle previous page button click
+prevPageButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        updateContent();
+    }
+});
+
+// Handle next page button click
+nextPageButton.addEventListener('click', () => {
+    const startIdx = currentPage * itemsPerPage;
+    if (startIdx < combinedMovies.length) {
+        currentPage++;
+        updateContent();
+    }
+});
+
+// Initial content display
+updateContent();
+*/
+
+async function fetchMoviesFromTop4() {
+    const topContainers = [];
+
+    for (let i = 4; i <= 30; i++) {
+      const topContainer = document.createElement('div');
+      topContainer.classList.add('flex-item-4-10');
+      topContainer.id = `top${i}`;
+  
+      const rankElement = document.createElement('h1');
+      rankElement.id = `rank${i}`;
+      rankElement.textContent = i;
+  
+      topContainer.appendChild(rankElement);
+      topContainers.push(topContainer);
+    }
+
+    const top4To10Container = document.querySelector('.top4-10-container');
+    topContainers.forEach(container => top4To10Container.appendChild(container));
+  
+    try {
+      const combinedMovies = await combineResults();
+  
+      combinedMovies.slice(3, 3 + topContainers.length).forEach(async (movie, index) => {
+        createMovieContainer(movie, topContainers[index]);
+      });
+    } catch (error) {
+      handleError(error);
+    }
+  }

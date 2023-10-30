@@ -237,7 +237,7 @@ p{
   margin-left: 25%;
 }
 
-.flex-container, .top2-3-container, .top4-10-container{
+.flex-container, .top4-10-container{
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -261,7 +261,7 @@ p{
 
 
 
-#top4, #top5, #top6, #top7, #top8, #top9, #top10{
+#top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12{
   width: 10%;
 }
 
