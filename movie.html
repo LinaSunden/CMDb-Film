@@ -10,6 +10,7 @@
     <script type="module" src="js/movieDetails.js"></script>
     <script type="module" src="js/scoreRate.js"></script>
     <script type="module" src="js/apiCalls.js"></script>
+    <script type="module" src="js/postReview.js"></script>
     <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
 </head>
 
@@ -36,7 +37,7 @@
                     
                 </div>
             </div>
-         <button class="search-button" onclick="redirectToSearchPage()">Search</button>
+         <!-- <button class="search-button" onclick="redirectToSearchPage()">Search</button> -->
         </div>    
     </header>
 
@@ -139,11 +140,13 @@
                         <label for="review">Recension</label>
                         <textarea id="review" name="review" placeholder="Skriv din recension här..."></textarea>
                     </div>
-                    <input name="submit" type="submit" value="Publicera">
+                   <input name="submit" id="button-review2" type="button" value="Publicera"> 
                 </form>
             </div>
+            <div id="review-success-message" style="color: green;"></div>
         </section>
     </main>
+
 
 
     <aside class="flex-posters">

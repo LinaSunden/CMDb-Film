@@ -21,8 +21,27 @@ const runtime = movieData.Runtime;
 const plot = movieData.Plot;
 const numberCmdbVotes = movieData.count;
 const reviewsData = JSON.stringify(movieData.reviews);
+const genre = movieData.Genre;
+const categorizedScores = JSON.stringify(movieData.categorizedScores);
+//awards, språk, director, actor, writer
 
-//#endregion
+const scoresArray = JSON.parse(categorizedScores);
+
+//assuming there's a section with the class 'see-rating-section' in your UI
+const scoreSection = document.querySelector('.see-rating-section');
+
+//iterate over the array and create html elements
+scoresArray.forEach(item => {
+  //create a new div for each item
+  const scoreItem = document.createElement('div');
+
+  //set the content of the div to display the score and count
+  scoreItem.textContent = `Score: ${item.score}, Count: ${item.count}`;
+
+//append the created div to the section
+scoreSection.appendChild(scoreItem);
+});
+  //#endregion
 
 //#region functions calls
 movieInfo();
@@ -67,6 +86,22 @@ releaseYearText.textContent = year;
 releaseYearSpan.textContent = 'Release year: ';
 releaseYearText.prepend(releaseYearSpan);
 infoMovie.appendChild(releaseYearText);
+
+//imdb id, temorär grej
+const imdbIDText = document.createElement('p'); 
+const imdbIDSpan = document.createElement('span');
+imdbIDText.textContent = `IMDb ID: ${imdbID}`;
+imdbIDText.id = `imdbIDDisplay`;
+imdbIDText.prepend(imdbIDSpan);
+infoMovie.appendChild(imdbIDText);
+
+//genre
+const genreText = document.createElement('p');
+const genreSpan = document.createElement('span');
+genreText.textContent = genre;
+genreSpan.textContent = 'Genre: ';
+genreText.prepend(genreSpan);
+infoMovie.appendChild(genreText);
 
 
 //poster
@@ -144,7 +179,7 @@ function rateMovieDetailpage(){
 //#endregion
 
 
-
+export {movieInfo, showReviews}
 
 
 
