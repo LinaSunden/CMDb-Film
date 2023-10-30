@@ -29,10 +29,14 @@ const actors = movieData.Actors;
 const director = movieData.Director;
 const writer = movieData.Writer;
 const awards = movieData.Awards;
-//awards, språk, director, actor, writer
+const imdbRating = movieData.imdbRating;
+const imdbVotes = movieData.imdbVotes;
+const otherRatings = JSON.stringify(movieData.Ratings);
+//#endregion
+
 
 const scoresArray = JSON.parse(categorizedScores);
- //#endregion
+ 
 
 
 const scoreSection = document.querySelector('.see-rating-section');
@@ -53,6 +57,7 @@ scoreSection.appendChild(scoreItem);
 //#region functions calls
 movieInfo();
 movieCmdbRating();
+otherMovieRatings();
 showReviews();
 rateMovieDetailpage();
 //#endregion
@@ -61,7 +66,7 @@ rateMovieDetailpage();
 //#region functions for movie details
 
 /**
- * Function that presents title, plot, runtime, release year and poster of the movie
+ * Function that presents title, plot, runtime, release year, poster of the movie and more
  */
 function movieInfo() {
 //title
@@ -158,8 +163,6 @@ awardsSpan.textContent = 'Awards: ';
 awardsText.prepend(awardsSpan);
 infoMovie.appendChild(awardsText);
 
-
-
 //poster
 const posterContainer = document.createElement('div');
 posterContainer.classList.add('moviePoster');
@@ -178,6 +181,61 @@ posterContainer.appendChild(posterLink);
 const posterContainers = document.querySelectorAll('.flex-posters');
 posterContainers.forEach(container => container.appendChild(posterContainer));
 }
+
+
+/**
+ * Function that presents the imdb rating and the other ratings
+ */
+function otherMovieRatings(){
+//imdb rating
+const imdbContainer = document.createElement('div');
+imdbContainer.classList.add('imdb');
+
+const imdbHeadline = document.createElement('h2');
+imdbHeadline.textContent = 'IMDb';
+
+const imdbVotesText = document.createElement('p');
+const imdbVotesSpan = document.createElement('span');
+imdbVotesSpan.textContent = 'Votes: ';
+imdbVotesText.textContent = imdbVotes;
+imdbVotesText.prepend(imdbVotesSpan);
+
+const imdbRatingText = document.createElement('p');
+const imdbRatingSpan = document.createElement('span');
+imdbRatingSpan.textContent = 'Rating: ';
+imdbRatingText.textContent = imdbRating;
+imdbRatingText.prepend(imdbRatingSpan);
+
+imdbContainer.appendChild(imdbHeadline);
+imdbContainer.appendChild(imdbVotesText);
+imdbContainer.appendChild(imdbRatingText);
+
+//The other ratings
+const otherRatingsContainer = document.querySelector('.otherRatings');
+otherRatingsContainer.appendChild(imdbContainer);
+
+const otherRatingsArray = JSON.parse(otherRatings);
+otherRatingsArray.forEach(rating => {
+  const otherRatingContainer = document.createElement('div');
+  otherRatingContainer.classList.add('otherRating');
+
+  const otherRatingHeadline = document.createElement('h2');
+  otherRatingHeadline.textContent = rating.Source;
+
+  const otherRatingText = document.createElement('p');
+  const otherRatingSpan = document.createElement('span');
+  otherRatingSpan.textContent = 'Rating: ';
+  otherRatingText.textContent = rating.Value;
+  otherRatingText.prepend(otherRatingSpan);
+
+  otherRatingContainer.appendChild(otherRatingHeadline);
+  otherRatingContainer.appendChild(otherRatingText);
+
+  otherRatingsContainer.appendChild(otherRatingContainer);
+});
+  
+}
+
 
 /**
  * Function that presents the cmdb rating and number of votes
