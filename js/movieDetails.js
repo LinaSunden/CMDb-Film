@@ -17,17 +17,24 @@ const title = movieData.Title;
 const poster = movieData.Poster;
 const score = movieData.cmdbScore;
 const year = movieData.Year;
+const realeased = movieData.Released;
 const runtime = movieData.Runtime;
 const plot = movieData.Plot;
 const numberCmdbVotes = movieData.count;
 const reviewsData = JSON.stringify(movieData.reviews);
 const genre = movieData.Genre;
 const categorizedScores = JSON.stringify(movieData.categorizedScores);
+const language = movieData.Language;
+const actors = movieData.Actors;
+const director = movieData.Director;
+const writer = movieData.Writer;
+const awards = movieData.Awards;
 //awards, språk, director, actor, writer
 
 const scoresArray = JSON.parse(categorizedScores);
+ //#endregion
 
-//assuming there's a section with the class 'see-rating-section' in your UI
+
 const scoreSection = document.querySelector('.see-rating-section');
 
 //iterate over the array and create html elements
@@ -41,7 +48,7 @@ scoresArray.forEach(item => {
 //append the created div to the section
 scoreSection.appendChild(scoreItem);
 });
-  //#endregion
+ 
 
 //#region functions calls
 movieInfo();
@@ -79,15 +86,23 @@ runtimeSpan.textContent = 'Runtime: ';
 runtimeText.prepend(runtimeSpan);
 infoMovie.appendChild(runtimeText);
 
-//release year
+//Year
 const releaseYearText = document.createElement('p');
 const releaseYearSpan = document.createElement('span');
 releaseYearText.textContent = year;
-releaseYearSpan.textContent = 'Release year: ';
+releaseYearSpan.textContent = 'Year: ';
 releaseYearText.prepend(releaseYearSpan);
 infoMovie.appendChild(releaseYearText);
 
-//imdb id, temorär grej
+//released
+const releasedText = document.createElement('p');
+const releasedSpan = document.createElement('span');
+releasedText.textContent = realeased;
+releasedSpan.textContent = 'Released: ';
+releasedText.prepend(releasedSpan);
+infoMovie.appendChild(releasedText);
+
+//imdb id, temorär grej TABORT INNAN INLÄMNING
 const imdbIDText = document.createElement('p'); 
 const imdbIDSpan = document.createElement('span');
 imdbIDText.textContent = `IMDb ID: ${imdbID}`;
@@ -102,6 +117,47 @@ genreText.textContent = genre;
 genreSpan.textContent = 'Genre: ';
 genreText.prepend(genreSpan);
 infoMovie.appendChild(genreText);
+
+//language
+const languageText = document.createElement('p');
+const languageSpan = document.createElement('span');
+languageText.textContent = language;
+languageSpan.textContent = 'Language: ';
+languageText.prepend(languageSpan);
+infoMovie.appendChild(languageText);
+
+//actors
+const actorsText = document.createElement('p');
+const actorsSpan = document.createElement('span');
+actorsText.textContent = actors;
+actorsSpan.textContent = 'Actors: ';
+actorsText.prepend(actorsSpan);
+infoMovie.appendChild(actorsText);
+
+//director
+const directorText = document.createElement('p');
+const directorSpan = document.createElement('span');
+directorText.textContent = director;
+directorSpan.textContent = 'Director: ';
+directorText.prepend(directorSpan);
+infoMovie.appendChild(directorText);
+
+//writer
+const writerText = document.createElement('p');
+const writerSpan = document.createElement('span');
+writerText.textContent = writer;
+writerSpan.textContent = 'Writer: ';
+writerText.prepend(writerSpan);
+infoMovie.appendChild(writerText);
+
+//awards
+const awardsText = document.createElement('p');
+const awardsSpan = document.createElement('span');
+awardsText.textContent = awards;
+awardsSpan.textContent = 'Awards: ';
+awardsText.prepend(awardsSpan);
+infoMovie.appendChild(awardsText);
+
 
 
 //poster

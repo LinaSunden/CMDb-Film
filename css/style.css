@@ -547,15 +547,31 @@ footer{
   right: 0;
 }
 
-.flex-movie-info p{
+.info-movie p{
   color: white;
   font-size: 20px;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid lightskyblue;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #035fa560;
 }
 
-.flex-movie-info span{
+.info-movie span{
   font-weight: bold;
+  background-color: orange;
+  color: black;
+  border-radius: 5px;
+  padding: 2px;
+  margin-right: 5px;
+}
+
+.see-rating-section p{
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .info-movie, .see-rating-section, .read-review{
