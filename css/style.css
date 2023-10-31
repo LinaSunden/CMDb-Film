@@ -467,22 +467,6 @@ main img{
   font-weight: bold;
 }
 
-/*Fungerar bara på första filmen de andra blir hel knasiga. Måste ha något med loop att göra*/
-/*
-.movie-plot{
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.movie-plot.expanded {
-  white-space: normal;
-  text-overflow: clip;
-}
-*/
-
-
 
 .movie-plot{
   margin-bottom: 2px;

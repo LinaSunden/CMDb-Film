@@ -1,6 +1,6 @@
 //#region imports
 import { rateMovie, ratedMovies } from './scoreRate.js';
-import { getMoviesCmdb, getMovieOmdb } from './apiCalls.js';
+import { getMoviesCmdb, getMovieOmdb, getMovieOmdbFullPlot } from './apiCalls.js';
 // #endregion
 
 //#region variables
@@ -166,8 +166,9 @@ async function fetchMoviesWithPagination(page) {
           readMoreButton.classList.add('read-more-button');
           readMoreButton.textContent = 'Read more...';
     
-          readMoreToggler(readMoreButton, moviePlot);
-    
+          readMoreToggler(readMoreButton, moviePlot, movie.imdbID);
+          
+
           const toMovieDetails = document.createElement('button');
             toMovieDetails.classList.add('to-movie-details');
             toMovieDetails.textContent = 'To movie details';
@@ -194,21 +195,7 @@ async function fetchMoviesWithPagination(page) {
   }
 
 
-  /**
- * Create a toggle function for the read more button.
- * @param {*} readMoreButton 
- * @param {*} moviePlot 
- */
-function readMoreToggler (readMoreButton, moviePlot) {
-    readMoreButton.addEventListener('click', () => {
-        moviePlot.classList.toggle('expanded');
-        if (moviePlot.classList.contains('expanded')) {
-            readMoreButton.textContent = 'Read less...';
-        } else {
-            readMoreButton.textContent = 'Read more...';
-        }
-    });
-}
+  
 
 /**
  * Create a local storage with all the movie data.
@@ -301,7 +288,54 @@ window.location.href = url;
     // Update the button visibility
     updateButtonVisibility();
   }
+
+/**
+ * Create a toggle function for the read more button.
+ * That change the plot from short to full and vice versa.
+ * @param {*} readMoreButton 
+ * @param {*} moviePlot 
+ * @param {*} imdbID 
+ */
+function readMoreToggler (readMoreButton, moviePlot, imdbID){
+  readMoreButton.addEventListener('click', () => {
+    if(readMoreButton.textContent === 'Read more...'){
+    displayFullPlot(imdbID, moviePlot);
+    readMoreButton.textContent = 'Read less...';
+    } 
+    else if (readMoreButton.textContent === 'Read less...'){
+      displayShortPlot(imdbID, moviePlot);
+      readMoreButton.textContent = 'Read more...';
+    }
+  });
+}
+
+
+/**
+ * Display the short plot in the moviePlot element.
+ * @param {*} imdbID 
+ * @param {*} moviePlot 
+ */
+async function displayShortPlot(imdbID, moviePlot) {
+  const oneMovie = await getMovieOmdb(imdbID);
+  moviePlot.textContent = oneMovie.Plot;
+}
+
+/**
+ * Display the full plot in the moviePlot element.
+ * @param {*} imdbID 
+ * @param {*} moviePlot 
+ */
+async function displayFullPlot(imdbID, moviePlot) {
+  const oneMovie = await getMovieOmdbFullPlot(imdbID);
+  moviePlot.textContent = oneMovie.Plot;
+}
+
 // #endregion
+
+
+
+
+
 
 
 

@@ -42,6 +42,18 @@ async function getMovieOmdb(imdbID){
     return oneMovie;
 }
 
+async function getMovieOmdbFullPlot(imdbID){
+  const response = await fetch(omdbURL + new URLSearchParams({
+      i: `${imdbID}`,
+      plot: "full",
+      apiKey: `${await getApiKey()}`  
+  }));
+  
+  const oneMovie = await response.json();
+  console.log(oneMovie);
+  return oneMovie;
+}
+
 /**
  * Handle the API PUT request to score a movie.
  * @param {*} imdbID 
@@ -70,5 +82,5 @@ async function scoreMovie(imdbID, score) {
 //#endregion
 
 //#region export
-export {getMoviesCmdb, getMovieOmdb, scoreMovie};
+export {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot};
 //#endregion
