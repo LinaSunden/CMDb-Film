@@ -38,22 +38,28 @@ header{
   display: flex;
   align-items: center;
   justify-content: left;
-  
-}
+  border-radius: 10px;
+} 
+
+
 .search-button {
-  height: 38px;
+  height: 55px;
   padding: 0 10px;
   border: none;
   background-color: #0078d7;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
-  margin-left: -370px;
+  margin-left: -460px;
+  margin-top: 6px;
+  border-radius: 10px;
 }
 
 .search-button:hover {
   background-color: #005a9e;
 }
+
+
 .search-element {
   display: flex;
   align-items: stretch;
@@ -63,11 +69,14 @@ header{
 
   border: 2px solid currentColor;
   border-radius: 10px;
-  background-color: #DEF4CC;
+  background-color: #ddf4cc;
   margin-left: 25%;
   margin-top: 10px; 
   margin-right: 25%;
+  width: 499px;
 }
+
+
 .search-element h3{
   align-self: center;
   margin-right: 1rem;
@@ -75,6 +84,7 @@ header{
   color: #fff;
   font-weight: 500;
   margin-bottom: 1.5rem;
+ 
 }
 
 .search-element .form-control{
@@ -84,11 +94,13 @@ header{
   border: none;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+  border-radius: 10px;
   outline: none;
   color: var(--light-dark-color);
-  width: 350px;
+  width: 450px;
   
-}
+} 
+ 
 
 
 .search-list{
@@ -739,6 +751,7 @@ footer{
 
 .contactUs #review{
   height: 200px;
+  
 }
 
 
@@ -1083,6 +1096,16 @@ select{
 }
 
 /*Denna stylning av formulär gäller både för aboutUs och movie*/
+
+
+/* Additional styles for the form, modify as needed */
+.contactUs {
+  background-color: #DEF4CC; /* Change this to the desired background color */
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+}
+
 .contactUs input[type=text], textarea, select, .contactUs, .contactUs input[type=email]
 ,.contactUs input[type=number], .contactUs input[type=date]{
   width: 95%;
@@ -1112,6 +1135,19 @@ select{
 }
 
 .contactUs input[type=submit]{
+  width: 95%;
+  background-color: #EC953B;
+  color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#button-review2 {
   width: 95%;
   background-color: #EC953B;
   color: white;
