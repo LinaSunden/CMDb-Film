@@ -608,11 +608,13 @@ footer{
   padding: 0;
   overflow: hidden;
   display: flex;
+  position: relative;
+  width: 200px;
 }
 
 
 .ratingline li{
-  margin-right: 3px;
+  margin-right: 2px;
 }
 
 
@@ -648,9 +650,9 @@ footer{
   position: relative;
 }
 
-.rating-stroke{
+#rating-stroke{
   position: absolute;
-  margin-left: 125px;
+  margin-left: 129px;
   margin-top: -60px;
   width: 3px;
   height: 70px;
@@ -663,7 +665,7 @@ footer{
 }
 
 .green-vote{
-  background: linear-gradient(to right, green 75%,  gray 0%);
+  background: linear-gradient(to right, green 0%,  gray 0%);
   width: 400px;
   height: 30px;
   border-radius: 10px;
@@ -675,7 +677,7 @@ footer{
 }
 
 .lightgreen-vote{
-  background: linear-gradient(to right, #8CA047 20%,  gray 0%);
+  background: linear-gradient(to right, #8CA047 0%,  gray 0%);
   width: 400px;
   height: 30px;
   border-radius: 10px;
@@ -687,7 +689,7 @@ footer{
 }
 
 .orange-vote{
-  background: linear-gradient(to right, orange 2%,  gray 0%);
+  background: linear-gradient(to right, orange 0%,  gray 0%);
   width: 400px;
   height: 30px;
   border-radius: 10px;
@@ -699,7 +701,7 @@ footer{
 }
 
 .red-vote{
-  background: linear-gradient(to right, red 2%,  gray 0%);
+  background: linear-gradient(to right, red 0%,  gray 0%);
   width: 400px;
   height: 30px;
   border-radius: 10px;

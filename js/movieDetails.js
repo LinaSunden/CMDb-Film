@@ -16,6 +16,8 @@ console.log(movieData);
 const title = movieData.Title;
 const poster = movieData.Poster;
 const score = movieData.cmdbScore;
+
+
 const year = movieData.Year;
 const realeased = movieData.Released;
 const runtime = movieData.Runtime;
@@ -36,22 +38,27 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 
 
 const scoresArray = JSON.parse(categorizedScores);
- 
+ console.log(scoresArray);
 
 
 const scoreSection = document.querySelector('.see-rating-section');
+
+const countArray = [];
 
 //iterate over the array and create html elements
 scoresArray.forEach(item => {
   //create a new div for each item
   const scoreItem = document.createElement('div');
 
-  //set the content of the div to display the score and count
-  scoreItem.textContent = `Score: ${item.score}, Count: ${item.count}`;
+  countArray.push(item.count);
 
 //append the created div to the section
 scoreSection.appendChild(scoreItem);
 });
+
+
+
+
  
 
 //#region functions calls
@@ -291,6 +298,123 @@ function rateMovieDetailpage(){
   });
 }
 //#endregion
+
+
+
+// Update the UI with the score
+function updateRatingUI(score) {
+  const maxScore = 4;
+  const maxWidth = 194;
+
+  // Ensure the score is between 1 and 4
+  score = Math.max(1, Math.min(4, score));
+
+  // Calculate the scaling factor based on the maximum score and width
+  const scalingFactor = maxWidth / (maxScore - 1);
+
+  // Calculate the margin dynamically
+  const marginValue = (score - 1) * scalingFactor;
+
+  // Set the margin-left dynamically
+  document.getElementById('rating-stroke').style.marginLeft = `${marginValue}px`;
+}
+
+// Example usage
+updateRatingUI(score);
+
+
+
+
+
+
+// Update the bars with the vote colors
+function updateVoteColors(scoresArray) {
+  const totalVotes = scoresArray.reduce((sum, item) => sum + item.count, 0);
+
+  scoresArray.forEach(item => {
+    const percentage = (item.count / totalVotes) * 100;
+    const selector = getSelector(item.score);
+
+
+    
+    if (selector) {
+      
+
+      document.querySelector(selector).style.background = `linear-gradient(to right, ${getColor(selector)} ${percentage}%, gray 0%)`;
+    }
+  });
+}
+
+function getSelector(score) {
+  switch (score) {
+    case 4:
+      return '.green-vote';
+    case 3:
+      return '.lightgreen-vote';
+    case 2:
+      return '.orange-vote';
+    case 1:
+      return '.red-vote';
+    default:
+      return '';
+  }
+}
+
+function getColor(selector) {
+  switch (selector) {
+    case '.green-vote':
+      return 'green';
+    case '.lightgreen-vote':
+      return '#8CA047';
+    case '.orange-vote':
+      return 'orange';
+    case '.red-vote':
+      return 'red';
+    default:
+      return '';
+  }
+}
+
+updateVoteColors(scoresArray);
+
+
+
+// update the vote counts
+
+
+function updateVoteCounts(scoresArray) {
+  scoresArray.forEach(item => {
+    const selector = getSelectorClass(item.score);
+    const countElement = document.getElementById(`${selector}`);
+
+    if (countElement) {
+      countElement.textContent = `${item.count} st`;
+    }
+  });
+}
+
+
+
+function getSelectorClass(score) {
+  switch (score) {
+    case 4:
+      return 'greentext';
+    case 3:
+      return 'lightgreentext';
+    case 2:
+      return 'orangetext';
+    case 1:
+      return 'redtext';
+    default:
+      return '';
+  }
+}
+updateVoteCounts(scoresArray);
+
+
+
+
+
 
 
 export {movieInfo, showReviews}
