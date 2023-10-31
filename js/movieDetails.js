@@ -302,29 +302,42 @@ scoresArray.forEach(item => {
 scoreSection.appendChild(scoreItem);
 });
 
+
+
+
+
+
+
+
+
+
+//#region user interface dynamic changes for rating
+
 // Update the UI with the score
 function updateRatingUI(score) {
-  const maxScore = 4;
-  const maxWidth = 194;
-
-  // Ensure the score is between 1 and 4
   score = Math.max(1, Math.min(4, score));
 
-  // Calculate the scaling factor based on the maximum score and width
-  const scalingFactor = maxWidth / (maxScore - 1);
+  // Calculate the margin based on specific conditions
+  let marginValue;
 
-  // Calculate the margin dynamically
-  const marginValue = (score - 1) * scalingFactor;
-
+  if (score === 1) {
+    marginValue = 1;
+  } else if (score === 2) {
+    marginValue = 52;
+  } else if (score === 3) {
+    marginValue = 104;
+  } else if (score === 4) {
+    marginValue = 200;
+  } else {
+    // For scores between integers, interpolate the margin value
+    const interval = 52; // Adjust this based on your desired margin between scores
+    marginValue = (score - 1) * interval;
+  }
   // Set the margin-left dynamically
   document.getElementById('rating-stroke').style.marginLeft = `${marginValue}px`;
+  document.getElementById('number').style.marginLeft = `${marginValue}px`;
 }
-
-// Example usage
 updateRatingUI(score);
-
-
-
 
 
 
@@ -335,12 +348,7 @@ function updateVoteColors(scoresArray) {
   scoresArray.forEach(item => {
     const percentage = (item.count / totalVotes) * 100;
     const selector = getSelector(item.score);
-
-
-    
     if (selector) {
-      
-
       document.querySelector(selector).style.background = `linear-gradient(to right, ${getColor(selector)} ${percentage}%, gray 0%)`;
     }
   });
@@ -375,14 +383,10 @@ function getColor(selector) {
       return '';
   }
 }
-
 updateVoteColors(scoresArray);
 
 
-
-// update the vote counts
-
-
+//function that updates the  counts
 function updateVoteCounts(scoresArray) {
   scoresArray.forEach(item => {
     const selector = getSelectorClass(item.score);
@@ -393,7 +397,6 @@ function updateVoteCounts(scoresArray) {
     }
   });
 }
-
 
 
 function getSelectorClass(score) {
@@ -412,8 +415,7 @@ function getSelectorClass(score) {
 }
 updateVoteCounts(scoresArray);
 
-
-
+//#endregion
 
 
 
