@@ -30,7 +30,9 @@ function rateMovie(imdbID, option, ratedMovies, link) {
 
         link.textContent = 'Your rating is ' + option;
 
-        ratedMovies.push(imdbID);   
+        const ratedMovie = {imdbID, ratingScore};
+
+        ratedMovies.push(ratedMovie);   
   
         // Update ratedMovies in local storage
         localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
