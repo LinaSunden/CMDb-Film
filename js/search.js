@@ -62,18 +62,31 @@ function loadMovieDetails() {
             searchList.classList.add('hide-search-list');
             movieSearchBox.value = "";
            
-            const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`); //combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
-            const movieDetails = await result.json();
+            const omdbResponse = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`); //combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
+            const omdbMovieDetails = await omdbResponse.json();
 
-            // const cmdbResponse = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/${movie.dataset.id}`);
-            // const cmdbMovieDetails = await cmdbResponse.json();
-            
-            // const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
-            
-            // Store movie data and redirect to details page  //TOG BORT FÖR FICK MASSA ERRORS
-            storeMovieData(result);
+            try {
+                const cmdbResponse = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/${movie.dataset.id}`);
+                if (cmdbResponse.status === 404) {
+                  // Handle the case where the movie is not found in the CMDB
+                  console.log("Movie not found in CMDB");
+                    storeMovieData(omdbMovieDetails);
+                    redirectToMovieDetails(omdbMovieDetails.imdbID);
+                } else {
+                  const cmdbMovieDetails = await cmdbResponse.json();
+                  const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
+                  // Now you can use combinedMovieDetails
+                  storeMovieData(combinedMovieDetails);
            
-            redirectToMovieDetails(movieDetails.imdbID);
+                    redirectToMovieDetails(combinedMovieDetails.imdbID);
+                }
+              } catch (error) {
+                // Handle other fetch errors, e.g., network issues
+                console.error("Error fetching movie details:", error);
+              }
+            
+            //Store movie data and redirect to details page  //TOG BORT FÖR FICK MASSA ERRORS
+            
          
         });
     });
@@ -102,16 +115,16 @@ function redirectToMovieDetails(imdbID) {
     window.location.href = url;
 }
 
-// Byte till söksidan
-function redirectToSearchPage() {  
-    const searchTerm = document.getElementById('movie-search-box').value.trim();
-    if (searchTerm.length > 0) {
-        window.location.href = `search.html?searchTerm=${searchTerm}`;
-    } else {
-        window.location.href = 'search.html';
-        console.log('$searchTerm')
-    }
-} 
+// // Byte till söksidan
+// function redirectToSearchPage() {  
+//     const searchTerm = document.getElementById('movie-search-box').value.trim();
+//     if (searchTerm.length > 0) {
+//         window.location.href = `search.html?searchTerm=${searchTerm}`;
+//     } else {
+//         window.location.href = 'search.html';
+//         console.log('$searchTerm')
+//     }
+// } 
 
 
 
@@ -119,28 +132,28 @@ function redirectToSearchPage() {
 
 
 
-function displayMovieDetails(details){
-    resultGrid.innerHTML = `
-    <div class = "movie-poster">
-        <img src = "${(details.Poster != "N/A") ? details.Poster : "image_not_found.png"} alt = "movie poster"> 
-    </div>
-    <div class = "movie-info">
-        <h3 class = "movie-title">${details.Title}</h3>
-        <ul class = "movie-misc-info">
-            <li class = "year">year: ${details.Year}</li>
-            <li class = "rated">Ratings: ${details.Rated}</li>
-            <li class = "released">Released: ${details.Released}</li>
-        </ul>
-        <p class = "genre"><b>Genre:</b> ${details.Genre}</p>
-        <p class = "writer"><b>Writer:</b> ${details.Writer}</p>
-        <p class = "actors"><b>Actors:</b> ${details.Actors}</p>
-        <p class = "plot"><b>Plot:</b> ${details.Plot}</p>
-        <p class = "language"><b>Language:</b> ${details.Language}</p>
-        <p class = "awards"><b><i class = "fas fa-award"></i></b> ${details.Awards}</p>
-    </div>
-    `;
+// function displayMovieDetails(details){
+//     resultGrid.innerHTML = `
+//     <div class = "movie-poster">
+//         <img src = "${(details.Poster != "N/A") ? details.Poster : "image_not_found.png"} alt = "movie poster"> 
+//     </div>
+//     <div class = "movie-info">
+//         <h3 class = "movie-title">${details.Title}</h3>
+//         <ul class = "movie-misc-info">
+//             <li class = "year">year: ${details.Year}</li>
+//             <li class = "rated">Ratings: ${details.Rated}</li>
+//             <li class = "released">Released: ${details.Released}</li>
+//         </ul>
+//         <p class = "genre"><b>Genre:</b> ${details.Genre}</p>
+//         <p class = "writer"><b>Writer:</b> ${details.Writer}</p>
+//         <p class = "actors"><b>Actors:</b> ${details.Actors}</p>
+//         <p class = "plot"><b>Plot:</b> ${details.Plot}</p>
+//         <p class = "language"><b>Language:</b> ${details.Language}</p>
+//         <p class = "awards"><b><i class = "fas fa-award"></i></b> ${details.Awards}</p>
+//     </div>
+//     `;
 
-}
+// }
 
 // function loadMovieDetails(){
 //     const searchListMovies = searchList.querySelectorAll('.search-list-item');

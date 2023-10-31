@@ -37,24 +37,7 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 //#endregion
 
 
-const scoresArray = JSON.parse(categorizedScores);
- console.log(scoresArray);
 
-
-const scoreSection = document.querySelector('.see-rating-section');
-
-const countArray = [];
-
-//iterate over the array and create html elements
-scoresArray.forEach(item => {
-  //create a new div for each item
-  const scoreItem = document.createElement('div');
-
-  countArray.push(item.count);
-
-//append the created div to the section
-scoreSection.appendChild(scoreItem);
-});
 
 
 
@@ -300,6 +283,24 @@ function rateMovieDetailpage(){
 //#endregion
 
 
+const scoresArray = JSON.parse(categorizedScores);
+ console.log(scoresArray);
+
+
+const scoreSection = document.querySelector('.see-rating-section');
+
+const countArray = [];
+
+//iterate over the array and create html elements
+scoresArray.forEach(item => {
+  //create a new div for each item
+  const scoreItem = document.createElement('div');
+
+  countArray.push(item.count);
+
+//append the created div to the section
+scoreSection.appendChild(scoreItem);
+});
 
 // Update the UI with the score
 function updateRatingUI(score) {
