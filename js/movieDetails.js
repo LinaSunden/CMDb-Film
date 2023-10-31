@@ -16,8 +16,6 @@ console.log(movieData);
 const title = movieData.Title;
 const poster = movieData.Poster;
 const score = movieData.cmdbScore;
-
-
 const year = movieData.Year;
 const realeased = movieData.Released;
 const runtime = movieData.Runtime;
@@ -38,9 +36,9 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 
 
 
-
-
-
+//#region variables
+let currentReviewIndex = 0;
+//#endregion
 
  
 
@@ -48,8 +46,9 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 movieInfo();
 movieCmdbRating();
 otherMovieRatings();
-//showReviews();
 rateMovieDetailpage();
+showReviews();
+reviewPageNavigation();
 //#endregion
 
 
@@ -240,7 +239,24 @@ cmdbVotes.textContent = `Based on: ${numberCmdbVotes} votes`;
 }
 
 
-let currentReviewIndex = 0;
+
+
+/**
+ * Sort the reviews by date in descending order and filter out reviews with null reviewer or review
+ * @param {*} reviewsData 
+ * @returns 
+ */
+function sortFilterReviews(reviewsData) {
+  let reviewsArray = JSON.parse(reviewsData);
+
+  // Filter out reviews with null reviewer or review
+  reviewsArray = reviewsArray.filter(review => review.reviewer !== null && review.review !== null);
+
+  // Sort reviews by date
+  reviewsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  return reviewsArray;
+}
 
 /**
  * Function that presents the reviews of the movie
@@ -248,16 +264,11 @@ let currentReviewIndex = 0;
 function showReviews() {
   const reviewContainer = document.querySelector('.read-review');
   reviewContainer.innerHTML = ''; // Clear the container
-  let reviewsArray = JSON.parse(reviewsData);
-
-  // Filter out reviews with null reviewer or review
-  reviewsArray = reviewsArray.filter(review => review.reviewer !== null && review.review !== null);
-
-  reviewsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const reviewsArray = sortFilterReviews(reviewsData);
   console.log(reviewsArray);
   const reviewsToShow = reviewsArray.slice(currentReviewIndex, currentReviewIndex + 5);
+  
   reviewsToShow.forEach(review => {
- 
 
     const reviewWrapper = document.createElement('div');
     reviewWrapper.classList.add('review-entry');
@@ -274,65 +285,48 @@ function showReviews() {
   });
 
   currentReviewIndex += reviewsToShow.length;
+  updateButtonVisibility();
 }
 
-showReviews();
-document.getElementById('prevReviews').addEventListener('click', () => {
-  currentReviewIndex = Math.max(0, currentReviewIndex - 10);
-  showReviews();
-});
 
-document.getElementById('nextReviews').addEventListener('click', showReviews);
-
-/*
-const reviewsArray = JSON.parse(reviewsData);
-
-reviewsArray.sort((a, b) => {
-  console.log('a.date:', a.date, 'Date object:', new Date(a.date));
-  console.log('b.date:', b.date, 'Date object:', new Date(b.date));
-  return new Date(b.date) - new Date(a.date);
-});
-
-showReviews(1, 5);  // Show the first page with 5 reviews
-
-function showReviews(page, pageSize) {
-
-  const reviewContainer = document.querySelector('.read-review');
+/**
+ * Function that handles the navigation for the reviews
+ */
+function reviewPageNavigation(){
+  document.getElementById('prevReviews').addEventListener('click', () => {
+    currentReviewIndex = Math.max(0, currentReviewIndex - 10);
+    showReviews();
+    
+  });
   
-  // Calculate the start and end indices for the current page
-  const startIndex = (page - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
+  document.getElementById('nextReviews').addEventListener('click', () => {
+    showReviews();
+   
+  });
+}
 
-  // Clear the existing content in the reviewContainer
-  reviewContainer.innerHTML = '';
 
-  // Loop through and display the reviews for the current page
-  for (let i = startIndex; i < endIndex && i < reviewsArray.length; i++) {
-    const review = reviewsArray[i];
 
-    if (review.reviewer === null || review.review === null) {
-      continue; // Skip invalid reviews
-    }
+/**
+ * Function that handles the visibility of the buttons for the reviews
+ */
+function updateButtonVisibility() {
+  const prevButton = document.getElementById('prevReviews');
+  const nextButton = document.getElementById('nextReviews');
+  const reviewsArray = sortFilterReviews(reviewsData);
 
-    const reviewWrapper = document.createElement('div');
-    reviewWrapper.classList.add('review-entry');
+  if (currentReviewIndex === 5) {
+    prevButton.setAttribute('hidden', 'true'); 
+  } else {
+    prevButton.removeAttribute('hidden');
+  }
 
-    const reviewerInfo = document.createElement('h4');
-    reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
-
-    const reviewText = document.createElement('p');
-    reviewText.textContent = review.review;
-
-    reviewWrapper.appendChild(reviewerInfo);
-    reviewWrapper.appendChild(reviewText);
-    reviewContainer.appendChild(reviewWrapper);
+  if (currentReviewIndex >= reviewsArray.length) {
+    nextButton.setAttribute('hidden', 'true'); 
+  } else {
+    nextButton.removeAttribute('hidden'); 
   }
 }
-
-*/
-
-
-
 
 
 /**
@@ -486,8 +480,8 @@ updateVoteCounts(scoresArray);
 
 
 
-
+//#region export
 export {movieInfo, showReviews}
-
+//#endregion
 
 
