@@ -627,7 +627,7 @@ footer{
   overflow: hidden;
   display: flex;
   position: relative;
-  width: 200px;
+  width: 208px;
 }
 
 
@@ -645,13 +645,13 @@ footer{
 }
 
 #orange-rating{
-  width: 45px;
+  width: 50px;
   height: 50px;
   background-color: orange;
 }
 
 #lightgreen-rating{
-  width: 45px;
+  width: 50px;
   height: 50px;
   background-color: #8CA047;
 }
@@ -670,7 +670,7 @@ footer{
 
 #rating-stroke{
   position: absolute;
-  margin-left: 129px;
+  margin-left: 140px;
   margin-top: -60px;
   width: 3px;
   height: 70px;
@@ -678,7 +678,7 @@ footer{
   border-radius: 10px;
 }
 
-.rating-number{
+#number{
   margin-left: 115px;
 }
 
