@@ -3,19 +3,17 @@ import { rateMovie, ratedMovies } from './scoreRate.js';
 import { getMoviesCmdb, getMovieOmdb } from './apiCalls.js';
 // #endregion
 
-
+//#region variables
+let currentPage = 1; // Initialize the current page
+// #endregion
 
 //#region functions calls
-
 console.log(combineResults());
 fetchMoviesTop3();
-fetchMoviesFromTop4();
-
-
+initializePagination();
 // #endregion
 
 // #region functions for top list
-
 /**
  * Take the results from the CMDB and the OMDB API and combine them into one object.
  * @returns {Promise<Array>} An array of combined movie objects.
@@ -67,39 +65,45 @@ try {
   }
 }
 
+
 /**
- * Fetch the top 4-10 movies from the CMDB with data from OMDB API.
+ * Fetch the movies with pagination. From top 4 and upto 30.
+ * @param {} page 
  */
-// async function fetchMoviesFromTop4() {
-//     const topContainers = [];
+async function fetchMoviesWithPagination(page) {
+  const moviesPerPage = (page < 4) ? 7 : 6; // 7 movies for the first 3 pages, 6 for the last
+  const startIdx = 3 + (page - 1) * 7; // Start from 3 for the first 3 pages
+  const endIdx = (page < 4) ? (startIdx + moviesPerPage) : 30; // Limit the end index to 30
 
-//     for (let i = 4; i <= 10; i++) {
-//       const topContainer = document.createElement('div');
-//       topContainer.classList.add('flex-item-4-10');
-//       topContainer.id = `top${i}`;
-  
-//       const rankElement = document.createElement('h1');
-//       rankElement.id = `rank${i}`;
-//       rankElement.textContent = i;
-  
-//       topContainer.appendChild(rankElement);
-//       topContainers.push(topContainer);
-//     }
+  const topContainers = [];
 
-//     const top4To10Container = document.querySelector('.top4-10-container');
-//     topContainers.forEach(container => top4To10Container.appendChild(container));
-  
-//     try {
-//       const combinedMovies = await combineResults();
-  
-//       combinedMovies.slice(3, 3 + topContainers.length).forEach(async (movie, index) => {
-//         createMovieContainer(movie, topContainers[index]);
-//       });
-//     } catch (error) {
-//       handleError(error);
-//     }
-//   }
+  for (let i = startIdx + 1; i <= endIdx; i++) {
+    const topContainer = document.createElement('div');
+    topContainer.classList.add('flex-item-4-10');
+    topContainer.id = `top${i}`;
 
+    const rankElement = document.createElement('h1');
+    rankElement.id = `rank${i}`;
+    rankElement.textContent = i;
+
+    topContainer.appendChild(rankElement);
+    topContainers.push(topContainer);
+  }
+
+  const top4To10Container = document.querySelector('.top4-10-container');
+  top4To10Container.innerHTML = ''; // Clear the existing content
+  topContainers.forEach(container => top4To10Container.appendChild(container));
+
+  try {
+    const combinedMovies = await combineResults();
+
+    combinedMovies.slice(startIdx, endIdx).forEach(async (movie, index) => {
+      createMovieContainer(movie, topContainers[index]);
+    });
+  } catch (error) {
+    handleError(error);
+  }
+}
 
 
 /**
@@ -233,103 +237,79 @@ window.location.href = url;
     console.error(error);
   }
 
-// #endregion
+  
+  /**
+   * Go to the next page of movies.
+   */
+  function next() {
+    if (currentPage < 4) {
+      currentPage++;
+    }
+    fetchMoviesWithPagination(currentPage);
+    updateButtonVisibility();
+  }
+  
 
-/*
-// Define the number of items per page
-const itemsPerPage = 11; // Change this to your desired value
-
-/// Get references to the pagination controls
-const prevPageButton = document.getElementById('prevPage');
-const nextPageButton = document.getElementById('nextPage');
-const top4To10Container = document.querySelector('.top4-10-container');
-
-// Initialize the current page
-let currentPage = 1;
-
-// Initialize the topContainers array with container elements
-const topContainers = [];
-for (let i = 4; i < itemsPerPage; i++) {
-  const topContainer = document.createElement('div');
-    topContainer.classList.add('flex-item-4-10');
-topContainer.id = `top${i}`;
-    
-  const rankElement = document.createElement('h1');
-  rankElement.id = `rank${i}`;
-  rankElement.textContent = i;
-    
-  topContainer.appendChild(rankElement);
-  topContainers.push(topContainer);
-}
-
-// Update the content based on the current page
-async function updateContent() {
-    const startIdx = (currentPage - 1) * itemsPerPage + 3;
-    const endIdx = startIdx + itemsPerPage;
-
-    // Clear the current content
-    top4To10Container.innerHTML = '';
-
-    // Display movies for the current page
-    const combinedMovies = await combineResults();
-
-    combinedMovies.slice(startIdx, Math.min(endIdx, combinedMovies.length)).forEach(async (movie, index) => {
-        createMovieContainer(movie, topContainers[index]);
-        top4To10Container.appendChild(topContainers[index]); // Append container to the container list
-    });
-
-    // Enable or disable the pagination buttons based on the current page
-    prevPageButton.disabled = currentPage === 1;
-    nextPageButton.disabled = endIdx >= combinedMovies.length;
-}
-
-// Handle previous page button click
-prevPageButton.addEventListener('click', () => {
+  /**
+   * Go to the previous page of movies.
+   */
+  function previous() {
     if (currentPage > 1) {
-        currentPage--;
-        updateContent();
+      currentPage--;
+      fetchMoviesWithPagination(currentPage);
     }
-});
+    updateButtonVisibility();
+  }
 
-// Handle next page button click
-nextPageButton.addEventListener('click', () => {
-    const startIdx = currentPage * itemsPerPage;
-    if (startIdx < combinedMovies.length) {
-        currentPage++;
-        updateContent();
+
+  /**
+ * Update the visibility of the "Previous" and "Next" buttons
+ */
+  function updateButtonVisibility() {
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+
+    if (currentPage === 1) {
+      prevButton.classList.add('hidden');
     }
-});
-
-// Initial content display
-updateContent();
-*/
-
-async function fetchMoviesFromTop4() {
-    const topContainers = [];
-
-    for (let i = 4; i <= 30; i++) {
-      const topContainer = document.createElement('div');
-      topContainer.classList.add('flex-item-4-10');
-      topContainer.id = `top${i}`;
-  
-      const rankElement = document.createElement('h1');
-      rankElement.id = `rank${i}`;
-      rankElement.textContent = i;
-  
-      topContainer.appendChild(rankElement);
-      topContainers.push(topContainer);
+    else {
+      prevButton.classList.remove('hidden');
     }
-
-    const top4To10Container = document.querySelector('.top4-10-container');
-    topContainers.forEach(container => top4To10Container.appendChild(container));
   
-    try {
-      const combinedMovies = await combineResults();
-  
-      combinedMovies.slice(3, 3 + topContainers.length).forEach(async (movie, index) => {
-        createMovieContainer(movie, topContainers[index]);
-      });
-    } catch (error) {
-      handleError(error);
+    if (currentPage < 4) {
+      nextButton.classList.remove('hidden');
+    } else {
+      nextButton.classList.add('hidden');
     }
   }
+
+
+  /**
+ * Initialize the pagination and fetch the first page of movies
+ */
+  function initializePagination() {
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+  
+    // Add click event listeners to the buttons
+    prevButton.addEventListener("click", previous);
+    nextButton.addEventListener("click", next);
+  
+    // Initial display of movies (page 1)
+    fetchMoviesWithPagination(currentPage);
+  
+    // Update the button visibility
+    updateButtonVisibility();
+  }
+// #endregion
+
+
+
+
+
+
+ 
+
+
+
+ 

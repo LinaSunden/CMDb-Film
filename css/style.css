@@ -259,11 +259,17 @@ p{
   border-radius: 5px;
 }
 
+.top4-10-container .movie-title {
+  font-size: 15px;
+  margin-left: 30px;
+}
 
 
-#top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12{
+#top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12, #top13, #top14, #top15, #top16, 
+#top17, #top18, #top19, #top20, #top21, #top22, #top23, #top24, #top25, #top26, #top27, #top28, #top29, #top30{
   width: 10%;
 }
+
 
 .to-movie-details{
   background-color: #EC953B;
@@ -321,22 +327,38 @@ p{
   top: -5rem;
   left: -1rem; 
   padding: 0;
-  font-size: 60px;
+  font-size: 50px;
   rotate: -10deg;
   margin-bottom: -200px;
 }
 
-#rank10 {
+#rank10, #rank11, #rank12, #rank13, #rank14, #rank15, #rank16, #rank17, #rank18, #rank19, #rank20,
+#rank21, #rank22, #rank23, #rank24, #rank25, #rank26, #rank27, #rank28, #rank29, #rank30 {
   float: left;
   position: relative;
   top: -5rem;
   left: -2rem; 
   padding: 0;
-  font-size: 60px;
+  font-size: 50px;
   rotate: -10deg;
   margin-bottom: -200px;
 }
 
+
+#prevPage, #nextPage{
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #EC953B;
+  margin: 10px;
+  font-size: 20px;
+}
+
+
+
+.hidden {
+  display: none;
+}
 
 h3{
   color: white;
@@ -1140,6 +1162,7 @@ select{
 
 
 
+
 /*iPad Air*/
 @media all and (max-width: 1180px){
 
@@ -1180,7 +1203,8 @@ select{
 }
 
 
-#top4, #top5, #top6, #top7, #top8, #top9, #top10{
+#top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12, #top13, #top14, #top15, #top16,
+#top17, #top18, #top19, #top20, #top21, #top22, #top23, #top24, #top25, #top26, #top27, #top28, #top29, #top30{
   width: 26%;
 }
 
@@ -1438,10 +1462,13 @@ h4{
 }
 
 
-#topp4, #top5, #top6, #top7, #top8, #top9, #top10{
+#top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12, #top13, #top14, #top15, #top16,
+#top17, #top18, #top19, #top20, #top21, #top22, #top23, #top24, #top25, #top26, #top27, #top28, #top29, #top30{
   width: 45%;
   margin: 8px;
 }
+
+
 
 .rating li{
   padding-left: 40px;
@@ -1461,10 +1488,11 @@ h4{
   font-size: 40px;
 }
 
-#rank10{
+#rank10, #rank11, #rank12, #rank13, #rank14, #rank15, #rank16, #rank17, #rank18, #rank19, #rank20, 
+#rank21, #rank22, #rank23, #rank24, #rank25, #rank26, #rank27, #rank28, #rank29, #rank30{
   top: -30px;
-  left: -15px; 
-  font-size: 40px;
+  left: -25px; 
+  font-size: 37px;
 }
 
 /*Anpassningar för filmer*/
