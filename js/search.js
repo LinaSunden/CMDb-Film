@@ -28,8 +28,6 @@ function findMovies(){
 }
 
 
-
-
 function displayMovieList(movies){
     searchList.innerHTML = "";
     for(let idx = 0; idx < movies.length; idx++){
@@ -55,20 +53,7 @@ function displayMovieList(movies){
     loadMovieDetails();
 }
 
-// function loadMovieDetails(){
-//     const searchListMovies = searchList.querySelectorAll('.search-list-item');
-//     searchListMovies.forEach(movie => {
-//         movie.addEventListener('click', async () => {
-//             // console.log(movie.dataset.id);  får fram id
-//             searchList.classList.add('hide-search-list');
-//             movieSearchBox.value = "";
-//             const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&apikey=5a4be969`);
-//             const movieDetails = await result.json();
-//             // console.log(movieDetails)
-//             displayMovieDetails(movieDetails);
-//         });
-//     });
-// }
+
 
 function loadMovieDetails() {
     const searchListMovies = searchList.querySelectorAll('.search-list-item');
@@ -77,18 +62,18 @@ function loadMovieDetails() {
             searchList.classList.add('hide-search-list');
             movieSearchBox.value = "";
            
-            const omdbResponse = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`);//combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
-            const omdbMovieDetails = await omdbResponse.json();
+            const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`); //combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
+            const movieDetails = await result.json();
 
-            const cmdbResponse = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/${movie.dataset.id}`);
-            const cmdbMovieDetails = await cmdbResponse.json();
+            // const cmdbResponse = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/${movie.dataset.id}`);
+            // const cmdbMovieDetails = await cmdbResponse.json();
             
-            const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
+            // const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
             
-            // Store movie data and redirect to details page
-            storeMovieData(combinedMovieDetails);
+            // Store movie data and redirect to details page  //TOG BORT FÖR FICK MASSA ERRORS
+            storeMovieData(result);
            
-            redirectToMovieDetails(combinedMovieDetails.imdbID);
+            redirectToMovieDetails(movieDetails.imdbID);
          
         });
     });
@@ -124,6 +109,7 @@ function redirectToSearchPage() {
         window.location.href = `search.html?searchTerm=${searchTerm}`;
     } else {
         window.location.href = 'search.html';
+        console.log('$searchTerm')
     }
 } 
 
@@ -153,4 +139,21 @@ function displayMovieDetails(details){
         <p class = "awards"><b><i class = "fas fa-award"></i></b> ${details.Awards}</p>
     </div>
     `;
+
 }
+
+// function loadMovieDetails(){
+//     const searchListMovies = searchList.querySelectorAll('.search-list-item');
+//     searchListMovies.forEach(movie => {
+//         movie.addEventListener('click', async () => {
+//             // console.log(movie.dataset.id);  får fram id
+//             searchList.classList.add('hide-search-list');
+//             movieSearchBox.value = "";
+//             const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&apikey=5a4be969`);
+//             const movieDetails = await result.json();
+//             // console.log(movieDetails)
+//             displayMovieDetails(movieDetails);
+//         });
+//     });
+// }
+
