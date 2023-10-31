@@ -48,7 +48,7 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 movieInfo();
 movieCmdbRating();
 otherMovieRatings();
-showReviews();
+//showReviews();
 rateMovieDetailpage();
 //#endregion
 
@@ -239,33 +239,101 @@ cmdbScore.textContent = score;
 cmdbVotes.textContent = `Based on: ${numberCmdbVotes} votes`;
 }
 
+
+let currentReviewIndex = 0;
+
 /**
  * Function that presents the reviews of the movie
  */
 function showReviews() {
-    const reviewContainer = document.querySelector('.read-review');
-    const reviewsArray = JSON.parse(reviewsData);
-    reviewsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
-    reviewsArray.forEach(review => {
-      if (review.reviewer === null || review.review === null) {
-        return;
-      }
+  const reviewContainer = document.querySelector('.read-review');
+  reviewContainer.innerHTML = ''; // Clear the container
+  let reviewsArray = JSON.parse(reviewsData);
+
+  // Filter out reviews with null reviewer or review
+  reviewsArray = reviewsArray.filter(review => review.reviewer !== null && review.review !== null);
+
+  reviewsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+  console.log(reviewsArray);
+  const reviewsToShow = reviewsArray.slice(currentReviewIndex, currentReviewIndex + 5);
+  reviewsToShow.forEach(review => {
  
-  const reviewWrapper = document.createElement('div');
-  reviewWrapper.classList.add('review-entry');
-  
-  const reviewerInfo = document.createElement('h4');
-  reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
-  
-  const reviewText = document.createElement('p');
-  reviewText.textContent = review.review;
-  
-  
-  reviewWrapper.appendChild(reviewerInfo);
-  reviewWrapper.appendChild(reviewText);
-  reviewContainer.appendChild(reviewWrapper);
+
+    const reviewWrapper = document.createElement('div');
+    reviewWrapper.classList.add('review-entry');
+
+    const reviewerInfo = document.createElement('h4');
+    reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
+
+    const reviewText = document.createElement('p');
+    reviewText.textContent = review.review;
+
+    reviewWrapper.appendChild(reviewerInfo);
+    reviewWrapper.appendChild(reviewText);
+    reviewContainer.appendChild(reviewWrapper);
   });
+
+  currentReviewIndex += reviewsToShow.length;
 }
+
+showReviews();
+document.getElementById('prevReviews').addEventListener('click', () => {
+  currentReviewIndex = Math.max(0, currentReviewIndex - 10);
+  showReviews();
+});
+
+document.getElementById('nextReviews').addEventListener('click', showReviews);
+
+/*
+const reviewsArray = JSON.parse(reviewsData);
+
+reviewsArray.sort((a, b) => {
+  console.log('a.date:', a.date, 'Date object:', new Date(a.date));
+  console.log('b.date:', b.date, 'Date object:', new Date(b.date));
+  return new Date(b.date) - new Date(a.date);
+});
+
+showReviews(1, 5);  // Show the first page with 5 reviews
+
+function showReviews(page, pageSize) {
+
+  const reviewContainer = document.querySelector('.read-review');
+  
+  // Calculate the start and end indices for the current page
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  // Clear the existing content in the reviewContainer
+  reviewContainer.innerHTML = '';
+
+  // Loop through and display the reviews for the current page
+  for (let i = startIndex; i < endIndex && i < reviewsArray.length; i++) {
+    const review = reviewsArray[i];
+
+    if (review.reviewer === null || review.review === null) {
+      continue; // Skip invalid reviews
+    }
+
+    const reviewWrapper = document.createElement('div');
+    reviewWrapper.classList.add('review-entry');
+
+    const reviewerInfo = document.createElement('h4');
+    reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
+
+    const reviewText = document.createElement('p');
+    reviewText.textContent = review.review;
+
+    reviewWrapper.appendChild(reviewerInfo);
+    reviewWrapper.appendChild(reviewText);
+    reviewContainer.appendChild(reviewWrapper);
+  }
+}
+
+*/
+
+
+
+
 
 /**
  * Function that handles the rating of the movie on the detailpage
