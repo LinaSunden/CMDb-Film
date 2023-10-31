@@ -245,6 +245,7 @@ cmdbVotes.textContent = `Based on: ${numberCmdbVotes} votes`;
 function showReviews() {
     const reviewContainer = document.querySelector('.read-review');
     const reviewsArray = JSON.parse(reviewsData);
+    reviewsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
     reviewsArray.forEach(review => {
       if (review.reviewer === null || review.review === null) {
         return;
