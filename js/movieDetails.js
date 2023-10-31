@@ -16,8 +16,6 @@ console.log(movieData);
 const title = movieData.Title;
 const poster = movieData.Poster;
 const score = movieData.cmdbScore;
-
-
 const year = movieData.Year;
 const realeased = movieData.Released;
 const runtime = movieData.Runtime;
@@ -38,9 +36,9 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 
 
 
-
-
-
+//#region variables
+let currentReviewIndex = 0;
+//#endregion
 
  
 
@@ -48,8 +46,9 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 movieInfo();
 movieCmdbRating();
 otherMovieRatings();
-showReviews();
 rateMovieDetailpage();
+showReviews();
+reviewPageNavigation();
 //#endregion
 
 
@@ -239,32 +238,96 @@ cmdbScore.textContent = score;
 cmdbVotes.textContent = `Based on: ${numberCmdbVotes} votes`;
 }
 
+
+
+
+/**
+ * Sort the reviews by date in descending order and filter out reviews with null reviewer or review
+ * @param {*} reviewsData 
+ * @returns 
+ */
+function sortFilterReviews(reviewsData) {
+  let reviewsArray = JSON.parse(reviewsData);
+
+  // Filter out reviews with null reviewer or review
+  reviewsArray = reviewsArray.filter(review => review.reviewer !== null && review.review !== null);
+
+  // Sort reviews by date
+  reviewsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  return reviewsArray;
+}
+
 /**
  * Function that presents the reviews of the movie
  */
 function showReviews() {
-    const reviewContainer = document.querySelector('.read-review');
-    const reviewsArray = JSON.parse(reviewsData);
-    reviewsArray.forEach(review => {
-      if (review.reviewer === null || review.review === null) {
-        return;
-      }
- 
-  const reviewWrapper = document.createElement('div');
-  reviewWrapper.classList.add('review-entry');
+  const reviewContainer = document.querySelector('.read-review');
+  reviewContainer.innerHTML = ''; // Clear the container
+  const reviewsArray = sortFilterReviews(reviewsData);
+  console.log(reviewsArray);
+  const reviewsToShow = reviewsArray.slice(currentReviewIndex, currentReviewIndex + 5);
   
-  const reviewerInfo = document.createElement('h4');
-  reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
+  reviewsToShow.forEach(review => {
+
+    const reviewWrapper = document.createElement('div');
+    reviewWrapper.classList.add('review-entry');
+
+    const reviewerInfo = document.createElement('h4');
+    reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
+
+    const reviewText = document.createElement('p');
+    reviewText.textContent = review.review;
+
+    reviewWrapper.appendChild(reviewerInfo);
+    reviewWrapper.appendChild(reviewText);
+    reviewContainer.appendChild(reviewWrapper);
+  });
+
+  currentReviewIndex += reviewsToShow.length;
+  updateButtonVisibility();
+}
+
+
+/**
+ * Function that handles the navigation for the reviews
+ */
+function reviewPageNavigation(){
+  document.getElementById('prevReviews').addEventListener('click', () => {
+    currentReviewIndex = Math.max(0, currentReviewIndex - 10);
+    showReviews();
+    
+  });
   
-  const reviewText = document.createElement('p');
-  reviewText.textContent = review.review;
-  
-  
-  reviewWrapper.appendChild(reviewerInfo);
-  reviewWrapper.appendChild(reviewText);
-  reviewContainer.appendChild(reviewWrapper);
+  document.getElementById('nextReviews').addEventListener('click', () => {
+    showReviews();
+   
   });
 }
+
+
+
+/**
+ * Function that handles the visibility of the buttons for the reviews
+ */
+function updateButtonVisibility() {
+  const prevButton = document.getElementById('prevReviews');
+  const nextButton = document.getElementById('nextReviews');
+  const reviewsArray = sortFilterReviews(reviewsData);
+
+  if (currentReviewIndex === 5) {
+    prevButton.setAttribute('hidden', 'true'); 
+  } else {
+    prevButton.removeAttribute('hidden');
+  }
+
+  if (currentReviewIndex >= reviewsArray.length) {
+    nextButton.setAttribute('hidden', 'true'); 
+  } else {
+    nextButton.removeAttribute('hidden'); 
+  }
+}
+
 
 /**
  * Function that handles the rating of the movie on the detailpage
@@ -419,8 +482,8 @@ updateVoteCounts(scoresArray);
 
 
 
-
+//#region export
 export {movieInfo, showReviews}
-
+//#endregion
 
 
