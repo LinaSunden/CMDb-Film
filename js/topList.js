@@ -195,19 +195,34 @@ async function fetchMoviesWithPagination(page) {
   }
 
 
-  
+  /**
+   * Fech the full plot from the OMDB API and return it.
+   * @param {*} imdbID 
+   * @returns 
+   */
+  async function FetchFullPlot(imdbID) {
+    const oneMovie = await getMovieOmdbFullPlot(imdbID);
+    return oneMovie.Plot;
+  }
+
+
 
 /**
  * Create a local storage with all the movie data.
  * Redirect to the movie details page.
  * @param {*} movie 
  */
-function goToMovieDetails(movie) {
+async function goToMovieDetails(movie) {
+  //change the plot to full plot
+  const fullplot = await FetchFullPlot(movie.imdbID);
+  movie.Plot = fullplot;
+
   // Store the movie object in local storage
   const movieString = JSON.stringify(movie);
   const movieKey = `movieData_${movie.imdbID}`;
   localStorage.setItem(movieKey, movieString);
 
+  
  // Construct the URL with a query parameter for the IMDb ID
 const queryParams = new URLSearchParams();
 queryParams.set('imdbID', movie.imdbID);
@@ -215,6 +230,7 @@ const url = `movie.html?${queryParams.toString()}`;
 
 // Redirect to the detail page with the IMDb ID in the URL
 window.location.href = url;
+
 }
   
 /**
