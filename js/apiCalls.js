@@ -79,8 +79,19 @@ async function scoreMovie(imdbID, score) {
     }
   }
 
+  /**
+   * 
+   * @returns fetch the latest review from the CMDB API.
+   */
+  async function latestReview(){
+    const endpoint = '/movies/latest';
+    const response = await fetch(cmdbUrl + endpoint);
+    const latestReview = await response.json();
+    return latestReview;   
+  }
+
 //#endregion
 
 //#region export
-export {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot};
+export {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot, latestReview};
 //#endregion
