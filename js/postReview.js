@@ -78,6 +78,7 @@ function pressingPublishButton(event) {
       imdbID: imdbID,
       ratingScore: score,
     });
+    localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
     updateUIForRatedMovie();
 
   }
