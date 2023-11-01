@@ -18,33 +18,40 @@ console.log(ratedMovies);
  * @param {*} ratedMovies 
  * @param {*} link 
  */
+
+
 function rateMovie(imdbID, option, ratedMovies, link) {
-  if (!ratedMovies.includes(imdbID)) {
-    const ratingScore = parseInt(option);
+  return new Promise((resolve, reject) => {
+    if (!ratedMovies.find(movie => movie.imdbID === imdbID)) {
+      const ratingScore = parseInt(option);
 
-    scoreMovie(imdbID, ratingScore)
-      .then(response => {
-        console.log('Your rating is ', response);
+      scoreMovie(imdbID, ratingScore)
+        .then(response => {
+          console.log('Your rating is ', response);
 
-        // Update the UI to show the user's rating //kolla om den även kan spara detta lokalt 
+          // Update the UI to show the user's rating
+          link.textContent = 'Your rating is ' + option;
 
-        link.textContent = 'Your rating is ' + option;
+          const ratedMovie = {imdbID, ratingScore};
+          ratedMovies.push(ratedMovie);
 
-        const ratedMovie = {imdbID, ratingScore};
+          // Update ratedMovies in local storage
+          localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
 
-        ratedMovies.push(ratedMovie);   
-  
-        // Update ratedMovies in local storage
-        localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
-      })
-      .catch(error => {
-        console.error('Error rate movie:', error);
-      });
-  } else {
-    // Display a message to inform the user they've already rated the movie
-    alert('You have already rated this movie.');
-  }
+          resolve(); // Resolve the promise after successfully rating the movie
+        })
+        .catch(error => {
+          console.error('Error rate movie:', error);
+          reject(error); // Reject the promise if there is an error
+        });
+    } else {
+      // Display a message to inform the user they've already rated the movie
+      alert('You have already rated this movie.');
+      reject(new Error('Movie already rated')); // Reject the promise with an error
+    }
+  });
 }
+
 
 //#endregion
 

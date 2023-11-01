@@ -1088,6 +1088,20 @@ select{
   grid-row: 1 /span 2;
 }
 
+#review-success-message {
+  background-color: #DEF4CC;
+  border: 1px solid black;
+  color: #155724;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: bold;
+  display: none;
+}
+
+
+
 .contactForm{
   grid-column: 1;
   grid-row:2;
@@ -1106,8 +1120,8 @@ select{
 
 /* Additional styles for the form, modify as needed */
 .contactUs {
-  background-color: #DEF4CC; /* Change this to the desired background color */
-  border: 1px solid #ccc;
+  background-color: #DEF4CC; 
+  border: 1px solid #C3E6CB;
   padding: 15px;
   border-radius: 5px;
 }
