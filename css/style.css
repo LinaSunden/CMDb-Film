@@ -822,7 +822,7 @@ footer{
 }
 
 
-/*Styling för search*/
+/*Styling för searchpage*/
 #select-runtime{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -871,7 +871,59 @@ footer{
   z-index: 1;
 }
 
+.rating2 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  margin-top: 100px;
+ 
+}
 
+.rating2 li{
+  float: left;
+  list-style: none;
+}
+
+.rating2 li a{
+  display: block;
+  padding: 5px 10px;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.rating2 .rating-list2 {
+  padding: 10px;
+  margin: 20px;
+  padding-inline-start: 0% !important;
+}
+
+.rating2 ._12 {
+  background-color: red;
+  margin: 5px 5px 10px 0px;
+}
+
+.rating2 ._22{
+  background-color: orange;
+  margin: 5px 5px 10px 0px;
+}
+
+.rating2 ._32{
+  background-color: #8CA047;
+  margin: 5px 5px 10px 0px;
+}
+
+.rating2 ._42{
+  background-color: rgb(1, 143, 1);
+  margin: 5px 5px 10px 0px;
+}
 
 
 
@@ -1104,7 +1156,10 @@ select{
   margin-left: 5px;
   margin-bottom: 5px;
 }
+.rate-button {
+  margin-top: 100px;
 
+}
 
 /*Styling för aboutUs*/
 #grid-container-aboutUs{
@@ -1401,6 +1456,14 @@ input:disabled, textarea:disabled, select:disabled {
 /*Anpassning för söksida*/
 .search-result{
   width: 100%;
+}
+
+#searchbutton2:hover {
+  cursor: pointer;
+}
+
+.search-button2:hover{
+  cursor: pointer;
 }
 
 .topp-search{
@@ -1729,7 +1792,7 @@ main h1{
   border: 1px solid black;
 }
 
-/*Anpassningar för söksidan*/
+/*Anpassningar för sök*/
 #searchbar-site-search{
   margin-top: 50px;
   margin-left: 5px;
@@ -1748,6 +1811,14 @@ main h1{
   grid-template-columns: auto;
   row-gap: 50px;
   margin: 10px;
+}
+.hide {
+  display: none;
+}
+
+.pagination-bar{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .search-filter, .search-result, .topp-search{
