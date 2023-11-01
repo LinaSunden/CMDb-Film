@@ -392,18 +392,6 @@ function updateRatingUI2(imdbID, ratingOption, link) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 const scoresArray = JSON.parse(categorizedScores);
  console.log(scoresArray);
 
@@ -421,11 +409,6 @@ scoresArray.forEach(item => {
 //append the created div to the section
 scoreSection.appendChild(scoreItem);
 });
-
-
-
-
-
 
 
 
@@ -455,7 +438,9 @@ function updateRatingUI(score) {
   }
   // Set the margin-left dynamically
   document.getElementById('rating-stroke').style.marginLeft = `${marginValue}px`;
+  document.getElementById('rating-stroke').style.display = 'block';
   document.getElementById('number').style.marginLeft = `${marginValue}px`;
+  
 }
 updateRatingUI(score);
 

@@ -736,6 +736,7 @@ footer{
   height: 70px;
   background-color: white;
   border-radius: 10px;
+  display: none;
 }
 
 #number{
@@ -1198,11 +1199,18 @@ select{
   font-size: 16px;
 }
 
-.contactUs input[type=text], .contactUs input[type=email], .contactUs input[type=number], 
+/* .contactUs input[type=text], .contactUs input[type=email], .contactUs input[type=number], 
 .contactUs input[type=date]{
   background-color: white;
+} */
+input:disabled, textarea:disabled, select:disabled {
+  background-color: #6c757d; /* light gray */
+  color: #6c757d; /* dark gray */
 }
-
+#publish-button:disabled {
+  
+  cursor: not-allowed;
+}
 
 .contactUs label{
   margin-left: 10px;
@@ -1227,7 +1235,7 @@ select{
   font-weight: bold;
 }
 
-#button-review2 {
+#publish-button {
   width: 95%;
   background-color: #EC953B;
   color: white;
