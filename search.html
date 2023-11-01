@@ -19,7 +19,7 @@
         <div class = "search-element">
             
             <input type = "text" class = "form-control" id = "movie-search-box" 
-            placeholder="Search Movie Title ..." onkeyup="findMovies()">
+            placeholder="Search Movie Title ...">
             
              
             <div class = "search-list" id = "search-list">
@@ -36,7 +36,7 @@
                 
             </div>
         </div>
-        <button class="search-button" onclick="redirectToSearchPage()">Search</button>
+        <button id="searchbutton" class="search-button">Search</button>
     </div>    
 </header>
     <nav>
@@ -47,7 +47,7 @@
         <ul class="navigation">
             <li><a href="index.html">Hem</a></li>
             <li><a href="movie.html">Filmer</a></li>
-            <li><a href="search.html" class="active">Sök</a></li>
+            <li><a href="search.html" class="active">Search</a></li>
             <li><a href="aboutUs.html">Om oss</a></li>
         </ul> 
     </nav>
@@ -58,10 +58,10 @@
             <h1>Sökfilter</h1>
 
             <div class = "search-box2">
-              <input type = "text" class = "form-control2" id = "movie-search-box2" placeholder="Sök film..." onkeyup="findMovies()">
+              <input type = "text" class = "form-control2" id = "movie-search-box2" placeholder="Search movie...">
               <div class = "search-list2" id = "search-list2"></div>
             </div>
-            <button class="search-button2" onclick="redirectToSearchPage()">Search</button>
+            <button id="searchbutton2" class="search-button2">Search</button>
 
             
             <div id="grid-container-search-filter">
@@ -128,15 +128,13 @@
         </section>
 
         <section class="search-result flex-item">
-            <div class="searchResultheadings clearfix">
+            <div class="searchResultheadings clearfix" >
               <h1>Sök resultat</h1>
               <h3>Din sökning: Home</h3>
-
-            >
             </div>
             
-
-              <div class="result1 clearfix">
+            <div id="movie-results">
+              <div class="result1 clearfix" style="display: none;">
                 <div class="movie-poster">
                   <a href="img/home.jpg" target="_blank"> <img src="img/home.jpg" alt="Home"/></a>
                 </div>
@@ -150,7 +148,7 @@
                 </div>
               </div>
 
-              <div class="result2 clearfix">
+              <div class="result2 clearfix" style="display: none;">
                 <div class="movie-poster">
                   <a href="img/spidermanNoWayHome.jpg" target="_blank"> <img src="img/spidermanNoWayHome.jpg" alt="Spiderman no way home"/></a>
                 </div>
@@ -162,8 +160,8 @@
                   </p>
                 </div>
               </div>
+            </div>
               
-            
         </section>
 
         <section class="topp-search flex-item">
@@ -194,6 +192,6 @@
         <span id="email">E-post: info@cmdbfilm.se</span>     
         <span id="copyright"><i class="fa-regular fa-copyright"></i> 2023 CMDB Film</span>
     </footer>
-    <script src="/js/search.js"></script>
+    <script type="module"  src="/js/search.js"></script>
 </body>
 </html>

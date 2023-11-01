@@ -27,7 +27,7 @@
                 <div class = "search-element">
                     
                     <input type = "text" class = "form-control" id = "movie-search-box" 
-                    placeholder="Search Movie Title ..." onkeyup="findMovies()">
+                    placeholder="Search Movie Title ..." >
                     
                      
                     <div class = "search-list" id = "search-list">
@@ -46,7 +46,7 @@
                     </div>
                     
                 </div>
-                <button class="search-button" onclick="redirectToSearchPage()">Search</button>
+                <button id="searchbutton" class="search-button">Search</button>
             </div>    
         </header>
 
@@ -141,7 +141,7 @@
         <span id="email">E-post: info@cmdbfilm.se</span>     
         <span id="copyright"><i class="fa-regular fa-copyright"></i> 2023 CMDB Film</span>
     </footer>
-    <script src="/js/search.js"></script>
+    <script type="module"  src="/js/search.js"></script>
 </body>
 </html>
 
