@@ -75,7 +75,7 @@ async function displayLatestReview() {
 //#region function calls
 
 // Fetch the latest review every 3 seconds (3000 milliseconds)
-setInterval(displayLatestReview, 3000);
+//setInterval(displayLatestReview, 3000); //SÄTT TILLBAKA FÖR ATT FÅ LATEST REVIEW ATT HÄMTAS VAR 3E SEKUND
 
 displayLatestReview();
 //#endregion
