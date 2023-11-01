@@ -330,25 +330,82 @@ function updateButtonVisibility() {
 
 
 /**
- * Function that handles the rating of the movie on the detailpage
+ * Function that handles the rating of the movie on the detailpage 
  */
 function rateMovieDetailpage(){
   const ratingLinks = document.querySelectorAll('.set-rating-detailpage .rating ul li a');
+
   // Add event listeners to rating buttons
   ratingLinks.forEach(link => {
     link.addEventListener('click', function (event) {
       event.preventDefault();
       const ratingOption = link.textContent;
-      rateMovie(imdbID, ratingOption, ratedMovies, link);
+
+      // Check if the movie has been rated
+      const ratedMovie = ratedMovies.find(movie => movie.imdbID === imdbID);
+
+      if (ratedMovie) {
+        // Movie has been rated, display a message with the previous rating
+        alert(`You have already rated this movie with ${ratedMovie.ratingScore}`);
+      } else {
+        updateRatingUI2(imdbID, ratingOption, link);
+
+        // Call the rateMovie function
+        rateMovie(imdbID, ratingOption, ratedMovies, link)
+          .then(() => {
+            // Disable other rating links after rating
+            ratingLinks.forEach(disableLink);
+          })
+          .catch(error => {
+            console.error('Error rating movie:', error);
+          });
+      }
     });
   });
 }
+
+
+function updateRatingUI2(imdbID, ratingOption, link) {
+  console.log("Updating UI:", imdbID, ratingOption, link)
+
+  const ratedMovie = ratedMovies.find(movie => movie.imdbID === imdbID);
+
+  if (ratedMovie) {
+    // Movie has been rated, update the existing text
+    // Assuming the link is where the rating is displayed
+    ratedMovie.textContent = `You have rated this movie with ${ratedMovie.ratingScore}`;
+    alert(`You have rated this movie with ${ratedMovie.ratingScore}`);
+ 
+  } else {
+    // Movie hasn't been rated, update the text accordingly
+    // Assuming the link is where the rating is displayed
+    link.textContent = `You have rated this movie with ${ratingOption}`;
+    alert(`You have rated this movie with ${ratingOption}`);
+    
+  }
+}
+
+
 //#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const scoresArray = JSON.parse(categorizedScores);
  console.log(scoresArray);
-
 
 const scoreSection = document.querySelector('.see-rating-section');
 
