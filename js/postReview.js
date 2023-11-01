@@ -1,11 +1,14 @@
 import { ratedMovies } from './scoreRate.js';
 
 
+
 // Constants
 const imdbID = getImdbIDFromURL();
-const messageContainer = document.getElementById('message-container');
 const scoreInput = document.getElementById('score');
-const buttonReview2 = document.getElementById('button-review2');
+const ratingMessage = document.getElementById('rating-message');
+const publishButton = document.getElementById('publish-button');
+
+updateUIForRatedMovie();
 
 
 // Functions
@@ -15,77 +18,86 @@ function getImdbIDFromURL() {
 }
 
 // Initial UI setup based on whether the movie has been rated
-if (ratedMovies) {
+function updateUIForRatedMovie() {
+    
+  if (ratedMovies) {
   const ratedMovie = ratedMovies.find(movie => movie.imdbID === imdbID);
 
   if (ratedMovie) {
-    // Movie has been rated, display a message with the previous rating
-    messageContainer.textContent = `You have rated this movie with ${ratedMovie.ratingScore}.`;
-
-    messageContainer.style.backgroundColor = '#DEF4CC';
-    messageContainer.style.border = '1px solid black';
-    messageContainer.style.color = 'black';
-    messageContainer.style.padding = '15px';
-    messageContainer.style.margin = '10px';
-    messageContainer.style.borderRadius = '2px';
-    messageContainer.style.fontSize = '16px';
-    messageContainer.style.fontWeight = 'bold';
-    messageContainer.style.display = 'block';
-
-
+    // Movie has been rated, disable the form and show a message
+    document.getElementById('name').disabled = true;
+    document.getElementById('review').disabled = true;
+    document.getElementById('score').disabled = true;
+    document.getElementById('publish-button').disabled = true;
     scoreInput.style.display = 'none';
+    ratingMessage.textContent = "You have given this movie the score: " + ratedMovie.ratingScore;
+    
   } else {
     // Movie hasn't been rated, offer the dropdown box
     // Show the form or any UI elements you want to display for submitting a review
+    document.getElementById('name').disabled = false;
+    document.getElementById('review').disabled = false;
+    document.getElementById('score').disabled = false;
+    document.getElementById('publish-button').disabled = false;
     scoreInput.style.display = 'block';
   }
 }
+}
 
-// Event listener for the review submission
-buttonReview2.addEventListener('click', function(event) {
-  event.preventDefault();
 
-  const firstName = document.getElementById("firstName").value;
-  const lastName = document.getElementById("lastName").value;
-  const fullName = `${firstName}${lastName ? ` ${lastName}` : ''}`;
-  const date = document.getElementById("date").value;
-  const review = document.getElementById("review").value;
 
-  const scoreInput = document.getElementById("score");
-  const ratedMovie = ratedMovies.find(movie => movie.imdbID === imdbID);
-  const score = ratedMovie ? parseInt(ratedMovie.ratingScore) : parseInt(scoreInput.value);
 
-  // Check for required fields and whether the movie has been rated
+function pressingPublishButton(event) {
+    event.preventDefault();
+  
+    // Get the name and review values
+    const name = document.getElementById("name").value;
+    const review = document.getElementById("review").value;
+  
+    // Check if name and review are filled
+    if (!name || !review) {
+      alert('Please fill in the required fields');
+      return;
+    } 
+  
+    //Get the score
+    const score = parseInt(scoreInput.value);
 
-  if (!firstName || !date || !review) {
-    alert('Please fill in the required fields');
+    const ratedMovie = ratedMovies.find(movie => movie.imdbID === imdbID);
+    if (ratedMovie) {
+    alert('You have already rated this movie');
     return;
-  } else {
-    // Submit the review
-    submitReviewToAPI(imdbID, fullName, score, review, date);
+    }
+  
+    // Proceed with API submission
 
-    // Hide the score input after submission
-    scoreInput.style.display = 'none';
+    submitReviewToAPI(imdbID, name, score, review);
+  
+    // Add the movie to the ratedMovies array
+    ratedMovies.push({
+      imdbID: imdbID,
+      ratingScore: score,
+    });
+    updateUIForRatedMovie();
 
-    // Clear the form
-    document.getElementById("firstName").value = '';
-    document.getElementById("lastName").value = '';
-    document.getElementById("date").value = '';
-    document.getElementById("review").value = '';
   }
-});
+  publishButton.addEventListener('click', pressingPublishButton);
+
+
+
 
 // Function to submit the review to the API
-async function submitReviewToAPI(imdbID, fullName, score, review, date) {
+async function submitReviewToAPI(imdbID, name,  score, review) {
   const apiUrl = `https://grupp6.dsvkurs.miun.se/api/movies/review`;
 
   const reviewData = {
     imdbID: imdbID,
-    reviewer: fullName,
+    reviewer: name,
     score: score,
     review: review,
-    date: date,
+    date: null,
   };
+
 
   try {
     const response = await fetch(apiUrl, {
@@ -100,6 +112,7 @@ async function submitReviewToAPI(imdbID, fullName, score, review, date) {
       const successMessage = document.getElementById('review-success-message');
       successMessage.textContent = 'Review submitted successfully';
       successMessage.style.display = 'block';
+      
     } else {
       alert('Check that you have filled in all fields correctly');
     }
@@ -109,8 +122,6 @@ async function submitReviewToAPI(imdbID, fullName, score, review, date) {
 }
 
 
-    
-// //automatiskt lägga till dagens datum 
 
 
 
