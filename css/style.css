@@ -769,6 +769,14 @@ footer{
   border-bottom-right-radius: 10px;
 }
 
+
+.review-text{
+  border: 1px solid orange;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+
 #see-rating-section{
   position: relative;
 }

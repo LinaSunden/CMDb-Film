@@ -278,6 +278,7 @@ function showReviews() {
     reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
 
     const reviewText = document.createElement('p');
+    reviewText.classList.add('review-text');
     reviewText.textContent = review.review;
 
     reviewWrapper.appendChild(reviewerInfo);
