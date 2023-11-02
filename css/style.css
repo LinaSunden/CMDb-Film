@@ -495,25 +495,50 @@ main img{
 
 
 .rating ._1 {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.842);
   margin: 5px 5px 10px 0px;
 }
 
 
 .rating ._2{
-  background-color: orange;
+  background-color: rgba(255, 166, 0, 0.897);
   margin: 5px 5px 10px 0px;
 }
 
 .rating ._3{
-  background-color: #8CA047;
+  background-color: #798a3d;
   margin: 5px 5px 10px 0px;
 }
 
 .rating ._4{
-  background-color: rgb(1, 143, 1);
+  background-color: rgb(1, 119, 1);
   margin: 5px 5px 10px 0px;
 }
+
+.rating ._1:hover{
+  background-color: red;
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.rating ._2:hover{
+  background-color: orange;
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.rating ._3:hover{
+  background-color: #8CA047;
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.rating ._4:hover{
+  background-color: rgb(1, 143, 1);
+  scale: 1.1;
+  border: 2px solid black;
+}
+
 
 .set-rating{
   font-weight: bold;
@@ -730,6 +755,7 @@ footer{
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
 
 #see-rating-section{
   position: relative;
