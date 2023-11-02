@@ -498,7 +498,7 @@ function updateVoteCounts(scoresArray) {
     const countElement = document.getElementById(`${selector}`);
 
     if (countElement) {
-      countElement.textContent = `${item.count} st`;
+      countElement.textContent = `${item.count} votes`;
     }
   });
 }
