@@ -41,6 +41,9 @@ async function displayLatestReview() {
         movieTitle.textContent = movie.Title;
         movieTitle.classList.add('colored-text');
 
+        const moviePoster = document.createElement('img');
+        moviePoster.src = movie.Poster;
+
         movieTitleContainer.appendChild(movieTitelLabel);
         movieTitleContainer.appendChild(movieTitle);
 
@@ -54,7 +57,9 @@ async function displayLatestReview() {
         // Clear any existing content in the latestReviewContainer
         latestReviewContainer.innerHTML = '';
 
+        
         latestReviewContainer.appendChild(headline);
+        
         reviewerInfo.appendChild(reviewerLabel);
         reviewerInfo.appendChild(reviewerName);
         reviewerInfo.appendChild(dateLabel);
@@ -63,6 +68,7 @@ async function displayLatestReview() {
         latestReviewContainer.appendChild(movieTitleContainer);
         latestReviewContainer.appendChild(reviewText);
         latestReviewContainer.appendChild(reviewerScore);
+        latestReviewContainer.appendChild(moviePoster);
     } catch (error) {
         console.error('Error fetching latest review data:', error);
     }

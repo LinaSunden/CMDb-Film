@@ -11,6 +11,7 @@
 
 }
 
+
 body{
   font-family: Arial, Helvetica, sans-serif;
   background-color: #5E807F;
@@ -240,6 +241,13 @@ nav {
   margin: 0;
 }
 
+.latestReview img{
+  width: 50%;
+  height: auto;
+ margin-left: 540px;
+margin-top: -220px;
+}
+
 .movie-title-container {
   padding-top: 20px;
   margin-left: -40px;
@@ -329,7 +337,19 @@ p{
   text-shadow: 2px 2px 3px black;
   box-shadow: 1px 1px 10px whitesmoke;
   margin: 5px;
+  cursor: pointer;
+  position: relative;
 }
+
+.to-movie-details:hover{
+  background-color: #c06300;
+}
+
+#prevPage:hover, #nextPage:hover, #prevReviews:hover, #nextReviews:hover{
+  background-color: orange;
+  cursor: pointer;
+}
+
 
 
 #rank1{
@@ -401,11 +421,6 @@ p{
 }
 
 
-
-.hidden {
-  display: none;
-}
-
 h3{
   color: white;
   text-shadow: 2px 2px 3px black;
@@ -462,24 +477,57 @@ main img{
 
 
 .rating ._1 {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.842);
   margin: 5px 5px 10px 0px;
 }
 
 
 .rating ._2{
-  background-color: orange;
+  background-color: rgba(255, 166, 0, 0.897);
   margin: 5px 5px 10px 0px;
 }
 
 .rating ._3{
-  background-color: #8CA047;
+  background-color: #798a3d;
   margin: 5px 5px 10px 0px;
 }
 
 .rating ._4{
-  background-color: rgb(1, 143, 1);
+  background-color: rgb(1, 119, 1);
   margin: 5px 5px 10px 0px;
+}
+
+.rating ._1:hover{
+  background-color: red;
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.rating ._2:hover{
+  background-color: orange;
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.rating ._3:hover{
+  background-color: #8CA047;
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.rating ._4:hover{
+  background-color: rgb(1, 143, 1);
+  scale: 1.1;
+  border: 2px solid black;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .set-rating{
@@ -697,6 +745,14 @@ footer{
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+
+.review-text{
+  border: 1px solid orange;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
 
 #see-rating-section{
   position: relative;
@@ -1209,7 +1265,7 @@ input:disabled, textarea:disabled, select:disabled {
   font-weight: bold;
 }
 
-.contactUs input[type=submit]:hover{
+.contactUs input[type=submit]:hover, #publish-button:hover{
   background-color: orange;
 }
 
@@ -1326,8 +1382,16 @@ input:disabled, textarea:disabled, select:disabled {
 
 /*Style for the latest reviews*/
 .latestReview{
-  margin-right: 20%;
-  margin-left: 20%;
+  margin-right: 30%;
+  margin-left: 0%;
+  padding-bottom: 5px;
+}
+
+.latestReview img{
+  width: 40%;
+  height: auto;
+ margin-left: 770px;
+margin-top: -220px;
 }
 
 
@@ -1528,11 +1592,24 @@ nav{
   margin-right: 1%;
   margin-left: 1%;
   margin-top: 40px;
+  padding-bottom: 10px;
+}
+
+.latestReview p{
+ margin-bottom: 10px;
+}
+
+.latestReview img{
+  width: 90%;
+  height: auto;
+ margin-left: 0px;
+margin-top: 10px;
 }
 
 .movie-title-container {
   margin-bottom: 5px;
 }
+
 
 .latestReview .reviewer-score {
   margin-top: 5px;
@@ -1542,8 +1619,9 @@ nav{
 .carousel-container{
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 100px;
+  margin-bottom: 150px;
 }
+
 
 #rank1{
   float: left;
@@ -1633,6 +1711,8 @@ h4{
   top: -30px;
   left: -6px; 
   font-size: 40px;
+  z-index: 1;
+
 }
 
 #rank10, #rank11, #rank12, #rank13, #rank14, #rank15, #rank16, #rank17, #rank18, #rank19, #rank20, 

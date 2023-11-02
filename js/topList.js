@@ -13,6 +13,9 @@ fetchMoviesTop3();
 initializePagination();
 // #endregion
 
+
+
+
 // #region functions for top list
 /**
  * Take the results from the CMDB and the OMDB API and combine them into one object.
@@ -142,21 +145,15 @@ async function fetchMoviesWithPagination(page) {
           const ratingList = document.createElement('ul');
 
           ratingOptions.forEach(option => {
-              const listItem = document.createElement('li');
-              const link = document.createElement('a');
-              link.href = '#';
-              link.classList.add("_"+ option);
-              link.textContent = option;
-
-              link.addEventListener('click', function (event){
-                event.preventDefault();
-                const imdbID = movie.imdbID;
-                rateMovie(imdbID, option, ratedMovies, link);
-              });
-
-              listItem.appendChild(link);
-              rating.appendChild(listItem);
-            });
+            const ratedMovie = retrieveRatingFromLocalStorage(movie, ratedMovies);
+            if (ratedMovie) {
+              if (ratedMovie.ratingScore.toString() === option) {
+                createRatedLink(option, movie, ratedMovies, rating);
+              }
+            } else {
+              createRatingLink(option, movie, ratedMovies, rating);
+            }
+          });  
     
           const moviePlot = document.createElement('p');
           moviePlot.classList.add('movie-plot');
@@ -194,6 +191,66 @@ async function fetchMoviesWithPagination(page) {
           targetContainer.appendChild(movieContainer);
   }
 
+  /**
+   * Create a link for rating the movie.
+   * @param {} option 
+   * @param {*} movie 
+   * @param {*} ratedMovies 
+   * @param {*} rating 
+   */
+  function createRatingLink(option, movie, ratedMovies, rating) {
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = '#';
+    link.classList.add("_"+ option);
+    link.textContent = option;
+  
+    link.addEventListener('click', function (event){
+      event.preventDefault();
+      const imdbID = movie.imdbID;
+      rateMovie(imdbID, option, ratedMovies, link, rating);
+      link.classList.add('disabled');
+    });
+  
+    listItem.appendChild(link);
+    rating.appendChild(listItem);
+  }
+  
+  /**
+   * Create a link for rated movie.
+   * @param {*} option 
+   * @param {*} movie 
+   * @param {*} ratedMovies 
+   * @param {*} rating 
+   */
+  function createRatedLink(option, movie, ratedMovies, rating) {
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = '#';
+    link.classList.add("_"+ option);
+    link.textContent = 'You rated ' + option;
+    link.classList.add('disabled');
+  
+    link.addEventListener('click', function (event){
+      event.preventDefault();
+      const imdbID = movie.imdbID;
+      rateMovie(imdbID, option, ratedMovies, link, rating);
+      link.classList.add('disabled');
+    });
+  
+    listItem.appendChild(link);
+    rating.appendChild(listItem);
+  }
+  
+  /**
+   * Retrieve the rating from the local storage.
+   * @param {*} movie 
+   * @param {*} ratedMovies 
+   * @returns 
+   */
+  function retrieveRatingFromLocalStorage(movie, ratedMovies) {
+    return ratedMovies.find(ratedMovie => ratedMovie.imdbID === movie.imdbID);
+  }
 
   /**
    * Fech the full plot from the OMDB API and return it.

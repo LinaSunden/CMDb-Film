@@ -40,6 +40,7 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 let currentReviewIndex = 0;
 //#endregion
 
+
  
 
 //#region functions calls
@@ -278,6 +279,7 @@ function showReviews() {
     reviewerInfo.textContent = `${review.reviewer} ${review.date}`;
 
     const reviewText = document.createElement('p');
+    reviewText.classList.add('review-text');
     reviewText.textContent = review.review;
 
     reviewWrapper.appendChild(reviewerInfo);
