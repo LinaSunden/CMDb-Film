@@ -363,6 +363,8 @@ p{
   text-shadow: 2px 2px 3px black;
   box-shadow: 1px 1px 10px whitesmoke;
   margin: 5px;
+  cursor: pointer;
+  position: relative;
 }
 
 .to-movie-details:hover{
@@ -371,6 +373,7 @@ p{
 
 #prevPage:hover, #nextPage:hover, #prevReviews:hover, #nextReviews:hover{
   background-color: orange;
+  cursor: pointer;
 }
 
 
@@ -1700,8 +1703,9 @@ margin-top: 10px;
 .carousel-container{
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 100px;
+  margin-bottom: 150px;
 }
+
 
 #rank1{
   float: left;
@@ -1791,6 +1795,8 @@ h4{
   top: -30px;
   left: -6px; 
   font-size: 40px;
+  z-index: 1;
+
 }
 
 #rank10, #rank11, #rank12, #rank13, #rank14, #rank15, #rank16, #rank17, #rank18, #rank19, #rank20, 
