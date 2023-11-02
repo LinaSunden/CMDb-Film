@@ -7,8 +7,12 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link rel="icon" href="icon/favicon.ico">
     <script type="text/javascript" src="js/navToggle.js"></script>
+    
+    <script type="module" src="js/movieDetails.js"></script>
+    <script type="module" src="js/scoreRate.js"></script>
+    <script type="module" src="js/apiCalls.js"></script>
     <script type="module" src="js/search.js"></script>
-    <script type="text/javascript" src="js/multiselect-dropdown.js"></script>
+  
     <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
   
 </head>
@@ -17,29 +21,15 @@
 
   <header> 
     <img src="img/CMDb_logo.png" alt="CMBb:s logga" width="200" class="logo">
-    <div class = "search-container">
+
+    <!-- <div class = "search-container">
         <div class = "search-element">
-            
             <input type = "text" class = "form-control" id = "movie-search-box" 
             placeholder="Search Movie Title ...">
-            
-             
-            <div class = "search-list" id = "search-list">
-                <!-- list here -->
-                <!-- <div class = "search-list-item">
-                    <div class = "search-item-thumbnail">
-                        <img src = "/img/medium-cover.jpg">
-                    </div>
-                    <div class = "search-item-info">
-                        <h3>Guardians of the Galaxy Vol. 2</h3>
-                        <p>2017</p>
-                    </div>
-                </div>   -->
-                
-            </div>
+            <div class = "search-list" id = "search-list"></div>
         </div>
         <button id="searchbutton" class="search-button">Search</button>
-    </div>    
+    </div>     -->
 </header>
     <nav>
         <div class="hamburger">
@@ -56,21 +46,24 @@
  
     
     <div id="flex-content-search">
-        <section class="search-filter flex-item"> 
-            <h1>Sökfilter</h1>
-
-            <div class = "search-box2">
-              <input type = "text" class = "form-control2" id = "movie-search-box2" placeholder="Search movie...">
-              <div class = "search-list2" id = "search-list2"></div>
-            </div>
-            <button id="searchbutton2" class="search-button2">Search</button>
-
+      
+        <section class="search-filter flex-item onlysearchpage"> 
+            <h1>Search filter</h1>
+            <div class = "search-container">
+              <div class = "search-element">
+                  <input type = "text" class = "form-control" id = "movie-search-box" 
+                  placeholder="Search Movie Title ...">
+                  <div class = "search-list onlysearchpage" id = "search-list"></div>
+              </div>
+              <button id="searchbutton" class="search-button">Search</button>
+          </div> 
             
+
             <div id="grid-container-search-filter">
                 <div id="genres">
                     <h4>Genre</h4>
-                 <select name="select" multiple multiselect-search="true" multiselect-select-all="true"
-                 multiselect-max-items="14" title="select">
+                 <select name="select"  title="select" id="genre">
+                  <option disabled selected>-</option>
                   <option>Action</option>
                   <option>Animerat</option>
                   <option>Barnfilm</option>
@@ -89,35 +82,37 @@
 
                 </div>
                 <div id="release-year">
-                    <h4>Utgivningsår</h4>
+                    <h4>Release year</h4>
                     <form class="year">
-                      <!--Kommer förmodligen behöva använda action="/action_page.php" sen när den ska behandla det 
-                      ifyllda med javascript-->
+                   
                       <div class="form-group">
-                        <label for="startYear">Från: </label>
-                        <input type="tel" maxlength="4" id="startYear" name="startYear" value="1894">
+                        <label for="startYear">From: </label>
+                        <input type="tel" maxlength="4" id="startYear" name="startYear" value="" pattern="\d{4}" title="Please enter a four-digit year"placeholder="ex. 2010">
+                        
                       </div>
                       <div class="form-group">
-                        <label for="endYear">Till: </label>
-                        <input type="tel" maxlength="4" id="endYear" name="endYear" value="2023">
+                        <label for="endYear">To: </label>
+                        <input type="tel" maxlength="4" id="endYear" name="endYear" value="" pattern="\d{4}" title="Please enter a four-digit year"placeholder="ex. 2013">
                       </div>  
                     </form>
                 </div>
+
+
                 <div id="CMDb-score">
-                    <h4>CMDb poäng</h4>
-                    <select name="select" multiple multiselect-search="true" multiselect-select-all="true"
-                    multiselect-max-items="4" title="select">
+                    <h4>CMDb Score</h4>
+                    <select name="scoreselect" title="select" id="scorefilter">
+                      <option disabled selected>-</option>
                       <option>4</option>
                       <option>3</option>
                       <option>2</option>
                       <option>1</option>
                     </select>
-                  
                 </div>
+
                 <div id="movie-runtime">
-                    <h4>Max speltid</h4>
+                    <h4>Maximum runtime</h4>
                     <select name="select-runtime" id="select-runtime">
-                      <option disabled selected>Välj</option>
+                      <option disabled selected>-</option>
                       <option>30 min</option>
                       <option>1 h</option>
                       <option>1 h 30 min</option>
@@ -131,34 +126,33 @@
 
         <section class="search-result flex-item">
             <div class="searchResultheadings clearfix" >
-              <h1>Sök resultat</h1>
-              <h3>Din sökning: Home</h3>
+              <h1>Search result</h1>
+              <h3>Your search: </h3>
             </div>
+            
+
             
             <div id="movie-results">
               <div class="result1 clearfix" style="display: none;">
                 <div class="movie-poster">
-                  <a href="img/home.jpg" target="_blank"> <img src="img/home.jpg" alt="Home"/></a>
+                  <a href="#" target="_blank"> <img src="img/home.jpg" alt="Home"/></a>
                 </div>
                 <div class="movie-summary">
-                  <h4>Home</h4>
+                  <h4></h4>
                   <p>
-                    En fredlig grupp utomjordingar använder jorden som ett gömställe från sina fiender. 
-                    När en utomjording råkar avslöja deras gömställe måste han ge sig av tillsammans med en tonårstjej 
-                    på en fartfylld jorden-runt-resa för att ställa allt till rätta.
+                    
                   </p>
                 </div>
               </div>
 
               <div class="result2 clearfix" style="display: none;">
                 <div class="movie-poster">
-                  <a href="img/spidermanNoWayHome.jpg" target="_blank"> <img src="img/spidermanNoWayHome.jpg" alt="Spiderman no way home"/></a>
+                  <a href="#" target="_blank"> <img src="img/spidermanNoWayHome.jpg" alt="Spiderman no way home"/></a>
                 </div>
                 <div class="movie-summary">
-                  <h4>Spider-Man No Way Home</h4>
+                  <h4></h4>
                   <p>
-                    När hans nära och kära utsätts för fara ber Peter Parker doktor Stange att återställa
-                    hans hemlighet-och råkar av misstag utlösa en katastrof av episka proportioner.
+                    
                   </p>
                 </div>
               </div>

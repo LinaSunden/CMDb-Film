@@ -18,28 +18,7 @@
 <body>
     <header> 
         <img src="img/CMDb_logo.png" alt="CMBb:s logga" width="200" class="logo">
-        <div class = "search-container">
-            <div class = "search-element">
-                
-                <input type = "text" class = "form-control" id = "movie-search-box" 
-                placeholder="Search Movie Title ..." onkeyup="findMovies()">
-                 
-                <div class = "search-list" id = "search-list">
-                    <!-- list here -->
-                    <!-- <div class = "search-list-item">
-                        <div class = "search-item-thumbnail">
-                            <img src = "/img/medium-cover.jpg">
-                        </div>
-                        <div class = "search-item-info">
-                            <h3>Guardians of the Galaxy Vol. 2</h3>
-                            <p>2017</p>
-                        </div>
-                    </div>   -->
-                    
-                </div>
-            </div>
-         <button id="searchbutton" class="search-button">Search</button>
-        </div>    
+         
     </header>
 
     <nav>
@@ -48,11 +27,23 @@
         </div>
 
         <ul class="navigation">
-            <li><a href="index.html">Hem</a></li>
-            <li><a href="movie.html" class="active">Filmer</a></li>
-            <li><a href="search.html">Sök</a></li>
-            <li><a href="aboutUs.html">Om oss</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="movie.html">(Filmer)</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="aboutUs.html">About us</a></li>
         </ul> 
+
+        <div class = "search-container">
+            <!-- <div class = "search-element"> -->
+                <input type = "text" class = "form-control" id = "movie-search-box" 
+                placeholder="Search Movie Title ..." >
+                <div class = "search-list" id = "search-list">
+                    
+                </div>
+                
+            <!-- </div> -->
+            <button id="searchbutton" class="search-button">Search</button>
+        </div>   
     </nav>
 
  
