@@ -2,8 +2,9 @@
 // detalj: https://www.omdbapi.com/?i=tt3896198&apikey=5a4be969
 // https://omdbapi.com/?i=tt4300958&plot=full&apikey=5a4be969
 
-import { ratedMovies } from './scoreRate.js'; 
+import { ratedMovies } from "./scoreRate.js"; 
 import { scoreMovie } from './apiCalls.js';
+
 
 // #region searchfunction
 
