@@ -29,6 +29,8 @@ function updateUIForRatedMovie() {
     document.getElementById('review').disabled = true;
     document.getElementById('score').disabled = true;
     document.getElementById('publish-button').disabled = true;
+    document.getElementById('rateMovieHeadline').hidden = true;
+    document.querySelector('.rating').hidden = true;
     scoreInput.style.display = 'none';
     ratingMessage.textContent = "You have given this movie the score: " + ratedMovie.ratingScore;
     
