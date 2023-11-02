@@ -365,6 +365,10 @@ p{
   margin: 5px;
 }
 
+.to-movie-details:hover{
+  background-color: #c06300;
+}
+
 
 #rank1{
   float: left;
@@ -1339,7 +1343,7 @@ input:disabled, textarea:disabled, select:disabled {
   font-weight: bold;
 }
 
-.contactUs input[type=submit]:hover{
+.contactUs input[type=submit]:hover, #publish-button:hover{
   background-color: orange;
 }
 
