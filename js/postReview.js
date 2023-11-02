@@ -81,7 +81,7 @@ function pressingPublishButton(event) {
     localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
     updateUIForRatedMovie();
 
-  }
+}
   publishButton.addEventListener('click', pressingPublishButton);
 
 

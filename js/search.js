@@ -185,7 +185,7 @@ let movieCount = 0;
 
 async function displayMovie(movie) {
     // Fetch the detailed information for the movie from the OMDB API
-    const responseOMDB = await fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=5a4be969`);
+    const responseOMDB = await fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=5a4be969`);
     const detailsOMDB = await responseOMDB.json();
 
     // Fetch the detailed information for the movie from the CMDb API

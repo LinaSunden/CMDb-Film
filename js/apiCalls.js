@@ -1,6 +1,6 @@
 //#region API URLs
 const cmdbUrl = "https://grupp6.dsvkurs.miun.se/api";
-const omdbURL = "http://www.omdbapi.com/?";
+const omdbURL = "https://www.omdbapi.com/?";
 //#endregion
 
 //#region API calls functions

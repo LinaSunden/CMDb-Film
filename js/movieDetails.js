@@ -40,6 +40,7 @@ const otherRatings = JSON.stringify(movieData.Ratings);
 let currentReviewIndex = 0;
 //#endregion
 
+
  
 
 //#region functions calls
