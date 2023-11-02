@@ -369,6 +369,11 @@ p{
   background-color: #c06300;
 }
 
+#prevPage:hover, #nextPage:hover, #prevReviews:hover, #nextReviews:hover{
+  background-color: orange;
+}
+
+
 
 #rank1{
   float: left;
