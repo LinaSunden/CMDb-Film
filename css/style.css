@@ -266,6 +266,13 @@ nav {
   margin: 0;
 }
 
+.latestReview img{
+  width: 50%;
+  height: auto;
+ margin-left: 540px;
+margin-top: -220px;
+}
+
 .movie-title-container {
   padding-top: 20px;
   margin-left: -40px;
@@ -1617,6 +1624,7 @@ nav{
 .movie-title-container {
   margin-bottom: 5px;
 }
+
 
 .latestReview .reviewer-score {
   margin-top: 5px;
