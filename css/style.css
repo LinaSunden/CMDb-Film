@@ -1399,8 +1399,16 @@ input:disabled, textarea:disabled, select:disabled {
 
 /*Style for the latest reviews*/
 .latestReview{
-  margin-right: 20%;
-  margin-left: 20%;
+  margin-right: 30%;
+  margin-left: 0%;
+  padding-bottom: 5px;
+}
+
+.latestReview img{
+  width: 40%;
+  height: auto;
+ margin-left: 770px;
+margin-top: -220px;
 }
 
 .movie-title-container {
@@ -1619,6 +1627,18 @@ nav{
   margin-right: 1%;
   margin-left: 1%;
   margin-top: 40px;
+  padding-bottom: 10px;
+}
+
+.latestReview p{
+ margin-bottom: 10px;
+}
+
+.latestReview img{
+  width: 90%;
+  height: auto;
+ margin-left: 0px;
+margin-top: 10px;
 }
 
 .movie-title-container {
