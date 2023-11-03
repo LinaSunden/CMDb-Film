@@ -46,7 +46,7 @@ const resultGrid = document.getElementById('result-grid');
 // #region searchbar
 // load movies from API
 async function loadMovies(searchTerm){
-    const URL = `https://www.omdbapi.com/?s=${searchTerm}&page=1&apikey=5a4be969`;
+    const URL = `https://www.omdbapi.com/?s=${searchTerm}&page=1&apikey=163dfc00`;
     const res = await fetch(`${URL}`);
     const data = await res.json();
     //console.log(data.Search);
@@ -103,7 +103,7 @@ function loadMovieDetails() {
             searchList.classList.add('hide-search-list');
             movieSearchBox.value = "";
            
-            const omdbResponse = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=5a4be969`); //combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
+            const omdbResponse = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&plot=full&apikey=79c784c8`); //combine detta resultatet med cmdbs uppgifter, som läggs in i moviedetails
             const omdbMovieDetails = await omdbResponse.json();
 
             try {
@@ -166,30 +166,52 @@ function redirectToMovieDetails(imdbID) {
 
 
 // #region searchpage
+
+
+
 let movieCount = 0;
  
 
 async function displayMovie(movie) {
     // Fetch the detailed information for the movie from the OMDB API
-
-    const responseOMDB = await fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=5a4be969`);
+   
+    const responseOMDB = await fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=163dfc00`);
     const detailsOMDB = await responseOMDB.json();
+
+    console.log(movie.imdbID);
+    
+    // const detailsCMDB = await responseCMDB.json();
+
+    
 
     // Fetch the detailed information for the movie from the CMDb API
     const responseCMDB = await fetch(`https://grupp6.dsvkurs.miun.se/api/movies/${movie.imdbID}`);
-    let detailsCMDB = { cmdbScore: 'N/A', count: 'N/A' }; //Before we see if the movie is in the CMDB, we set the values to N/A
-    
+    let detailsCMDB = { cmdbScore: 'N/A', count: 'N/A' }; // Default values
+    console.log(detailsCMDB);
+
+   
+
+   
     if (responseCMDB.status === 200) {
-       detailsCMDB = await responseCMDB.json();  
+        
+
+       detailsCMDB = await responseCMDB.json();
+        
     } else if (responseCMDB.status === 404) {
-        console.log("Movie not found in CMDB");
+        console.log(`Movie with imdbID ${movie.imdbID} not found in CMDb API`);
     }
     
     const movieData = { ...detailsOMDB, ...detailsCMDB };
+    console.log(movieData);
     storeMovieData(movieData);
    
-    // Checks if poster or plot is n/a and replaces it with not available
+    
+    
+
+    // Check if the poster is "N/A", and if it is, replace it with your own image URL
     const posterURL = detailsOMDB.Poster !== "N/A" ? movieData.Poster : "./img/image_not_found.png";
+
+    // Check if the plot is "N/A", and if it is, replace it with your own default plot
     const plot = detailsOMDB.Plot !== "N/A" ? movieData.Plot : "Plot information not available.";
 
     // Create a new div for the movie
@@ -213,6 +235,8 @@ async function displayMovie(movie) {
 
     movieDiv.addEventListener('click', (event) => {
         // Redirect to the movie details page
+        
+        console.log('Clicked on movie with IMDb ID:', movieData.imdbID);
         redirectToMovieDetails(movieData.imdbID);
     });
 
@@ -248,10 +272,35 @@ if (detailsCMDB.cmdbScore === 'N/A') {
     movieDiv.appendChild(rating);
 }
 
-const searchResultElement = document.querySelector('.search-result');
+// const searchResultElement = document.querySelector('.search-result');
+// console.log(searchResultElement);
+// // if (searchResultElement) {
 
-//We need to check if the element exists, it should only exist on the search page so this prevents it from breaking the code if it doesn't exist
-if (searchResultElement) {  
+//     searchResultElement.appendChild(movieDiv);
+// // } else {
+// //     console.log('Search result element not found');
+// // }
+// movieCount++;
+// }
+// const searchResultElement = document.querySelector('.search-result');
+// searchResultElement.addEventListener('click', (event) => {
+//     // Check if the clicked element is a movieDiv
+//     const movieDiv = event.target.closest('.result1, .result2');
+//     if (movieDiv) {
+//         // Retrieve the IMDb ID from the data attribute
+//         const imdbID = movieDiv.getAttribute('data-imdb-id');
+//         console.log('Clicked on movie with IMDb ID:', imdbID);
+
+//         // Store IMDb ID in local storage
+//         localStorage.setItem('clickedMovieIMDbID', imdbID);
+
+//         // Redirect to the movie details page
+//         redirectToMovieDetails(imdbID);
+//     }
+const searchResultElement = document.querySelector('.search-result');
+console.log(searchResultElement);
+
+if (searchResultElement) {
     searchResultElement.appendChild(movieDiv);
 
     searchResultElement.addEventListener('click', (event) => {
@@ -274,30 +323,38 @@ if (searchResultElement) {
 }
 
 movieCount++;
+
 };
 
 
 
 
+
 async function fetchAndDisplayMovies(searchTerm, pageNumber) {
-        const URL = `https://www.omdbapi.com/?s=${searchTerm}&page=${pageNumber}&apikey=5a4be969`;
+        const URL = `https://www.omdbapi.com/?s=${searchTerm}&page=${pageNumber}&apikey=163dfc00`;
         const res = await fetch(URL);
         const data = await res.json();
         storeMovieData(data);
         const searchHeading = document.querySelector('.searchResultheadings h3');
       
+    
         // Check if data.Response is "True"
         if (data.Response === "True") {
             // Display the movie information
             
-            data.Search.forEach(movie => { 
+            data.Search.forEach(movie => {
+            console.log(movie.imdbID);  
             displayMovie(movie);
+
+
+
             });
-        
             if (searchHeading) {
                 searchHeading.textContent = data.Response === "True" ? `Your search: ${searchTerm}` : `No search results found`;
             }  
 
+
+            
         } else {
             
             searchHeading.textContent = `No search results found`;
@@ -306,25 +363,34 @@ async function fetchAndDisplayMovies(searchTerm, pageNumber) {
   
 //redirects, searchbutton
 
+
+
+
+
+
+
 function redirectToSearchPage() {
     // Get the search value
     const searchValue = document.querySelector('#movie-search-box').value;
+    console.log(searchValue);
     // Store the search value in localStorage
     localStorage.setItem('searchValue', searchValue);
-  
+    
     // Redirect to the search results page
     window.location.href = 'search.html';
+    searchMovie();
   }
+  
   // Attach the event handler to the search button
   document.querySelector('#searchbutton').addEventListener('click', redirectToSearchPage);
 
   
-
+  
   // Fetch and display the movies for the search value from localStorage when the page loads
-  document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function() {
+
     // Get the search value from localStorage
     const searchTerm = localStorage.getItem('searchValue');
-
     if (searchTerm){
     // Fetch and display the movies for page 1
     await fetchAndDisplayMovies(searchTerm, 1);
@@ -341,15 +407,12 @@ searchBox.addEventListener('keypress', function (event) {
     // Prevent the default action
     event.preventDefault();
 
-    searchMovie();
-    // redirectToSearchPage();
+    
+    // Perform the search
+    redirectToSearchPage();
+  
   }
 });
-
-// #endregion
-
-//#region top search
-
 
 function searchMovie() {
     const searchTerm = document.querySelector('#movie-search-box').value;

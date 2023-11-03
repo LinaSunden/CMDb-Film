@@ -518,9 +518,9 @@ updateVoteCounts(scoresArray);
 
 //#endregion
 
-function getClickedMovieIMDbID() {
-  return localStorage.getItem('clickedMovieIMDbID');
-}
+// function getClickedMovieIMDbID() {
+//   return localStorage.getItem('clickedMovieIMDbID');
+// }
 
 //#region export
 export {movieInfo, showReviews}
