@@ -20,30 +20,23 @@ console.log(ratedMovies);
  */
 
 
-function rateMovie(imdbID, option, ratedMovies, link, rating) {
+function rateMovie(imdbID, option, ratedMovies, link) {
   return new Promise((resolve, reject) => {
     if (!ratedMovies.find(movie => movie.imdbID === imdbID)) {
       const ratingScore = parseInt(option);
 
       scoreMovie(imdbID, ratingScore)
         .then(response => {
-          console.log('You rated ', response);
+          console.log('Your rating is ', response);
 
           // Update the UI to show the user's rating
-          link.textContent = 'You rated ' + option;
+          link.textContent = 'Your rating is ' + option;
 
           const ratedMovie = {imdbID, ratingScore};
           ratedMovies.push(ratedMovie);
 
           // Update ratedMovies in local storage
           localStorage.setItem('ratedMovies', JSON.stringify(ratedMovies));
-
-           // Remove other links
-           rating.querySelectorAll('a').forEach(otherLink => {
-            if (otherLink !== link) {
-              otherLink.parentNode.remove();
-            }
-          });
 
           resolve(); // Resolve the promise after successfully rating the movie
         })

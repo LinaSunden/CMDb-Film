@@ -516,14 +516,15 @@ function getSelectorClass(score) {
 }
 updateVoteCounts(scoresArray);
 
-//#endregion
+// //#endregion
 
 function getClickedMovieIMDbID() {
   return localStorage.getItem('clickedMovieIMDbID');
 }
 
 //#region export
-export {movieInfo, showReviews}
+
+export {movieInfo, showReviews, updateRatingUI, updateVoteColors, updateVoteCounts} 
 //#endregion
 
 

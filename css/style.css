@@ -297,7 +297,8 @@ p{
   text-align: center;
   padding: 5px;
   justify-content: center;
-}
+  position: relative;
+ }
 
 .flex-item{
   background-color: #2D3142;
@@ -311,17 +312,31 @@ p{
   padding: 5px;
   margin: 20px;
   border-radius: 5px;
+
 }
 
+.hidden #nextbutton, #prevbutton{
+  display: none !important;
+  align-items: bottom !important;
+  justify-self: bottom !important;
+}
 .top4-10-container .movie-title {
   font-size: 15px;
   margin-left: 30px;
 }
 
+.pagination-bar .nextbutton, prevbutton{
+  display: flex;
+  justify-content: center;
+ align-items: b0ttom !important;
+  margin: 10px;
+}
 
 #top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12, #top13, #top14, #top15, #top16, 
 #top17, #top18, #top19, #top20, #top21, #top22, #top23, #top24, #top25, #top26, #top27, #top28, #top29, #top30{
-  width: 10%;
+  width: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 
@@ -418,6 +433,7 @@ p{
   background-color: #EC953B;
   margin: 10px;
   font-size: 20px;
+  justify-self: bottom !important;
 }
 
 
@@ -770,7 +786,8 @@ footer{
 }
 
 #number{
-  margin-left: 115px;
+  margin-left: 110px;
+  
 }
 
 .green-vote{
@@ -1382,12 +1399,20 @@ margin-top: -220px;
 
 .flex-container, .top2-3-container, .top4-10-container{
   justify-content: left;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-basis: 50%;
 }
-
+.top4-10-container{
+  margin-left: 0;
+  size: 20%;
+}
 
 #top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12, #top13, #top14, #top15, #top16,
 #top17, #top18, #top19, #top20, #top21, #top22, #top23, #top24, #top25, #top26, #top27, #top28, #top29, #top30{
-  width: 26%;
+  width:50%;
+  
 }
 
 
@@ -1500,17 +1525,29 @@ margin-top: -220px;
 /*SÖKRUTA*/
 .search-container {
   width: 100%;
+  right: 50% !important;
+  bottom: 5px;
+  margin-left: -100px;
 }
-.search-button {
+.search-container .search-button {
   margin-left: 0;
   margin-top: 10px;
+  margin-right: -100px;
+  
+
+}
+.search-button{
+  padding: 10px;
+}
+#movie-search-box{
+  width: 100%;
+  margin-right: 0px;
+  margin-left: 0;
+  margin-right: -46px;
+  
 }
 
-.search-element {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 400px;
-}
+
 
 .search-element h3{
   font-size: 1.4rem;
@@ -1586,6 +1623,14 @@ margin-top: 10px;
   margin-bottom: 5px;
 }
 
+.pagination-bar .nextbutton
+{
+  margin-left: 300px !important;
+}
+#nextbutton{    
+  margin-left: 300px !important;
+  
+}
 
 .latestReview .reviewer-score {
   margin-top: 5px;
@@ -1637,6 +1682,7 @@ margin-top: 10px;
 .flex-container, .top2-3-container, .top4-10-container, .flex-item{
   padding: 5px;
   margin: 0;
+  width: 100% !important;
 }
 
 .summary p{
@@ -1645,7 +1691,7 @@ margin-top: 10px;
 
 
 #top4 img, #top5 img, #top6 img, #top7 img, #top8 img, #top9 img, #top10 img {
-  width: 90%;
+  width: 100 !important;
 }
 
 #toplist{
@@ -1665,8 +1711,9 @@ h4{
 
 #top4, #top5, #top6, #top7, #top8, #top9, #top10, #top11, #top12, #top13, #top14, #top15, #top16,
 #top17, #top18, #top19, #top20, #top21, #top22, #top23, #top24, #top25, #top26, #top27, #top28, #top29, #top30{
-  width: 45%;
+  width: 900px !important;
   margin: 8px;
+
 }
 
 
@@ -1791,6 +1838,7 @@ main h1{
 .pagination-bar{
   margin-left: 0;
   margin-right: 0;
+  
 }
 
 .search-filter, .search-result, .topp-search{
