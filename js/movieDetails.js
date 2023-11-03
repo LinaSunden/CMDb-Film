@@ -98,13 +98,6 @@ releasedSpan.textContent = 'Released: ';
 releasedText.prepend(releasedSpan);
 infoMovie.appendChild(releasedText);
 
-//imdb id, temorär grej TABORT INNAN INLÄMNING
-const imdbIDText = document.createElement('p'); 
-const imdbIDSpan = document.createElement('span');
-imdbIDText.textContent = `IMDb ID: ${imdbID}`;
-imdbIDText.id = `imdbIDDisplay`;
-imdbIDText.prepend(imdbIDSpan);
-infoMovie.appendChild(imdbIDText);
 
 //genre
 const genreText = document.createElement('p');

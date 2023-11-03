@@ -29,6 +29,7 @@ function updateUIForRatedMovie() {
     document.getElementById('review').disabled = true;
     document.getElementById('score').disabled = true;
     document.getElementById('publish-button').disabled = true;
+    publishButton.classList.add('button-disabled');
     document.getElementById('rateMovieHeadline').hidden = true;
     document.querySelector('.rating').hidden = true;
     scoreInput.style.display = 'none';

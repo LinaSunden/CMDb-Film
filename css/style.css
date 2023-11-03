@@ -900,36 +900,6 @@ footer{
   display: none;
 }
 
-/* .search-box2 {
-  position: relative;
-  display: inline-block;
-}
-
-.search-button2{
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  border-color: 2px solid orange; 
-}
-
-#movie-search-box2{
-  margin-bottom: 65px;
-  width: 500px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid orange;
-} */
-
-/* .search-list2{
-  position: absolute;
-  top: 100%;
-  left: 0;
-  max-height: 200px;
-  border: 1px solid #ccc;
-  overflow-y: scroll;
-  z-index: 1;
-} */
-
 .rating2 {
   list-style-type: none;
   margin: 0;
@@ -1225,10 +1195,16 @@ input:disabled, textarea:disabled, select:disabled {
   color: #6c757d; /* dark gray */
 }
 #publish-button:disabled {
-  
+  background-color: gray;
   cursor: not-allowed;
 }
-
+.button-disabled:hover {
+  /* Override the hover styles here */
+  /* For example: */
+  background-color: grey !important;
+  color: white;
+  cursor: not-allowed;
+}
 .contactUs label{
   margin-left: 10px;
   font-weight: bold;
