@@ -298,7 +298,7 @@ if (detailsCMDB.cmdbScore === 'N/A') {
 //         redirectToMovieDetails(imdbID);
 //     }
 const searchResultElement = document.querySelector('.search-result');
-console.log(searchResultElement);
+;
 
 if (searchResultElement) {
     searchResultElement.appendChild(movieDiv);

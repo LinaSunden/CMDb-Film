@@ -20,12 +20,29 @@ async function getApiKey(){
  * @param {*} moviesPerPage is the number of movies to be returned from the CMDB API.
  * @returns return the top movies from the CMDB API.
  */
-async function getMoviesCmdb(moviesPerPage){
+async function getToplistCmdb(moviesPerPage){
  const endpoint = `/toplists?sort=DESC&limit=${moviesPerPage}&page=1&countLimit=2`;
 const response = await fetch(cmdbUrl + endpoint);
     const movies = await await response.json();
     return movies;
 }
+
+//async function getToplistCmdbByGenre(genre, moviesPerPage){ TILL FILTRERINGEN
+
+
+
+/**
+ * fetch all information about a movie from the CMDB API(put in imdb, get out id, cmdb score, topscore, minscore, count, reviews, categorized score[array]).
+ * @param {*} imdbID 
+ * @returns 
+ */
+async function getMovieCmdb(imdbID){
+  const endpoint = `/movies/${imdbID}`;
+  const response = await fetch(cmdbUrl + endpoint);
+  const movie = await response.json();
+  return movie;
+}
+
 
 /**
  * 
@@ -93,5 +110,5 @@ async function scoreMovie(imdbID, score) {
 //#endregion
 
 //#region export
-export {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot, latestReview};
+export {getToplistCmdb, getMovieOmdb, getMovieCmdb, scoreMovie, getMovieOmdbFullPlot, latestReview};
 //#endregion
