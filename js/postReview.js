@@ -124,17 +124,3 @@ async function submitReviewToAPI(imdbID, name,  score, review) {
     console.error('Error submitting review:', error);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
