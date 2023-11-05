@@ -1,4 +1,5 @@
 //# region Import
+import { getMovieOmdb,getMovieOmdbFullPlot } from './apiCalls.js';
 import { rateMovie, ratedMovies } from './scoreRate.js';
 // #endregion
 
@@ -8,6 +9,7 @@ const imdbID = urlParams.get('imdbID');
 const movieKey = `movieData_${imdbID}`;
 const movieString = localStorage.getItem(movieKey);
 const movieData = JSON.parse(movieString);
+
 
 //contains all the data for the movie
 console.log(movieData); 
@@ -516,15 +518,12 @@ function getSelectorClass(score) {
 }
 updateVoteCounts(scoresArray);
 
-// //#endregion
+//#endregion
 
 function getClickedMovieIMDbID() {
   return localStorage.getItem('clickedMovieIMDbID');
 }
 
 //#region export
-
-export {movieInfo, showReviews, updateRatingUI, updateVoteColors, updateVoteCounts} 
+export {movieInfo, showReviews}
 //#endregion
-
-

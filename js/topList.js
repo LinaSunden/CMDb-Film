@@ -1,6 +1,6 @@
 //#region imports
 import { rateMovie, ratedMovies } from './scoreRate.js';
-import { getMovieOmdb, getMovieOmdbFullPlot, getToplistCmdb } from './apiCalls.js';
+import { getMoviesCmdb, getMovieOmdb, getMovieOmdbFullPlot } from './apiCalls.js';
 // #endregion
 
 //#region variables
@@ -22,7 +22,7 @@ initializePagination();
  * @returns {Promise<Array>} An array of combined movie objects.
  */
 async function combineResults(){
-    const moviesCmdb = await getToplistCmdb(30);
+    const moviesCmdb = await getMoviesCmdb(30);
     const moviePromises = moviesCmdb.movies.map(async (movie) => {
         const imdbID = movie.imdbID;
         const movieOmdb = await getMovieOmdb(imdbID);
