@@ -1,209 +1,77 @@
 import { ratedMovies } from "./scoreRate.js"; 
-import {getMoviesCmdb, scoreMovieWithReturn, getMovieOmdb, getMovieOmdbShortPlot, scoreMovie, getMovieOmdbFullPlot, latestReview, searchForMoviesOmdb, getMoviesCmdbPaging, cmdbScoreFilter, getMoviesByGenre, getMovieDetailsFromCMDB} from './apiCalls.js';
+import {getMoviesCmdb, scoreMovieWithReturn, getMovieOmdb, getMovieOmdbShortPlot, scoreMovie, getMovieOmdbFullPlot, latestReview, searchForMoviesOmdb, getMoviesCmdbPaging, cmdbScoreFilter, getMoviesByGenre, getMovieDetailsFromCMDB, searchForMoviesOmdbFilter} from './apiCalls.js';
 
 
-const messageSearchResult = document.getElementById('yoursearch');
-const movieSearchBox = document.getElementById('movie-search-box');
+
+const searchBox = document.getElementById('movie-search-box');
 const searchButton = document.getElementById('searchbutton')
 const movieResults = document.getElementById('movie-results');
 const searchList = document.getElementById('search-list');
-const resultGrid = document.getElementById('result-grid');
 
 
-// Step 2. Fetches the movies from OMDB, if found calls method to display them )
-async function loadMovies(searchTerm){
-    const searchResults = await searchForMoviesOmdb(searchTerm);
-    
-   
-    if(searchResults && searchResults.length > 0){
-        displayMovieList(searchResults);
-        displayMovieListSearchBar(searchResults);
-    } 
-    if (!messageSearchResult) return; // If the element doesn't exist, do nothing
-}
 
-// Step 1. Takes the searchTerm from the search box and call the loadMovies method
-function findMovies(){
-   
-    const movieSearchBox = document.getElementById('movie-search-box');
+//VID ENTER PÅ INEDEX, func displayMovieList();
+window.onload = performSearchOnLoad;
 
-    let searchTerm = (movieSearchBox.value).trim();
-
-    if(searchTerm.length > 0){       
-        loadMovies(searchTerm);
-        searchList.classList.remove('hide-search-list');
-    
-        sessionStorage.setItem('searchTerm', searchTerm);
-        
-    } else {       
-            searchList.classList.add('hide-search-list');      
-    }
-}
-
-
-// If key has been pressed, call the findMovies method (NOT on search.html)
-if (!window.location.href.includes('search.html')) {
-    document.getElementById('movie-search-box').addEventListener('keyup', findMovies);
-    
-    const searchBox = document.getElementById('movie-search-box');
-
-    searchBox.addEventListener('keyup', function(event) {
-        // Check if the key that was pressed was Enter
-        if (event.key === 'Enter') {
-            const searchTerm = searchBox.value.trim();
-            if (searchTerm) {
-                // Store the search term in localStorage
-                localStorage.setItem('searchValue', searchTerm);
-
-                // Redirect to the search results page
-                window.location.href = 'search.html';
-            }
-        } else {
-            findMovies(event.target.value);
-        }
-    });
-}
-
-// If search button is clicked, call the findMovies method
+// Event listener for the search button
 searchButton.addEventListener('click', function() {
-    const searchValue = document.querySelector('#movie-search-box').value;
-    if (searchValue.length > 1) {
-        // Store the search term in localStorage
-        localStorage.setItem('searchValue', searchValue);
-
-        // Redirect to the search results page
-        window.location.href = 'search.html';
+    const searchTerm = searchBox.value.trim();
+    if (searchTerm) {
+        localStorage.setItem('lastSearchTerm', searchTerm);
+        // Redirect to 'search.html' with the search term as a query parameter
+        window.location.href = 'search.html?searchTerm=' + encodeURIComponent(searchTerm);
     }
 });
-
-window.onload = function() {
-    // Check if the current page is 'search.html'
-    if (window.location.pathname.endsWith('search.html')) {
-        // Get the search term from localStorage 
-        const searchTerm = localStorage.getItem('searchValue');
-        // Use the search term to display the results
+    
+searchBox.addEventListener('keyup', function(event) {
+    // Check if the key that was pressed was Enter
+    if (event.key === 'Enter') {
+        const searchTerm = searchBox.value.trim();
         if (searchTerm) {
-            loadMovies(searchTerm);
-
-            const yourSearchElement = document.getElementById('yoursearch');
-            yourSearchElement.innerHTML = `Your search: ${searchTerm}`;
-
-            let recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
-            recentSearches.unshift(searchTerm);
-            if (recentSearches.length > 10) {
-                recentSearches.pop();
-            }
-            localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-
-            const toppTodaySearchElement = document.getElementById('topp-today-search');
-            toppTodaySearchElement.innerHTML = recentSearches.map((searchTerm, index) => `
-                <p><span class="topp-search-number">${index + 1}.</span> ${searchTerm} <span class="type"></span></p>
-            `).join('');
+            // If the search box has a value, perform the search
+            localStorage.setItem('lastSearchTerm', searchTerm);
+            window.location.href = 'search.html?searchTerm=' + encodeURIComponent(searchTerm);
         }
     }
-};
+});
+    searchBox.addEventListener('keyup', findMoviesSearchBar);
 
 
+function performSearchOnLoad() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get('searchTerm');
 
-
-
-
-//#region Search bar
-function displayMovieListSearchBar(movies){
-    searchList.innerHTML = "";
-    for(let idx = 0; idx < movies.length; idx++){
-        let movieListItem = document.createElement('div');
-        movieListItem.dataset.id = movies[idx].imdbID;
-        movieListItem.classList.add('search-list-item');
-
-        let moviePoster;
-        if(movies[idx].Poster != "N/A")
-            moviePoster = movies[idx].Poster;
-        else
-            moviePoster = "image_not_found.png";
-
-        movieListItem.innerHTML = `
-        <div class = "search-item-thumbnail">
-        <img src = "${moviePoster}"> 
-    </div>
-    <div class = "search-item-info">
-        <h3>${movies[idx].Title}</h3>
-        <p>${movies[idx].Year}</p>
-    </div>
-    `;
-    searchList.appendChild(movieListItem)             
+    if (searchTerm) {
+        updateRecentSearches(searchTerm);    
+        loadMovies(searchTerm);  
     }
-    loadMovieDetailsSearchBar();
 }
 
 
-function loadMovieDetailsSearchBar() {
-    const searchListMovies = searchList.querySelectorAll('.search-list-item');
-    searchListMovies.forEach(movie => {
-        movie.addEventListener('click', async () => {
-            searchList.classList.add('hide-search-list');
-            movieSearchBox.value = "";
-           
-            const omdbMovieDetails = await getMovieOmdbFullPlot(movie.dataset.id);
-
-            try {
-                const cmdbMovieDetails = await getMovieDetailsFromCMDB(movie.dataset.id);
-                if (!cmdbMovieDetails) {
-                    // Handle the case where the movie is not found in the CMDB
-                    console.log("Movie not found in CMDB");
-                    storeMovieData(omdbMovieDetails);
-                    redirectToMovieDetails(omdbMovieDetails.imdbID);
-                } else {
-                    const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
-                    
-                    storeMovieData(combinedMovieDetails);
-                    redirectToMovieDetails(combinedMovieDetails.imdbID);
-                }
-            } catch (error) {
-                console.error("Error fetching movie details:", error);
-            }
-        });
-    });
-}
-
-//#endregion Search bar
 
 
-//#region functions to save, load and display movies
 
+//#region Searchpage
+// Step 2. SEARCHPAGE //SKRIV IN SÖKTERM I MESSAGE
 
-function storeMovieData(movie) {
-    // Store the movie object in local storage
-    const movieString = JSON.stringify(movie);
-    const movieKey = `movieData_${movie.imdbID}`;
-    localStorage.setItem(movieKey, movieString);
-}
-
-function constructMovieURL(imdbID) {
-    // Construct the URL with a query parameter for the IMDb ID
-    const queryParams = new URLSearchParams();
-    queryParams.set('imdbID', imdbID);
-    const url = `movie.html?${queryParams.toString()}`;
-    return url;
-}
-
-function redirectToMovieDetails(imdbID) {
-    const url = constructMovieURL(imdbID);
+async function loadMovies(searchTerm) {
     
-    window.location.href = url;
+    const searchResults = await searchForMoviesOmdb(searchTerm);
+    console.log(searchResults);
+    
+    if (!searchResults)  {
+        document.getElementById('yoursearch').textContent = 'No results found for ' + searchTerm;
+    } else {
+       
+        displayMovieList(searchResults);
+    }
 }
-
-
-
-//#endregion
-
 
 async function displayMovieList(movies){
     const movieResults = document.querySelector('#movie-results');
     if (movieResults) {
         movieResults.innerHTML = '';
    
-
     for(let idx = 0; idx < movies.length; idx++){
         
         let movieDiv = document.createElement('div');
@@ -215,7 +83,7 @@ async function displayMovieList(movies){
         if(movies[idx].Poster != "N/A")
             moviePoster = movies[idx].Poster;
         else
-            moviePoster = "img/img-not-found.png";
+            moviePoster = "img/image_not_found.png";
 
             const movieDetails = await getMovieOmdbShortPlot(movies[idx].imdbID);
             console.log(movieDetails);
@@ -305,8 +173,6 @@ async function displayMovieList(movies){
 }
 
 
-
-
 function loadMovieDetails() {
     const searchListMovies = movieResults.querySelectorAll('.result1');
    console.log(searchListMovies);
@@ -314,7 +180,7 @@ function loadMovieDetails() {
     searchListMovies.forEach(movie => {
         movie.addEventListener('click', async (event) => { 
             console.log(movie.dataset.id);
-            movieSearchBox.value = "";
+            searchBox.value = "";
             const omdbMovieDetails = await getMovieOmdbFullPlot(movie.dataset.id);
             try {
                 const cmdbMovieDetails = await getMovieDetailsFromCMDB(movie.dataset.id);
@@ -335,6 +201,120 @@ function loadMovieDetails() {
         });
     });
 }
+//#endregion Searchpage
+
+
+
+//#region Search bar
+async function loadMoviesSearchBar(searchTerm){
+    const searchResults = await searchForMoviesOmdb(searchTerm);
+    console.log(searchResults);
+    displayMovieListSearchBar(searchResults);
+}
+
+
+// Step 1. ONLY FOR SEACHBAR, koppla eventlistener
+function findMoviesSearchBar(){
+    let searchTerm = (searchBox.value).trim();
+    if(searchTerm.length > 0){       
+       searchList.classList.remove('hide-search-list');
+        loadMoviesSearchBar(searchTerm);
+        console.log(searchTerm);
+
+        sessionStorage.setItem('searchTerm', searchTerm);
+    } else {       
+            searchList.classList.add('hide-search-list');      
+    }
+} 
+
+function displayMovieListSearchBar(movies){
+    searchList.innerHTML = "";
+    for(let idx = 0; idx < movies.length; idx++){
+        let movieListItem = document.createElement('div');
+        movieListItem.dataset.id = movies[idx].imdbID;
+        movieListItem.classList.add('search-list-item');
+
+        let moviePoster;
+        if(movies[idx].Poster != "N/A")
+            moviePoster = movies[idx].Poster;
+        else
+            moviePoster = "image_not_found.png";
+
+        movieListItem.innerHTML = `
+        <div class = "search-item-thumbnail">
+        <img src = "${moviePoster}"> 
+    </div>
+    <div class = "search-item-info">
+        <h3>${movies[idx].Title}</h3>
+        <p>${movies[idx].Year}</p>
+    </div>
+    `;
+    searchList.appendChild(movieListItem)             
+    }
+    loadMovieDetailsSearchBar();
+}
+
+
+function loadMovieDetailsSearchBar() {
+    const searchListMovies = searchList.querySelectorAll('.search-list-item');
+    searchListMovies.forEach(movie => {
+        movie.addEventListener('click', async () => {
+            searchList.classList.add('hide-search-list');
+            searchBox.value = "";
+           
+            const omdbMovieDetails = await getMovieOmdbFullPlot(movie.dataset.id);
+
+            try {
+                const cmdbMovieDetails = await getMovieDetailsFromCMDB(movie.dataset.id);
+                if (!cmdbMovieDetails) {
+                    // Handle the case where the movie is not found in the CMDB
+                    console.log("Movie not found in CMDB");
+                    storeMovieData(omdbMovieDetails);
+                    redirectToMovieDetails(omdbMovieDetails.imdbID);
+                } else {
+                    const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
+                    
+                    storeMovieData(combinedMovieDetails);
+                    redirectToMovieDetails(combinedMovieDetails.imdbID);
+                }
+            } catch (error) {
+                console.error("Error fetching movie details:", error);
+            }
+        });
+    });
+}
+//#endregion Search bar
+
+
+function updateRecentSearches(searchTerm) {
+    // Get the recent searches from localStorage
+    let recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+
+    // Add the search term to the start of the recent searches array
+    recentSearches.unshift(searchTerm);
+
+    recentSearches = recentSearches.slice(0, 10);
+
+
+    // Store the updated recent searches array in localStorage
+    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+
+    const container = document.getElementById('topp-today-search');
+
+    // Clear the container
+    container.innerHTML = '';
+    recentSearches = recentSearches.reverse(); 
+    // Iterate over the recent searches
+    recentSearches.forEach((searchTerm, index) => {
+       
+        const p = document.createElement('p');
+        const number = recentSearches.length - index;
+        p.innerHTML = `<span class="topp-search-number">${number}.</span> ${searchTerm} <span class="type"></span>`;
+        container.prepend(p);
+    });
+    document.getElementById('yoursearch').textContent = 'Your search: ' + searchTerm;
+}
+
 
 //#region Rating 
 function rateMovie(imdbID, score) {
@@ -353,7 +333,7 @@ function rateMovie(imdbID, score) {
     .then(newAverageScore => {   
         const scoreElement = document.querySelector(`.result1[data-id="${imdbID}"] .cmdb-score`);
         if (scoreElement) {
-            scoreElement.textContent = `CMDB Score: ${newAverageScore.toFixed(2)}`;
+            scoreElement.textContent = `CMDB Score:  ${Math.round(newAverageScore)}`;
         }             
     })
         .catch((error) => {
@@ -368,17 +348,29 @@ function rateMovie(imdbID, score) {
 
 
 
-//searches
 
-// Takes searchTerm , stores it, redirects to search.html
-function redirectToSearchPage() {
-    // Get the search value
-    const searchValue = document.querySelector('#movie-search-box').value;
-    console.log(searchValue);
-    // Store the search value in localStorage
-    localStorage.setItem('searchValue', searchValue);
-    
-    // Redirect to the search results page
-    window.location.href = 'search.html';
+//#region functions to save, load and display movies
+
+
+function storeMovieData(movie) {
+    // Store the movie object in local storage
+    const movieString = JSON.stringify(movie);
+    const movieKey = `movieData_${movie.imdbID}`;
+    localStorage.setItem(movieKey, movieString);
 }
+
+function constructMovieURL(imdbID) {
+    // Construct the URL with a query parameter for the IMDb ID
+    const queryParams = new URLSearchParams();
+    queryParams.set('imdbID', imdbID);
+    const url = `movie.html?${queryParams.toString()}`;
+    return url;
+}
+
+function redirectToMovieDetails(imdbID) {
+    const url = constructMovieURL(imdbID);
+    
+    window.location.href = url;
+}
+//#endregion
 
