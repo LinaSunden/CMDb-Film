@@ -2,8 +2,8 @@
 // detalj: https://www.omdbapi.com/?i=tt3896198&apikey=5a4be969
 // https://omdbapi.com/?i=tt4300958&plot=full&apikey=5a4be969
 
-import { ratedMovies } from "./scoreRate.js"; 
-import {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot, latestReview, searchForMoviesOmdb, getMoviesCmdbPaging, cmdbScoreFilter, getMoviesByGenre, getMovieDetailsFromCMDB} from './apiCalls.js';
+// import { ratedMovies } from "./scoreRate.js"; 
+// import {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot, latestReview, searchForMoviesOmdb, getMoviesCmdbPaging, cmdbScoreFilter, getMoviesByGenre, getMovieDetailsFromCMDB} from './apiCalls.js';
 
 
 
@@ -11,32 +11,32 @@ import {getMoviesCmdb, getMovieOmdb, scoreMovie, getMovieOmdbFullPlot, latestRev
 // #region searchfunction
 
 
-const movieSearchBox = document.getElementById('movie-search-box');
-const searchList = document.getElementById('search-list');
-const resultGrid = document.getElementById('result-grid');
+// const movieSearchBox = document.getElementById('movie-search-box');
+// const searchList = document.getElementById('search-list');
+// const resultGrid = document.getElementById('result-grid');
 
 // #endregion
 
 
-async function loadMovies(searchTerm) {
-    const searchResults = await searchForMoviesOmdb(searchTerm);
+// async function loadMovies(searchTerm) {
+//     const searchResults = await searchForMoviesOmdb(searchTerm);
 
-    if(searchResults) {
-        displayMovieList(searchResults);
-    }
-}
+//     if(searchResults) {
+//         displayMovieList(searchResults);
+//     }
+// }
 
 
-function findMovies(){
-    let searchTerm = (movieSearchBox.value).trim();
-    if(searchTerm.length> 0 ){
-        searchList.classList.remove('hide-search-list');
-        loadMovies(searchTerm);
-    }  else {
-        searchList.classList.add('hide-search-list');
-    }     
+// function findMovies(){
+//     let searchTerm = (movieSearchBox.value).trim();
+//     if(searchTerm.length> 0 ){
+//         searchList.classList.remove('hide-search-list');
+//         loadMovies(searchTerm);
+//     }  else {
+//         searchList.classList.add('hide-search-list');
+//     }     
  
-}
+// }
 // document.addEventListener('DOMContentLoaded', function() {
 //     const searchTerm = sessionStorage.getItem('searchTerm');
 //     if (searchTerm) {
@@ -44,100 +44,102 @@ function findMovies(){
         
 //     }
 // });
-document.getElementById('movie-search-box').addEventListener('keyup', findMovies);
-document.getElementById('searchbutton').addEventListener('click', findMovies);
+
+
+// document.getElementById('movie-search-box').addEventListener('keyup', findMovies);
+// document.getElementById('searchbutton').addEventListener('click', findMovies);
 
 
 
 
 
-function displayMovieList(movies){
-    searchList.innerHTML = "";
-    for(let idx = 0; idx < movies.length; idx++){
-        let movieListItem = document.createElement('div');
-        movieListItem.dataset.id = movies[idx].imdbID;
-        movieListItem.classList.add('search-list-item');
+// function displayMovieList(movies){
+//     searchList.innerHTML = "";
+//     for(let idx = 0; idx < movies.length; idx++){
+//         let movieListItem = document.createElement('div');
+//         movieListItem.dataset.id = movies[idx].imdbID;
+//         movieListItem.classList.add('search-list-item');
 
-        let moviePoster;
-        if(movies[idx].Poster != "N/A")
-            moviePoster = movies[idx].Poster;
-        else
-            moviePoster = "image_not_found.png";
+//         let moviePoster;
+//         if(movies[idx].Poster != "N/A")
+//             moviePoster = movies[idx].Poster;
+//         else
+//             moviePoster = "image_not_found.png";
 
-        movieListItem.innerHTML = `
-        <div class = "search-item-thumbnail">
-        <img src = "${moviePoster}"> 
-    </div>
-    <div class = "search-item-info">
-        <h3>${movies[idx].Title}</h3>
-        <p>${movies[idx].Year}</p>
-    </div>
-    `;
-    searchList.appendChild(movieListItem)             
-    }
-    loadMovieDetails();
-}
+//         movieListItem.innerHTML = `
+//         <div class = "search-item-thumbnail">
+//         <img src = "${moviePoster}"> 
+//     </div>
+//     <div class = "search-item-info">
+//         <h3>${movies[idx].Title}</h3>
+//         <p>${movies[idx].Year}</p>
+//     </div>
+//     `;
+//     searchList.appendChild(movieListItem)             
+//     }
+//     loadMovieDetails();
+// }
 
 
 
-function loadMovieDetails() {
-    const searchListMovies = searchList.querySelectorAll('.search-list-item');
-    searchListMovies.forEach(movie => {
-        movie.addEventListener('click', async () => {
-            searchList.classList.add('hide-search-list');
-            movieSearchBox.value = "";
+// function loadMovieDetails() {
+//     const searchListMovies = searchList.querySelectorAll('.search-list-item');
+//     searchListMovies.forEach(movie => {
+//         movie.addEventListener('click', async () => {
+//             searchList.classList.add('hide-search-list');
+//             movieSearchBox.value = "";
            
-            const omdbMovieDetails = await getMovieOmdb(movie.dataset.id);
+//             const omdbMovieDetails = await getMovieOmdb(movie.dataset.id);
 
-            try {
-                const cmdbMovieDetails = await getMovieDetailsFromCMDB(movie.dataset.id);
-                if (!cmdbMovieDetails) {
-                    // Handle the case where the movie is not found in the CMDB
-                    console.log("Movie not found in CMDB");
-                    storeMovieData(omdbMovieDetails);
-                    redirectToMovieDetails(omdbMovieDetails.imdbID);
-                } else {
-                    const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
+//             try {
+//                 const cmdbMovieDetails = await getMovieDetailsFromCMDB(movie.dataset.id);
+//                 if (!cmdbMovieDetails) {
+//                     // Handle the case where the movie is not found in the CMDB
+//                     console.log("Movie not found in CMDB");
+//                     storeMovieData(omdbMovieDetails);
+//                     redirectToMovieDetails(omdbMovieDetails.imdbID);
+//                 } else {
+//                     const combinedMovieDetails = { ...omdbMovieDetails, ...cmdbMovieDetails };
                     
-                    storeMovieData(combinedMovieDetails);
-                    redirectToMovieDetails(combinedMovieDetails.imdbID);
-                }
-            } catch (error) {
-                console.error("Error fetching movie details:", error);
-            }
-        });
-    });
-}
+//                     storeMovieData(combinedMovieDetails);
+//                     redirectToMovieDetails(combinedMovieDetails.imdbID);
+//                 }
+//             } catch (error) {
+//                 console.error("Error fetching movie details:", error);
+//             }
+//         });
+//     });
+// }
 
 
 
 
-function storeMovieData(movie) {
-    // Store the movie object in local storage
-    const movieString = JSON.stringify(movie);
-    const movieKey = `movieData_${movie.imdbID}`;
-    localStorage.setItem(movieKey, movieString);
-}
+// function storeMovieData(movie) {
+//     // Store the movie object in local storage
+//     const movieString = JSON.stringify(movie);
+//     const movieKey = `movieData_${movie.imdbID}`;
+//     localStorage.setItem(movieKey, movieString);
+// }
 
-function constructMovieURL(imdbID) {
-    // Construct the URL with a query parameter for the IMDb ID
-    const queryParams = new URLSearchParams();
-    queryParams.set('imdbID', imdbID);
-    const url = `movie.html?${queryParams.toString()}`;
-    return url;
-}
+// function constructMovieURL(imdbID) {
+//     // Construct the URL with a query parameter for the IMDb ID
+//     const queryParams = new URLSearchParams();
+//     queryParams.set('imdbID', imdbID);
+//     const url = `movie.html?${queryParams.toString()}`;
+//     return url;
+// }
 
-function redirectToMovieDetails(imdbID) {
-    const url = constructMovieURL(imdbID);
-    // Redirect to the detail page with the IMDb ID in the URL
-    window.location.href = url;
-}
+// function redirectToMovieDetails(imdbID) {
+//     const url = constructMovieURL(imdbID);
+//     // Redirect to the detail page with the IMDb ID in the URL
+//     window.location.href = url;
+// }
 
 
 // // #endregion 
   
 
-export {storeMovieData, constructMovieURL, redirectToMovieDetails};
+// export {storeMovieData, constructMovieURL, redirectToMovieDetails};
 
 
 // function redirectToSearchPage() {
