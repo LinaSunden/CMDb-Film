@@ -12,14 +12,13 @@
     <script type="module" src="js/scoreRate.js"></script>
     <script type="module" src="js/apiCalls.js"></script>
     <script type="module" src="js/search.js"></script>
-    
+    <script type="module" src="js/filter&searchResults.js"></script>
     <script src="https://kit.fontawesome.com/590228b404.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header> 
-        <a href="index.html" class="active"> <img src="img/CMDb_logo.png" alt="CMBb:s logga" width="200" class="logo"></a>
-         
+        <a href="index.html" class="active"> <img src="img/CMDb_logo.png" alt="CMBb:s logga" width="200" class="logo"></a>     
     </header>
 
     <nav>
@@ -28,10 +27,7 @@
         </div>
 
         <ul class="navigation">
-
             <li><a href="index.html">Home</a></li>
-            <!-- <li><a href="movie.html" class="active">Movie</a></li> -->
-
             <li><a href="search.html">Search</a></li>
             <li><a href="aboutUs.html">About us</a></li>
         </ul> 
@@ -42,7 +38,7 @@
                 <div class = "search-list" id = "search-list">
                     
                 </div>
-            <!-- <button id="searchbutton" class="search-button">Search</button> -->
+            <button id="searchbutton" class="search-button">Search</button>
         </div>   
     </nav>
 
@@ -51,15 +47,11 @@
    
     <main class="flex-movie-info">
         <section class="infoAndRating flex-item">
-            <div class="info-movie">
-                
-            </div>
+            <div class="info-movie"></div>
 
             <section class="see-rating-section"> 
                 <h1>Rating</h1>
-                <div class="otherRatings">
-                   
-                </div>
+                <div class="otherRatings"></div>
 
                 <div class="cmdb-rating">
                 <h2>Cmdb rating</h2>
@@ -88,33 +80,20 @@
                  <!-- den vita linjen -->
                 
                 <p class="votes"></p>
-
                 <span class="counts" id="greentext">0 votes</span> 
-
                 <div class="green-vote"> <span class="number">4</span></div> 
 
-
                 <span class="counts" id="lightgreentext">0 votes</span> 
-
-
-
                 <div class="lightgreen-vote" id="lightgreentext"><span class="number">3</span></div>
 
 
                 <span class="counts" id="orangetext">0 votes</span> 
-
-
                 <div class="orange-vote" id="orangetext"> <span class="number">2</span></div>
 
 
                 <span class="counts" id="redtext">0 votes</span> 
-
-
-
                 <div class="red-vote" > <span class="number">1</span> </div> 
                 </div>
-
-               
             </section>
 
             <section class="set-rating-detailpage">
